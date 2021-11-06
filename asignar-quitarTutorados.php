@@ -5,7 +5,7 @@
  echo '  tutor:'.$asigtutor=(isset($_POST['tutor']))?$_POST['tutor']:"";
  echo ' noc2'.$noct2=(isset($_POST['Ncontrol']))?$_POST['Ncontrol']:"";
 
- 
+ //holamundo
 //cosulta tutores 
 include("config/bd.php");//conexion
 $sentenciaSQL = $conexion->prepare("SELECT * FROM `usuario` Where TipoUser='Tutor' ORDER BY Nombre ASC");  
