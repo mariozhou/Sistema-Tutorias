@@ -1,0 +1,33 @@
+.form-cambioT{
+    margin-left: 20%;
+    padding-top: 3%;
+}
+
+.form-cambioT .textoT{
+    margin-right: 200px;
+    margin-bottom: 70px;
+    padding-top: 10px;
+}
+.form-cambioT label{
+    color: black;
+}
+
+.form-cambioT .InputTutor{
+    width: 450px;
+}
+
+.form-cambioT .InputMotivos{
+    width: 750px;
+    height: 350px;
+    margin-bottom: 20px;
+}
+.cambioTutor{
+    background-color: #D4E4F2;
+}
+
+.form-cambioT .botones{
+    margin-bottom: 30px;
+}
+#regresar{
+    margin-left: 200px;
+}

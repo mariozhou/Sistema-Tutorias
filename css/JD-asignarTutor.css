@@ -1,0 +1,45 @@
+.form-tutor{
+    margin-left: 25%;
+    margin-top: 3%;
+    width: 700px;   
+}
+.form-tutor label{
+    color: black;
+}
+
+.form-tutor .botones{
+    width: auto;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.tableFixHead    { overflow: auto; height: 300px; }
+.tableFixHead th { position: sticky; top: 0; }
+
+table  {  width: 100%; }
+
+th{
+    padding: 15px;
+    background-color: lightslategrey;
+    color:white;
+}
+td {
+    padding: 15px;
+    color: black;
+}
+ table tr:nth-child(even) {
+    background-color: #79777c;
+  }
+.form-tutor div{
+    margin-top: 20px;
+}
+
+div button{
+    
+    margin: 25px 75px;
+    border: 2px solid black;
+}
+
+body{
+    background-color: #D4E4F2;
+}
