@@ -2,9 +2,9 @@
 
 
 <?php
- $rango=(isset($_POST['range-semestre']))?$_POST['range-semestre']:"";
- echo '  tutor:'.$asigtutor=(isset($_POST['tutor']))?$_POST['tutor']:"";
- echo ' noc2'.$noct2=(isset($_POST['Ncontrol']))?$_POST['Ncontrol']:"";
+$rango=(isset($_POST['range-semestre']))?$_POST['range-semestre']:"";
+$asigtutor=(isset($_POST['tutor']))?$_POST['tutor']:"";
+$noct2=(isset($_POST['Ncontrol']))?$_POST['Ncontrol']:"";
 
  
 //cosulta tutores 
@@ -57,7 +57,6 @@ if($rango == 0  And (isset($_POST["btnbuscar1"]))){
     //$noct2="";
 }
 
-echo ' novt2:'.$noct2;
 //tutor con nombre retrun id 
 //SELECT IdTutor FROM `tutor` WHERE NombreTutor = 'blanca ramirez' 
 // agregar tutor

@@ -16,7 +16,7 @@
 
         <div class="card">
             <img src="img/consulta (1).png" >
-            <h4>Petición de Ayuda</h4>
+            <h4><a href="Alumno-MostrarPedirAyuda.php">Petición de Ayuda</a></h4>
             <a href=""></a>
         </div>
         <div class="card">
