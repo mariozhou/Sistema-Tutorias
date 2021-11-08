@@ -39,7 +39,7 @@ body{
     background-color: #FBB435;
 }
 
-.container .card_hover{
+.container .card:hover{
     transform: translateY(-15px);
     box-shadow: 0 12px 16px rgb(0,0,0,0.2);
 }
@@ -58,7 +58,19 @@ body{
     margin-top: auto;
     margin-bottom: auto;
 }
+ a{
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 22px;
+    margin-top: auto;
+    margin-bottom: auto;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
 
-.container .card a{
-    font-weight: 500;
+}
+
+ a:hover{
+   text-decoration: unset;
+   color: #2140AE;
 }

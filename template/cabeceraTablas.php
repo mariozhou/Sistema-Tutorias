@@ -11,13 +11,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tutorias</title>
 
-    <link rel="stylesheet" href="./css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="./css/cabecera.css" type="text/css">
-    <link rel="stylesheet" href="./css/diseñoasignar-quitarTutorados.css" type="text/css">
-    <link rel="stylesheet" href="./css/Menu.css" type="text/css">
-  
- 
 
+
+
+  
+    
+    <link rel="stylesheet" href="./css/Tablas.css">
+    <link rel="stylesheet" href="css\cabecera.css" >
 
 </head>
 <body>

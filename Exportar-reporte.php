@@ -1,6 +1,20 @@
 <?php include("template/cabeceraTablas.php"); ?>
 
-
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <!-- Bootstrap CSS -->
+      
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css\bootstrap.min.css">
+    <!-- CSS personalizado --> 
+    <link rel="stylesheet" href="css\Tablas.css">  
+      
+    <!--datables CSS básico-->
+    <link rel="stylesheet" type="text/css" href="datatable\datatables.min.css"/>
+    <!--datables estilo bootstrap 4 CSS-->  
+    <link rel="stylesheet"  type="text/css" href="datatable\DataTables-1.11.3\css\dataTables.bootstrap4.min.css">
+        <!--font awesome con CDN-->  
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">  
+      
 <?php
  $rango=(isset($_POST['range-semestre']))?$_POST['range-semestre']:"";
  echo '  tutor:'.$asigtutor=(isset($_POST['tutor']))?$_POST['tutor']:"";
@@ -14,10 +28,10 @@ $sentenciaSQL->execute();
 $tutor = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
 $btnbuscar2 = (isset($_POST["btnbuscar2"]));
 $asignar = (isset($_POST["btnasignar"]));
-//actualizar tabla alumnos
 $sentenciaSQL1 = $conexion->prepare("SELECT * FROM tutorados JOIN usuario ON tutorados.IdTutorado = usuario.IdUser ORDER BY Nombre ASC");  
 $sentenciaSQL1->execute();
 $alumno = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
+//actualizar tabla alumnos
 if($rango == 0  And (isset($_POST["btnbuscar1"]))){
     $sentenciaSQL1 = $conexion->prepare("SELECT * FROM tutorados JOIN usuario ON tutorados.IdTutorado = usuario.IdUser ORDER BY Nombre ASC");  
     $sentenciaSQL1->execute();
@@ -68,43 +82,19 @@ echo ' novt2:'.$noct2;
 
 <body>
     <form class="form-tutorado" method="post" >
-        <label> Tutor</label>
-        <select name="tutor">
-        <option >Tutores</option>
-            <?php foreach($tutor as $row): //llenar combobox con Tutores 
-                 ?>  
-                <option value="<?php echo $row->Nombre; ?>">
-                <?php echo $row->Nombre; ?>
-                </option>
-            <?php endforeach ?> 
-        </select> <br>
-
-        <label  style= "margin-top: 30px; margin-left: 50px; margin-bottom: 30px;"> Tutorados </label><br>
-        <label> Rango de semestres</label>
-        <select name="range-semestre" id="range-semestre" onchange="myFunction()">  
-            <option value=0>Todos</option>    
-            <option value=1>1-5</option>
-            <option value=2>6-8</option>
-            <option value=3>8-12 o mas</option>
-            
-        </select>
-        <button class="botones" name="btnbuscar1" type="submit" value="Buscar">Buscar</button><br>
-        <label for="" style= "margin-left: 50px;"> No. Control</label>
-        <input type="text" name="Ncontrol" id="Ncontrol" >
-        <button class="botones" name="btnbuscar2" type="submit" value="Buscar">Buscar</button><br>
 
         <div class="tableFixHead">
-            <table id= "table"  class="table table-border table-hover"style="width:100%"> 
+            <table id="example" class="table table-bordered" > 
                 <thead>
                     <tr>
-                        <th style="width:70%">Nombre</th>
+                        <th >Nombre</th>
                         <th>No.Control</th>
                         <th>Semestre</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                <?php foreach($alumno as $result) { 
+                 <?php foreach($alumno as $result) { 
             echo "<tr>
                     <td>".$result -> Nombre."</td>
                     <td>".$result -> IdUser."</td>
@@ -115,12 +105,31 @@ echo ' novt2:'.$noct2;
             </table>
         </div>
         <br>
-        <div>
-            <button class="botones" type="submit" value="Regresar">Regresar</button>
-            <button class="botones" name="btnasignar" type="submit" value="Asignar">Asignar</button>
-            <button class="botones" name="btnquitar" type="submit" value="Quitar">Quitar</button>
-        </div>
+        
     </form>
+    
+        <a id="boton" href="menuJD.php">
+            <button class="botones" type="submit" value="Regresar">Regresar</button>
+        </a>
+      
+     <!-- jQuery, Popper.js, Bootstrap JS -->
+     <script src="datatable/jquery/jquery-3.3.1.min.js"></script>
+    <script src="datatable/popper/popper.min.js"></script>
+    <script src="datatable/bootstrap/js/bootstrap.min.js"></script>
+      
+    <!-- datatables JS -->
+    <script type="text/javascript" src="datatable/datatables.min.js"></script>    
+     
+    <!-- para usar botones en datatables JS -->  
+    <script src="datatable/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>    
+    <script src="datatable/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <script src="datatable/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+    <!-- código JS propìo-->    
+    <script type="text/javascript" src="js\main.js"></script>  
+
 </body>
+
+
+
 
 <?php include("template/pie.php"); ?>
