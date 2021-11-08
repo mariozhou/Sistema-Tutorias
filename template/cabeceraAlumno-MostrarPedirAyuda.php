@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php 
+    session_start();
+    $tipo=$_SESSION['tipo'];
+    $nombre=$_SESSION['nombre'];
+    ?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,8 +33,10 @@
             <img src="img/menu.jpg" alt="imgmenu">
             
             <div>
-                <h4>Jose Luis Ramos Monreal</h4>
-                <p>Alumno</p>
+            <h4> <?php
+                echo  htmlspecialchars($nombre);
+                ?> </h4>
+                <p>  <?php echo htmlspecialchars($tipo) ?> </p>
                 <img src="img/foto-perfil.jpg" alt="foto-perfil">
             </div>
     </div>
