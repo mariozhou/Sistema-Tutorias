@@ -2,11 +2,15 @@ body{
     background-color: #D4E4F2;
 }
 
-
+table{
+    max-width: 1400px;
+}
 /*estilos para la tabla*/
 table th {
     background-color: #337ab7 !important;
     color: white;
+    width: 80px;
+    max-width: 87.5px;
 }
 table>tbody>tr>td {
     vertical-align: middle !important;

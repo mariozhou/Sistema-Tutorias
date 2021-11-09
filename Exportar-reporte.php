@@ -81,33 +81,68 @@ echo ' novt2:'.$noct2;
 ?>  
 
 <body>
+
+    
     <form class="form-tutorado" method="post" >
 
-        <div class="tableFixHead">
-            <table id="example" class="table table-bordered" > 
+        <div class="tableFixHead" max-width="1400px">
+            <table id="example" class="table table-bordered" max-width="1400px"> 
+
                 <thead>
                     <tr>
-                        <th >Nombre</th>
-                        <th>No.Control</th>
-                        <th>Semestre</th>
+                        <th >Nombre Del Estudiante</th>
+                        <th>No. Control</th>
+                       
+                        <th>Sesiones Individuales</th>
+                        <th>Sesiones  Grupales</th>
+                        
+                        
+                        <th>Actividad  Integradora  (Max. 4 hrs)</th>
+                        <th>Conferencias</th>
+                        <th>Talleres</th>
+                        <th>Psicologia</th>
+                        <th>Asesoria</th>
+                        
+                        <th>Total de horas  Cumplidas</th>
+                        <th>Acredito</th>
+                        <th>No Acredito</th>
+                        <th>Deserto</th>
+                        <th>Acredito En  Seguimiento</th>
+                        <th>Valor Numerico</th>
+                        <th>Nivel De Desempeño</th>
                     </tr>
                 </thead>
                 <tbody>
 
                  <?php foreach($alumno as $result) { 
-            echo "<tr>
+                echo "<tr>
                     <td>".$result -> Nombre."</td>
                     <td>".$result -> IdUser."</td>
                     <td>".$result -> Semestres."</td>
+                    <td>".$result -> Semestres."</td>
+                    <td>".$result -> Semestres."</td>
+                    <td>".$result -> Semestres."</td>
+                    <td>".$result -> Semestres."</td>
+                    <td>".$result -> Semestres."</td>
+                    <td>".$result -> Semestres."</td>
+                    <td>".$result -> Semestres."</td>
+                    <td>".$result -> Semestres."</td>
+                    <td>".$result -> Semestres."</td>
+                    <td>".$result -> Semestres."</td>
+                    <td>".$result -> Semestres."</td>
+                    <td>".$result -> Semestres."</td>
+                    <td>".$result -> Semestres."</td>
+
+
                 </tr>"; }      
                 ?>
                 </tbody>
             </table>
         </div>
         <br>
-        
+
     </form>
-    
+
         <a id="boton" href="menuJD.php">
             <button class="botones" type="submit" value="Regresar">Regresar</button>
         </a>
@@ -126,6 +161,7 @@ echo ' novt2:'.$noct2;
     <script src="datatable/Buttons-1.5.6/js/buttons.html5.min.js"></script>
     <!-- código JS propìo-->    
     <script type="text/javascript" src="js\main.js"></script>  
+
 
 </body>
 

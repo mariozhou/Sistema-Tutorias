@@ -1,5 +1,8 @@
 $(document).ready(function() {    
     $('#example').DataTable({        
+        deferRender: true,
+        scrollX:     300,
+        scroller:    true,
         language: {
                 "lengthMenu": "Mostrar _MENU_ registros",
                 "zeroRecords": "No se encontraron resultados",
@@ -28,3 +31,4 @@ $(document).ready(function() {
 		]	        
     });     
 });
+
