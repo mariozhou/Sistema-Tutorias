@@ -17,6 +17,7 @@
       
 <?php
  $rango=(isset($_POST['range-semestre']))?$_POST['range-semestre']:"";
+ $Estatus=(isset($_POST['Estatus']))?$_POST['Estatus']:"";
  echo '  tutor:'.$asigtutor=(isset($_POST['tutor']))?$_POST['tutor']:"";
  echo ' noc2'.$noct2=(isset($_POST['Ncontrol']))?$_POST['Ncontrol']:"";
 
@@ -26,11 +27,19 @@ include("config/bd.php");//conexion
 $sentenciaSQL = $conexion->prepare("SELECT * FROM `usuario` Where TipoUser='Tutor' ORDER BY Nombre ASC");  
 $sentenciaSQL->execute();
 $tutor = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
+
 $btnbuscar2 = (isset($_POST["btnbuscar2"]));
 $asignar = (isset($_POST["btnasignar"]));
 $sentenciaSQL1 = $conexion->prepare("SELECT * FROM tutorados JOIN usuario ON tutorados.IdTutorado = usuario.IdUser ORDER BY Nombre ASC");  
 $sentenciaSQL1->execute();
 $alumno = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
+$sentenciaSQL1 = $conexion->prepare("SELECT HoraSesionIndiv, HoraSesionGrup,Estatus, EvaValor, EvalNivel FROM reporte JOIN usuario ON reporte.IdTutorado = usuario.IdUser ORDER BY Nombre ASC");  
+$sentenciaSQL1->execute();
+$reporte = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
+include("config/bd.php");//conexion
+$sentenciaSQL = $conexion->prepare("SELECT c.IdCanal,c.IdCanal FROM canalizacion AS c JOIN tutorados AS t ON c.IdTutorado = t.IdTutorado");  
+$sentenciaSQL->execute();
+$canalizacion = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
 //actualizar tabla alumnos
 if($rango == 0  And (isset($_POST["btnbuscar1"]))){
     $sentenciaSQL1 = $conexion->prepare("SELECT * FROM tutorados JOIN usuario ON tutorados.IdTutorado = usuario.IdUser ORDER BY Nombre ASC");  
@@ -70,7 +79,24 @@ if($rango == 0  And (isset($_POST["btnbuscar1"]))){
     //$alumno = $sentenciaSQL2->fetchAll(PDO::FETCH_OBJ);
     //$noct2="";
 }
-
+/*if($Estatus == 'Acredito' ){
+    $sentenciaSQL1 = $conexion->prepare("SELECT Estatus FROM tutorados JOIN usuario ON tutorados.IdTutorado = usuario.IdUser ORDER BY Nombre ASC");  
+    $sentenciaSQL1->execute();
+    $reporteA = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
+}else if($Estatus == 'No Acredito' ){
+    $sentenciaSQL1 = $conexion->prepare("SELECT Estatus FROM tutorados JOIN usuario ON tutorados.IdTutorado = usuario.IdUser ORDER BY Nombre ASC");  
+    $sentenciaSQL1->execute();
+    $reporteN = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
+}else if($Estatus == 'Deserto' ){
+    $sentenciaSQL1 = $conexion->prepare("SELECT Estatus FROM tutorados JOIN usuario ON tutorados.IdTutorado = usuario.IdUser ORDER BY Nombre ASC");  
+    $sentenciaSQL1->execute();
+    $reporteD = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
+}else if($Estatus == 'Acredito en S' ){
+    $sentenciaSQL1 = $conexion->prepare("SELECT Estatus FROM tutorados JOIN usuario ON tutorados.IdTutorado = usuario.IdUser ORDER BY Nombre ASC");  
+    $sentenciaSQL1->execute();
+    $reporteS = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
+}
+*/
 echo ' novt2:'.$noct2;
 //tutor con nombre retrun id 
 //SELECT IdTutor FROM `tutor` WHERE NombreTutor = 'blanca ramirez' 
@@ -98,16 +124,11 @@ echo ' novt2:'.$noct2;
                         
                         
                         <th>Actividad  Integradora  (Max. 4 hrs)</th>
-                        <th>Conferencias</th>
-                        <th>Talleres</th>
-                        <th>Psicologia</th>
+
                         <th>Asesoria</th>
                         
                         <th>Total de horas  Cumplidas</th>
                         <th>Acredito</th>
-                        <th>No Acredito</th>
-                        <th>Deserto</th>
-                        <th>Acredito En  Seguimiento</th>
                         <th>Valor Numerico</th>
                         <th>Nivel De Desempeño</th>
                     </tr>
@@ -118,24 +139,30 @@ echo ' novt2:'.$noct2;
                 echo "<tr>
                     <td>".$result -> Nombre."</td>
                     <td>".$result -> IdUser."</td>
-                    <td>".$result -> Semestres."</td>
-                    <td>".$result -> Semestres."</td>
-                    <td>".$result -> Semestres."</td>
-                    <td>".$result -> Semestres."</td>
-                    <td>".$result -> Semestres."</td>
-                    <td>".$result -> Semestres."</td>
-                    <td>".$result -> Semestres."</td>
-                    <td>".$result -> Semestres."</td>
-                    <td>".$result -> Semestres."</td>
-                    <td>".$result -> Semestres."</td>
-                    <td>".$result -> Semestres."</td>
-                    <td>".$result -> Semestres."</td>
-                    <td>".$result -> Semestres."</td>
-                    <td>".$result -> Semestres."</td>
-
-
-                </tr>"; }      
+                    
+                    </tr>"; }      
                 ?>
+                 <?php foreach($reporte as $result) { 
+                echo "<tr>  
+                <td>".$result -> HoraSesionIndiv."</td>
+                <td>".$result -> HoraSesionGrup."</td>
+                </tr>"; }
+                ?>
+                 <?php foreach($canalizacion as $result) { 
+                echo "<tr>  
+                <td>".$result -> IdTutor."</td>
+                <td>".$result -> IdTutor."</td>
+                <td>".$result -> Hora."</td>
+                </tr>"; }
+                ?>
+                <?php foreach($reporte as $result) { 
+                echo "<tr>            
+                <td>".$result -> Estatus."</td>
+                <td>".$result -> EvaValor."</td>
+                <td>".$result -> EvalNivel."</td>         
+                </tr>"; }
+                ?>       
+
                 </tbody>
             </table>
         </div>
