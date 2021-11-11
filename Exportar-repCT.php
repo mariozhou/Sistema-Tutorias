@@ -72,24 +72,19 @@ $reporte = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
 
                 <thead>
                     <tr>
-                        <th >Nombre Del Estudiante</th>
-                        <th>No. Control</th>
+                        <th >Nombre Del Tutor</th>
+                        <th>Desertaron</th>
                        
-                        <th>Sesiones Individuales</th>
-                        <th>Sesiones  Grupales</th>
-                        
-                        
-                        <th>Actividad  Integradora  (Max. 4 hrs)</th>
+                        <th>Acreditacion</th>
+                        <th>No Acreditaron</th>
+                        <th>Total Estudiantes Atendidos</th>
+                        <th>Tutoria individual</th>
+                        <th>Tutoria Grupal</th>
+                        <th>Numero de Estudiantes Canalizados</th>
                         <th>Conferencias</th>
-                        <th>Talleres</th>
-                        <th>Psicologia</th>
-                        <th>Asesoria</th>
                         
-                        <th>Total de horas  Cumplidas</th>
-                        <th>Acredito</th>
-
-                        <th>Valor Numerico</th>
-                        <th>Nivel De Desempeño</th>
+                        <th>Talleres</th>
+ 
                     </tr>
                 </thead>
                 <tbody>
@@ -106,9 +101,7 @@ $reporte = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
                     <td>".$result -> Psicologia."</td>
                     <td>".$result -> Asesoria."</td>
                     <td>".$result -> IdTutorado."</td>
-                    <td>".$result -> Acredito."</td>
-                    <td>".$result -> EvaValor."</td>
-                    <td>".$result -> EvalNivel."</td>
+
                   
                     </tr>"; }      
                 ?>
@@ -127,7 +120,7 @@ $reporte = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
 
     </form>
 
-        <a id="boton" href="menuJD.php">
+        <a id="boton" href="menuCT.php">
             <button class="botones" type="submit" value="Regresar">Regresar</button>
         </a>
       

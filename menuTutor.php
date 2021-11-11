@@ -24,14 +24,16 @@
                 </div>
                 <div class="card">
                     <img src="img/vision.png" >
-                    <h4>Visualizar Encuestas</h4>
+                    <h4>Expediente</h4>
                     <a href=""></a>
                 </div>
+                <a href="Exportar-repT.php">
                 <div class="card">
                     <img src="img/exportar.png" >
                     <h4>Visualizar / Exportar Reporte</h4>
-                    <a href=""></a>
+                    
                 </div>
+                </a>
 
         
     </div>

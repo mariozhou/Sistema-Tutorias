@@ -13,16 +13,19 @@
             <h4>Visualizar Encuestas</h4>
             <a href=""></a>
         </div>
-
+        <a href="Exportar-repCT.php">
         <div class="card">
             <img src="img/exportar.png" >
             <h4>Exportar Reporte</h4>
-            <a href=""></a>
+           
         </div>
+        </a>
+        <a href="asignar-quitarTutorados.php">
         <div class="card">
             <img src="img/aceptado.png" >
-            <h4> <a href="asignar-quitarTutorados.php">Asignar Tutorados<a/></h4>
+            <h4> Asignar Tutorados</h4>
         </div>
+        <a/>
     </div>
 </body>
 <?php include("template/pie.php"); ?>
