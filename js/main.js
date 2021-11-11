@@ -2,7 +2,16 @@ $(document).ready(function() {
     $('#example').DataTable({        
         deferRender: true,
         scrollX:     300,
+        scrollY:     300,
         scroller:    true,
+        "buttons":[ 
+			{
+				extend:    'excelHtml5',
+				text:      '<i class="fas fa-file-excel"></i> ',
+				titleAttr: 'Exportar a Excel',
+				className: 'btn btn-success'
+			}
+		],
         language: {
                 "lengthMenu": "Mostrar _MENU_ registros",
                 "zeroRecords": "No se encontraron resultados",
@@ -20,15 +29,8 @@ $(document).ready(function() {
             },
         //para usar los botones   
         responsive: "true",
-        dom: 'Bfrtilp',       
-        buttons:[ 
-			{
-				extend:    'excelHtml5',
-				text:      '<i class="fas fa-file-excel"></i> ',
-				titleAttr: 'Exportar a Excel',
-				className: 'btn btn-success'
-			}
-		]	        
+        dom: 'Bfrtilp'      
+    
     });     
 });
 
