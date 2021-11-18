@@ -1,0 +1,54 @@
+
+.form-tutorado{
+    margin-left: 25%;
+    margin-top: 3%;
+    width: 700px;   
+}
+.form-tutorado label{
+    color: black;
+}
+.form-tutorado .botones{
+    width: auto;
+    height: 30px;
+    border-radius: 5px;
+}
+
+
+/*.form-tutorado table{  
+    margin-top: 30px;
+    /*overflow-y: scroll
+}*/
+
+
+/*tbody, thead tr { display: block; }
+
+tbody {
+    height: 100px;
+    overflow-y: auto;
+}*/
+
+.tableFixHead    { overflow: auto; height: 250px; }
+.tableFixHead th { position: sticky; top: 0; }
+
+table  {  width: 100%; }
+
+th{
+    padding: 15px;
+    background-color:black;
+    color:white;
+}
+td {
+    padding: 15px;
+    color: black;
+}
+tr:nth-child(even) {
+    background-color: #79777c;
+  }
+.form-tutorado div{
+    margin-top: 20px;
+}
+
+div button{
+    margin: 25px 50px;
+    border: 2px solid black;
+}

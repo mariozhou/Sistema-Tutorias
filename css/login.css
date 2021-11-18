@@ -1,0 +1,86 @@
+main {
+    display: grid;
+    grid-template-areas: "a" "b" ;
+    grid-auto-rows: 150px auto;
+    
+    background-color: #D4E4F2;
+}
+
+.contenedor-imagen{
+    display: flex;
+    grid-area: a;
+    padding-left: 41%;
+    padding-top: 25px;
+    width: 250px;
+    height: 150px;
+
+}
+
+.contenedor-principal{
+    display: flex;
+    grid-area: b;
+    padding-left: 26%;
+    padding-top: 25px;
+    justify-content:left;
+    
+    
+}
+
+.form-registro{
+    display: grid;
+    grid-template-areas: "c c" "d d" "e e" "f g" ;
+    grid-auto-rows: auto;
+    background-color: white;
+    margin-bottom: 100px;
+    width: 50%;
+    
+    
+}
+
+.form-registro .texto{
+    display: flex;
+    grid-area: c;
+    border: 2px solid orange;
+    border-radius: 5px;
+    background-color: orange;
+    
+}
+
+.texto h4{
+    color: white;
+    text-align: center;
+    font-size:250%;
+    margin-left: 210px;
+    
+}
+
+.form-registro .login{
+    display: flex;
+    grid-area: d;
+    margin-top: 20px;
+    margin-left: 220px;
+}
+
+.form-registro .contraseña{
+    display: flex;
+    grid-area: e;
+    margin-top: 20px;
+    margin-left: 220px;
+}
+
+.form-registro .Aceptar{
+    display: flex;
+    grid-area: g;
+    margin-left: 180px;
+    margin-right: 160px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.form-registro .cambioContra{
+    display: flex;
+    grid-area: f;
+    margin-left: 110px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+

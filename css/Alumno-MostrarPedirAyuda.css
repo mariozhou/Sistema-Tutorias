@@ -1,0 +1,51 @@
+main{
+    display: grid;
+    grid-template-areas: "a" "b";
+    grid-auto-rows: 10% 90%;
+    background-color: #D4E4F2;
+}
+label{
+    color: black;
+}
+.ren-arriba h3{
+    text-align: center;
+
+}
+.ren-arriba{
+    display: grid;
+    grid-area: a;
+    margin: 2%; 
+}
+.contenido{
+    display: grid;
+    grid-area: b;    
+}
+
+.contenido form{
+    display: grid;
+    grid-template-areas: "c d";
+    grid-auto-columns: 50% 50%;
+}
+
+.colum-izq{
+    display: grid;
+    grid-area: c;
+    padding-left: 25%;
+    padding-top: 3%;
+}
+
+
+.colum-der{
+    display: grid;
+    grid-area: d;
+}
+
+.ren-abajo button{
+    /*justify-content: space-around;*/
+    width: auto;
+    margin-bottom: 3%;
+    margin-left: 25%;
+}
+.ren-abajo{
+    justify-content: space-around;
+}

@@ -1,0 +1,37 @@
+main{
+    display: grid;
+    grid-template-areas: "a" "b" ;
+    grid-auto-rows: 45px auto;
+    background-color: #D4E4F2;
+    height: 600px;
+}
+
+.panel-botones{
+    margin-top: 45px;
+}
+
+.panel-botones input{
+    
+    width: 230px;
+    height: 95pX;
+    margin-bottom: 30px;
+    margin-left: 41%;
+    background-color: #FFAF22;
+    border: 2px;
+    border-radius: 20px;
+    font-size: 18px;
+    color: white;
+
+}
+.texto{
+    margin-top: 10px;
+    text-align: center;
+    font-size: 28px;
+    color: black;
+}
+.panel-botones .botones-Tutor{
+    font-size: 30px;
+}
+.panel-botones .botones-Alumno{
+    font-size: 30px;
+}

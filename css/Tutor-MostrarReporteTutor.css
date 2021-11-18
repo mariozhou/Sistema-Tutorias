@@ -1,0 +1,23 @@
+main{
+    background-color: #D4E4F2;
+    padding-bottom: 2%;
+
+}
+
+#marco{
+    border-style: dotted solid;
+    border-color: lightslategray;
+    border-radius: 5px;
+}
+
+#letra{
+    background-color: rgba(255, 99, 71, 0.2)   
+}
+#letra2{
+    color: black;
+    text-decoration: underline;
+}
+
+label, p{
+    color: black;
+}

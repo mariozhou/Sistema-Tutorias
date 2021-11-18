@@ -1,0 +1,58 @@
+/*main{
+    display: grid;
+    grid-template-areas: "a" "b";
+
+    background-color: #D4E4F2;
+}/*
+ren-arriba{
+    display: grid;
+    grid-area: a;
+    margin: 2%;
+}
+.col-izq{
+    display: grid;
+    grid-area: b;
+    margin: 3%;
+}
+
+.card{
+    border-radius: 20px;
+}
+.form-subirExpediente label{
+    color: black;
+}
+.txt-input, #myfile{
+    margin-bottom:3em;
+}
+
+.form-subirExpediente input{
+    width: 80%;
+}
+.form-subirExpediente button{
+    margin-left: 20%;
+    border-radius: 3px;
+}
+.card-header{
+    text-align: center;
+    background-color: #2140AE;
+    color: white;
+}
+
+
+.tableFixHead    { overflow: auto; height: 300px; }
+.tableFixHead th { position: sticky; top: 0; }
+
+table  {  width: 100%; }
+
+th{
+    padding: 15px;
+    background-color: lightslategrey;
+    color:white;
+}
+td {
+    padding: 15px;
+    color: black;
+}
+ table tr:nth-child(even) {
+    background-color: #79777c;
+  }
