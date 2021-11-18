@@ -41,15 +41,17 @@ $sentenciaSQL = $conexion->prepare("SELECT * FROM `usuario` Where TipoUser='Tuto
 $sentenciaSQL->execute();
 $tutor = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
 
-$sentenciaSQL1 = $conexion->prepare("SELECT tutorados.NombreTutorado, reporte.Asesoria,
-reporte.Actividad, reporte.Conferencias, reporte.Talleres,reporte.IdTutorado, reporte.HoraSesionIndiv,  
-reporte.HoraSesionGrup, reporte.Acredito, reporte.EvaValor, reporte.EvalNivel FROM tutorados 
-JOIN reporte ON tutorados.IdTutorado = reporte.IdTutorado ORDER BY NombreTutorado ASC");  
+$sentenciaSQL1 = $conexion->prepare("SELECT tutorados.NombreTutorado,
+tutorados.IdTutorado, reporte.Psicologia,
+reporte.Asesoria, reporte.Actividad, reporte.Conferencias,
+reporte.Talleres, reporte.HoraSesionIndiv,  
+reporte.HoraSesionGrup, reporte.EvaValor, reporte.EvalNivel, 
+reporte.Acredito,reporte.Noacredito,reporte.Deserto,
+reporte.AcreditadoSegui FROM tutorados 
+JOIN reporte ON tutorados.IdTutorado = reporte.IdTutorado 
+ORDER BY NombreTutorado ASC");  
 $sentenciaSQL1->execute();
 $alumno = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
-$sentenciaSQL1 = $conexion->prepare("SELECT HoraSesionIndiv, HoraSesionGrup, EvaValor, EvalNivel FROM reporte JOIN usuario ON reporte.IdTutorado = usuario.IdUser ORDER BY Nombre ASC");  
-$sentenciaSQL1->execute();
-$reporte = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
 //actualizar tabla alumnos
 
 
@@ -72,23 +74,22 @@ $reporte = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
 
                 <thead>
                     <tr>
-                        <th >Nombre Del Estudiante</th>
+                    <th >Nombre Del Tutorado</th>
                         <th>No. Control</th>
-                       
                         <th>Sesiones Individuales</th>
                         <th>Sesiones  Grupales</th>
-                        
-                        
                         <th>Actividad  Integradora  (Max. 4 hrs)</th>
                         <th>Conferencias</th>
                         <th>Talleres</th>
                         <th>Psicologia</th>
                         <th>Asesoria</th>
-                        
                         <th>Total de horas  Cumplidas</th>
                         <th>Acredito</th>
-
-                        <th>Valor Numerico</th>
+                        <th>No Acredito</th>
+                        <th>Deserto</th>
+                        <th>Acredito</th>
+                        <th>Ac. En Seguimiento</th>
+                        <th>Nivel Numerico</th>
                         <th>Nivel De Desempeño</th>
                     </tr>
                 </thead>
@@ -96,19 +97,24 @@ $reporte = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
 
                  <?php foreach($alumno as $result) { 
                 echo "<tr>
-                    <td>".$result -> NombreTutorado."</td>
-                    <td>".$result -> IdTutorado."</td>
-                    <td>".$result -> HoraSesionIndiv."</td>
-                    <td>".$result -> HoraSesionGrup."</td>
-                    <td>".$result -> Actividad."</td>
-                    <td>".$result -> Conferencias."</td>
-                    <td>".$result -> Talleres."</td>
-                    <td>".$result -> Psicologia."</td>
-                    <td>".$result -> Asesoria."</td>
-                    <td>".$result -> IdTutorado."</td>
-                    <td>".$result -> Acredito."</td>
-                    <td>".$result -> EvaValor."</td>
-                    <td>".$result -> EvalNivel."</td>
+                <td>".$result -> NombreTutorado."</td>
+                <td>".$result -> IdTutorado."</td>
+                <td>".$result -> HoraSesionIndiv."</td>
+                <td>".$result -> HoraSesionGrup."</td>
+                <td>".$result -> Actividad."</td>
+                <td>".$result -> Conferencias."</td>
+                <td>".$result -> Talleres."</td>
+                <td>".$result -> Psicologia."</td>
+                <td>".$result -> Asesoria."</td>
+                <td>".$result -> Asesoria."</td>
+                <td>".$result -> Acredito."</td>
+                <td>".$result -> Noacredito."</td>
+                <td>".$result -> Deserto."</td>
+                <td>".$result -> Asesoria."</td>
+             
+                <td>".$result -> AcreditadoSegui."</td>
+                <td>".$result -> EvaValor."</td>
+                <td>".$result -> EvalNivel."</td>
                   
                     </tr>"; }      
                 ?>

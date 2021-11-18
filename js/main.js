@@ -1,8 +1,14 @@
+$.fn.dataTable.Api.register( 'column().data().sum()', function () {
+    return this.reduce( function (a, b) {
+        var x = parseFloat( a ) || 0;
+        var y = parseFloat( b ) || 0;
+        return x + y;
+    } );
+} );
 $(document).ready(function() {    
-    $('#example').DataTable({        
+    var table = $('#example').DataTable({        
         deferRender: true,
         scrollX:     300,
-        scrollY:     300,
         scroller:    true,
         "buttons":[ 
 			{
@@ -29,7 +35,9 @@ $(document).ready(function() {
             },
         //para usar los botones   
         responsive: "true",
-        dom: 'Bfrtilp'      
+        dom: 'Bfrtilp'
+            
+        
     
     });     
 });

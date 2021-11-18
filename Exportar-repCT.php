@@ -37,19 +37,13 @@
  
 //cosulta tutores 
 include("config/bd.php");//conexion
-$sentenciaSQL = $conexion->prepare("SELECT * FROM `usuario` Where TipoUser='Tutor' ORDER BY Nombre ASC");  
+$sentenciaSQL = $conexion->prepare("SELECT m.NombreTutor,Count(r.deserto), 
+Count(r.Acredito), Count(r.Noacredito), r.deserto + r.Acredito + r.Noacredito,
+r.HoraSesionIndiv, r.HoraSesionGrup, Count(r.Psicologia+r.Asesoria), 
+Count(r.Conferencias), Count(r.Talleres) FROM tutor as m 
+Join reporte as r ON m.IdTutor = r.Idtutor  Group BY m.NombreTutor ASC");  
 $sentenciaSQL->execute();
 $tutor = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
-
-$sentenciaSQL1 = $conexion->prepare("SELECT tutorados.NombreTutorado, reporte.Asesoria,
-reporte.Actividad, reporte.Conferencias, reporte.Talleres,reporte.IdTutorado, reporte.HoraSesionIndiv,  
-reporte.HoraSesionGrup, reporte.Acredito, reporte.EvaValor, reporte.EvalNivel FROM tutorados 
-JOIN reporte ON tutorados.IdTutorado = reporte.IdTutorado ORDER BY NombreTutorado ASC");  
-$sentenciaSQL1->execute();
-$alumno = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
-$sentenciaSQL1 = $conexion->prepare("SELECT HoraSesionIndiv, HoraSesionGrup, EvaValor, EvalNivel FROM reporte JOIN usuario ON reporte.IdTutorado = usuario.IdUser ORDER BY Nombre ASC");  
-$sentenciaSQL1->execute();
-$reporte = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
 //actualizar tabla alumnos
 
 
@@ -72,35 +66,32 @@ $reporte = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
 
                 <thead>
                     <tr>
-                        <th >Nombre Del Tutor</th>
+                    <th >Nombre Del Tutor</th>
                         <th>Desertaron</th>
-                       
-                        <th>Acreditacion</th>
+                        <th>Acreditaron</th>
                         <th>No Acreditaron</th>
-                        <th>Total Estudiantes Atendidos</th>
-                        <th>Tutoria individual</th>
+                        <th>Total De Estudiantes Atendidos</th>
+                        <th>Tutoria Individual</th>
                         <th>Tutoria Grupal</th>
-                        <th>Numero de Estudiantes Canalizados</th>
+                        <th>Numero de estudiantes Canalizados</th>
                         <th>Conferencias</th>
-                        
                         <th>Talleres</th>
  
                     </tr>
                 </thead>
                 <tbody>
 
-                 <?php foreach($alumno as $result) { 
+                 <?php foreach($tutor as $result) { 
                 echo "<tr>
-                    <td>".$result -> NombreTutorado."</td>
-                    <td>".$result -> IdTutorado."</td>
-                    <td>".$result -> HoraSesionIndiv."</td>
-                    <td>".$result -> HoraSesionGrup."</td>
-                    <td>".$result -> Actividad."</td>
-                    <td>".$result -> Conferencias."</td>
-                    <td>".$result -> Talleres."</td>
-                    <td>".$result -> Psicologia."</td>
-                    <td>".$result -> Asesoria."</td>
-                    <td>".$result -> IdTutorado."</td>
+                <td>".$result -> NombreTutorado."</td>
+                <td>".$result -> Deserto."</td>
+                <td>".$result -> Acredito."</td>
+                <td>".$result -> Noacredito."</td>
+                <td>".$result -> HoraSesionIndiv."</td>
+                <td>".$result -> HoraSesionGrup."</td>
+                <td>".$result -> Conferencias."</td>
+                <td>".$result -> Talleres."</td>
+                <td>".$result -> Psicologia."</td>
 
                   
                     </tr>"; }      
