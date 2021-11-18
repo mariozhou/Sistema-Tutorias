@@ -112,7 +112,7 @@ $tutor = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
     </form>
 
         <a id="boton" href="menuCT.php">
-            <button class="botones" type="submit" value="Regresar">Regresar</button>
+            <button type="button" class="btn btn-primary">Regresar</button>
         </a>
       
      <!-- jQuery, Popper.js, Bootstrap JS -->

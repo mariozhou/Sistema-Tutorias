@@ -26,3 +26,11 @@ table>tbody>tr>td {
     display: flex;
     justify-self: center;
 }
+
+.form-radio{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+}

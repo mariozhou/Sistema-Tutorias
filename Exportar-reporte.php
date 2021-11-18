@@ -75,13 +75,13 @@ $alumno = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
 ?>  
 
 <body>
-    <form class="form-radio" method="post">
+    <form class="form-radio" method="post" >
         <p>
             Elige una opcion<br>
             
-                <input type="submit" name="opcion" value="tutores" <?php if($opcion == "tutores") echo "checked"; ?>> 
+                <input type="submit" name="opcion" value="tutores" class="btn btn-primary" <?php if($opcion == "tutores") echo "checked"; ?>> 
             
-                <input type="submit" name="opcion" value="tutorados" <?php if($opcion == "tutorados") echo "checked"; ?>> 
+                <input type="submit" name="opcion" value="tutorados" class="btn btn-primary" <?php if($opcion == "tutorados") echo "checked"; ?>> 
             
         </p>
     </form>
@@ -177,8 +177,14 @@ $alumno = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
 
     </form>
 
-        <a id="boton" href="menuJD.php">
-            <button class="botones" type="submit" value="Regresar">Regresar</button>
+        <a id="boton" href="menuJD.php" >
+        <div class="container">
+            <div class="row align-items-start">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary btn-lg" id="botones">Regresar</button>
+                </div>
+            </div>
+    </div>
         </a>
       
      <!-- jQuery, Popper.js, Bootstrap JS -->
