@@ -4,7 +4,15 @@
     session_start();
     $tipo=$_SESSION['tipo'];
     $nombre=$_SESSION['nombre'];
+    include("config/bd.php");//conexion
+    $sentenciaSQL = $conexion->prepare("SELECT * FROM `tutorados` Where NombreTutorado=:nombre ");  
+    $sentenciaSQL->bindParam(':nombre',$nombre);    
+    $sentenciaSQL->execute();
+    $id1 = $sentenciaSQL->fetch(PDO::FETCH_ASSOC);
+    $id=$_SESSION['id']= $id1["IdTutorado"];
+    $idtutor=$_SESSION['idtutor']= $id1["IdTutor"];
     ?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

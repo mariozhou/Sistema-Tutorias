@@ -19,11 +19,13 @@
                 </div>
                 </a>
 
+                <a href="Tutor-canalizacion.php"  style="text-decoration:none">
                 <div class="card">
                     <img src="img/resumen.png" >
                     <h4>Canalizacion</h4>
-                    <a href=""></a>
                 </div>
+                </a>
+
                 <!--
                 <div class="card">
                     <img src="img/vision.png" >

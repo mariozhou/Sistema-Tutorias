@@ -55,8 +55,6 @@ $sentenciaSQL1->execute();
 $alumno = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
 //actualizar tabla alumnos
 
-
-
 //tutor con nombre retrun id 
 //SELECT IdTutor FROM `tutor` WHERE NombreTutor = 'blanca ramirez' 
 // agregar tutor
@@ -116,16 +114,11 @@ $alumno = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
                 <td>".$result -> AcreditadoSegui."</td>
                 <td>".$result -> EvaValor."</td>
                 <td>".$result -> EvalNivel."</td>
-                  
-                    </tr>"; }      
+                </tr>"; }      
                 ?>
-
-                
+    
                 </tbody>
                 <tbody>
-
-
-
 
                 </tbody>
             </table>
@@ -143,14 +136,5 @@ $alumno = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
     </div>
     </a>                
     
-      
-     <!-- jQuery, Popper.js, Bootstrap JS -->
- 
-
-
 </body>
-
-
-
-
 <?php include("template/pie.php"); ?>

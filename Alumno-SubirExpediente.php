@@ -10,20 +10,20 @@ while ($row = $sel->fetch_assoc()) {
     array_push($res, $tmp);
 }
 
-//"DELETE FROM `files` WHERE `files`.`id` = 2"
+//"DELETE FROM `files` WHERE `files`.`id` = 2"          
 ?>       
 <br>                      
 <div class="container">
-    <h2>Entregable</h2>
+    <h2>Entregables</h2>
   <!--  <a href="http://localhost/Sistema-Tutorias/act/Diasgnostico%20inicial.pdf">Diasgnostico Inicial</a><br>-->
     <a href="http://localhost/Sistema-Tutorias/act/ficha%20de%20identificacion.pdf">Ficha</a><br>
     <a href="http://localhost/Sistema-Tutorias/act/entrevista.pdf">Encuesta</a><br>
 </div>
 <br>
 <div class="container">
-    <div class="row align-items-start ">
+    <div class="row align-items-start ">   
         <div class="col">
-            <h4 style="text-align: right;">Subir Archivos</h4>
+            <h4 style="text-align: right;">Subir Archivos</h4>   
         </div>
         <div class="col">
             <button  type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">

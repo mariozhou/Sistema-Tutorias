@@ -6,26 +6,18 @@
  $sentenciaSQL1->bindParam(':nombre',$nombre);
  $sentenciaSQL1->execute();
  $id=($sentenciaSQL1->fetchColumn());
-  '  Guardar:'.$guardar=(isset($_POST['opciones']))?$_POST['opciones']:"";
+ $guardar=null;
+  echo'  Guardar:'.$guardar=(isset($_POST['opciones']))?$_POST['opciones']:"";
   '  comentarios:'.$comentario=(isset($_POST['motivo']))?$_POST['motivo']:"";
   $tipo=(isset($_POST['opciones']))?$_POST['opciones']:"";
   $btn=(isset($_POST['accion']))?$_POST['accion']:"";
-
- if(isset($_POST['accion']) ){//problema con tutor
-    $sentenciaSQL2 = $conexion->prepare("INSERT INTO `canalizacion`( `IdTutorado`,Tipo, `Comentarios`) VALUES (:id,:tipo,:comentario)");  
-     $sentenciaSQL2->bindParam(':id',$id);
-     $sentenciaSQL2->bindParam(':tipo',$tipo);
-     $sentenciaSQL2->bindParam(':comentario',$comentario);
-     $sentenciaSQL2->execute();
-}
 ?>
-    
 
 <div class="ren-arriba">
         <h3>Por favor seleccione una opcion. Pronto se atenderá su solicitud</h3>
     </div>
     <div class="contenido">
-        <form action=""  method="post" required>
+        <form action="config/Alumno-MostrarPedirAyudaSQL.php"  method="post"  required>
             <div class="colum-izq">
                 <div>
                     <input type="radio" id="opciones" name="opciones" value="Psicologico" required>
