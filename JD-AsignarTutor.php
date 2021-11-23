@@ -30,14 +30,13 @@ if( (isset($_POST["Nombre"])) ){
         <label for="">Nombre</label>
         <input type="text" name="Nombre">
 
-        <label for="" style="margin-left:50px;">RFC</label>
+        <label for="" style="margin-left:50px;">Usuario</label>
         <input type="text" name="RFC"> <br>
 
         <div class="tableFixHead">
             <table style="width:100%"> 
                 <thead>
                     <tr>
-                       
                         <th style="width:70%">Nombre</th>
                         <th>RFC</th>
                     </tr>
