@@ -30,21 +30,29 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">  
       
 <?php
- $rango=(isset($_POST['range-semestre']))?$_POST['range-semestre']:"";
- echo $asigtutor=(isset($_POST['tutor']))?$_POST['tutor']:"";
- echo $noct2=(isset($_POST['Ncontrol']))?$_POST['Ncontrol']:"";
+
+
 
  
 //cosulta tutores 
 include("config/bd.php");//conexion
-$sentenciaSQL = $conexion->prepare("SELECT m.NombreTutor,Count(r.deserto), 
+if(isset($_POST['select'])){
+$sentenciaSQL = $conexion->prepare("SELECT m.NombreTutor, r.IdTutorado, Count(r.deserto), 
 Count(r.Acredito), Count(r.Noacredito), r.deserto + r.Acredito + r.Noacredito,
 r.HoraSesionIndiv, r.HoraSesionGrup, Count(r.Psicologia+r.Asesoria), 
 Count(r.Conferencias), Count(r.Talleres) FROM tutor as m 
 Join reporte as r ON m.IdTutor = r.Idtutor  Group BY m.NombreTutor ASC");  
 $sentenciaSQL->execute();
 $tutor = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
+}
 //actualizar tabla alumnos
+$sentenciaSQL = $conexion->prepare("SELECT * FROM `tutor`  ORDER BY  NombreTutor ASC");  
+$sentenciaSQL->execute();
+$alumno = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
+
+$id=(isset($_POST['select']))?$_POST['select']:"";
+$_POST['idsql']=$id;
+
 
 
 
@@ -58,8 +66,24 @@ $tutor = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
 
 <body>
 
-    
-    <form class="form-tutorado" method="post" >
+    <form action="" method="post" class="form-group">
+     <div class="form-group">       
+
+      <br>
+      <label for="No.Control"><h5>Seleccionar Tutor</h5></label> <br>
+      <select class="form-select col-md-6" name="select" id="inputGroupSelect01" onChange="this.form.submit()">
+      <option selected> <?php if(isset($_POST['select']) ){echo $id; }else{echo 'Tutor'; } ?> </option>
+      <?php foreach($alumno as $row): //llenar combobox con Tutores 
+                 ?>  
+                <option value="<?php echo$idsq= $row->IdTutor;?>"> 
+                <?php echo $select =$row->NombreTutor.' '.$row->IdTutor; $_POST['idsql']=$select;?>
+                
+                </option>
+            <?php endforeach ?>  
+            <?php   ?>
+      </select>
+    </div>
+    </form>     
 
         <div  max-width="1400px">
             <table id="example" class="table table-bordered" max-width="1400px"> 
@@ -67,6 +91,7 @@ $tutor = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
                 <thead>
                     <tr>
                     <th >Nombre Del Tutor</th>
+                    <th >Nombre Del Tutorado</th>
                         <th>Desertaron</th>
                         <th>Acreditaron</th>
                         <th>No Acreditaron</th>
@@ -81,11 +106,14 @@ $tutor = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
                 </thead>
                 <tbody>
 
-                 <?php foreach($tutor as $result) { 
+                 <?php if(isset($_POST['select'])){
+                     foreach($tutor as $result) { 
                 echo "<tr>
+                <td>".$result -> NombreTutor."</td>
                 <td>".$result -> NombreTutorado."</td>
                 <td>".$result -> Deserto."</td>
                 <td>".$result -> Acredito."</td>
+                <td>".$result -> Noacredito."</td>
                 <td>".$result -> Noacredito."</td>
                 <td>".$result -> HoraSesionIndiv."</td>
                 <td>".$result -> HoraSesionGrup."</td>
@@ -94,7 +122,8 @@ $tutor = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
                 <td>".$result -> Psicologia."</td>
 
                   
-                    </tr>"; }      
+                    </tr>"; }
+                }      
                 ?>
 
                 
