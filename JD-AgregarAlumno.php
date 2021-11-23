@@ -4,12 +4,13 @@
 
 //cosulta tutores 
 include("config/bd.php");//conexion
-$sentenciaSQL = $conexion->prepare("SELECT * FROM `usuario` Where TipoUser='Tutor' ORDER BY Nombre ASC");  
+$sentenciaSQL = $conexion->prepare("SELECT * FROM `tutorados`  ORDER BY NombreTutorado ASC");  
 $sentenciaSQL->execute();
 $tutor = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
 
 $nom=(isset($_POST['Nombre']))?$_POST['Nombre']:"";
 $rfc=(isset($_POST['RFC']))?$_POST['RFC']:"";
+$semestres=(isset($_POST['semestres']))?$_POST['semestres']:"";
 
 if( (isset($_POST["Nombre"])) ){
 
@@ -25,20 +26,25 @@ if( (isset($_POST["Nombre"])) ){
 }
 
 ?>
-    <form action="config\JD-AsigarTutorSQL.php" class="form-tutor" method="post">
-        <h2 style="text-align:center;">Asignar Tutor</h2><br>
+    <form action="config\JD-AgregarAlumnoSQL.php" class="form-tutor" method="post">
+
+        <h2 style="text-align:center;">Agregar Alumno</h2><br>
         <label for="">Nombre</label>
         <input type="text" name="Nombre" required>
 
-        <label for="" style="margin-left:50px;">Usuario</label>
+        <label for="" style="margin-left:30px;">Usuario</label>
         <input type="text" name="RFC" required> <br>
+
+        <label for="" style="margin-left:20px;">Semestres</label>
+        <input type="number" name="semestres" required> <br>
 
         <div class="tableFixHead">
             <table style="width:100%"> 
                 <thead>
                     <tr>
-                        <th style="width:70%">Nombre</th>
+                        <th style="width:60%">Nombre</th>
                         <th>Usuario</th>
+                        <th>Semestres</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,8 +52,9 @@ if( (isset($_POST["Nombre"])) ){
                     ?>
                                 <tr>
                            <!--     <td><input type='checkbox' name='check[]' value='<?//php $val -> IdUser ?>'></></td>  -->
-                                    <td><?php echo $val -> Nombre ?></td>
-                                    <td><?php echo $val -> IdUser ?></td>
+                                    <td><?php echo $val -> NombreTutorado ?></td>
+                                    <td><?php echo $val -> IdTutorado  ?></td>
+                                    <td><?php echo $val -> Semestres  ?></td>
                              
                                 </tr>
                             <?php } ?>

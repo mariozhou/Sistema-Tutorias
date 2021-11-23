@@ -3,6 +3,9 @@ session_start();
 include('config/conexion.php');
 include('config/bd.php');
 $nombre=$_SESSION['nombre'];
+
+
+
 $sentenciaSQL1= $conexion->prepare("SELECT IdTutorado FROM `tutorados` WHERE NombreTutorado = :nombre");
 $sentenciaSQL1->bindParam(':nombre',$nombre);
 $sentenciaSQL1->execute();
@@ -14,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = $con->real_escape_string(htmlentities($_POST['title']));
     $description = $con->real_escape_string(htmlentities($_POST['description']));
 
-    $file_name = $id.$_FILES['file']['name'];
+    $file_name = $id.$title;
 
     $new_name_file = null;
 

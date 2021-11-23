@@ -85,7 +85,7 @@ while ($row = $sel->fetch_assoc()) {
                         <form enctype="multipart/form-data" id="form1">
                             <div class="form-group">
                                 <label for="title">Titulo</label>
-                                <input type="text" class="form-control" id="title" name="title">
+                                <input type="text" class="form-control" id="title" name="title" required>
                             </div>
                             <div class="form-group">
                                 <label for="description">Descripcion</label>

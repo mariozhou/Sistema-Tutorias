@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-11-2021 a las 05:42:03
+-- Tiempo de generación: 23-11-2021 a las 07:25:35
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.12
 
@@ -29,9 +29,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `actividades` (
   `IdAct` int(20) NOT NULL,
-  `Actividad` blob NOT NULL,
-  `Semestres` int(11) NOT NULL
+  `Actividad` varchar(200) DEFAULT NULL,
+  `Des` varchar(520) DEFAULT NULL,
+  `Semestres` varchar(35) DEFAULT NULL,
+  `url` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `actividades`
+--
+
+INSERT INTO `actividades` (`IdAct`, `Actividad`, `Des`, `Semestres`, `url`) VALUES
+(30, 'futbol', 'partido', '8', 'act/entrevistapdf.pdf');
 
 -- --------------------------------------------------------
 
@@ -57,15 +66,18 @@ CREATE TABLE `ayuda` (
 CREATE TABLE `cambiartutor` (
   `IdMensaje` int(11) NOT NULL,
   `IdTutorado` int(11) NOT NULL,
-  `Mensaje` varchar(250) NOT NULL
+  `NombreTutorado` varchar(65) NOT NULL,
+  `Mensaje` varchar(550) NOT NULL,
+  `NombreTutor` varchar(50) NOT NULL,
+  `Fecha` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `cambiartutor`
 --
 
-INSERT INTO `cambiartutor` (`IdMensaje`, `IdTutorado`, `Mensaje`) VALUES
-(0, 16401029, 'fghfgh');
+INSERT INTO `cambiartutor` (`IdMensaje`, `IdTutorado`, `NombreTutorado`, `Mensaje`, `NombreTutor`, `Fecha`) VALUES
+(20, 16401029, 'Jose Luis Ramos Monreal', 'halo', 'edgar valderama', '2021-11-17 18:13:28');
 
 -- --------------------------------------------------------
 
@@ -86,30 +98,7 @@ CREATE TABLE `canalizacion` (
 --
 
 INSERT INTO `canalizacion` (`IdCanal`, `IdTutorado`, `Tipo`, `Comentarios`, `Fecha`) VALUES
-(51, 16401029, 'psicologico', 'werewr', '2021-11-09 12:41:46'),
-(52, 16401029, 'asesorias', 'sdsa', '2021-11-09 12:42:51'),
-(60, 16401029, 'asesorias', 'awawawa', '2021-11-09 12:47:42'),
-(61, 16401029, 'asesorias', 'awawawa', '2021-11-09 12:47:44');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `coordinador`
---
-
-CREATE TABLE `coordinador` (
-  `IdCoo` int(11) NOT NULL,
-  `NombreCoo` varchar(20) NOT NULL,
-  `ApellidoParteno` varchar(20) NOT NULL,
-  `ApellidoMarteno` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `coordinador`
---
-
-INSERT INTO `coordinador` (`IdCoo`, `NombreCoo`, `ApellidoParteno`, `ApellidoMarteno`) VALUES
-(16401024, 'Jiacheng', 'Zhou', '');
+(121, 16401029, 'Asesorias Departamental', 'hola amigos', '2021-11-16 23:07:53');
 
 -- --------------------------------------------------------
 
@@ -132,21 +121,7 @@ CREATE TABLE `files` (
 
 INSERT INTO `files` (`id`, `title`, `descripction`, `url`, `type`, `IdTutorado`) VALUES
 (5, 'gh', 'gfh', 'files/eje-proyecto-invespdf.pdf', NULL, 0),
-(21, 'asd', 'asd', 'files/avance-jiacheng-zhoupdf.pdf', NULL, 16401029),
-(22, 'ef', 'ewf', 'files/eje-proyecto-invespdf.pdf', NULL, 16401029);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `jefedpt`
---
-
-CREATE TABLE `jefedpt` (
-  `IdJefe` int(11) NOT NULL,
-  `NombreJefe` varchar(50) NOT NULL,
-  `ApellidoParteno` varchar(20) NOT NULL,
-  `ApellidoMarteno` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(33, 'asd', 'asd', 'files/16401029ficha-de-identificacionpdf.pdf', NULL, 16401029);
 
 -- --------------------------------------------------------
 
@@ -168,10 +143,10 @@ CREATE TABLE `reporte` (
   `HoraSesionGrup` int(11) NOT NULL,
   `EvaValor` int(11) NOT NULL,
   `EvalNivel` varchar(20) NOT NULL,
-  `Acredito` int(11) DEFAULT NULL,
-  `Noacredito` int(11) DEFAULT NULL,
-  `Deserto` int(11) DEFAULT NULL,
-  `AcreditadoSegui` int(11) DEFAULT NULL
+  `Acredito` int(11) NOT NULL,
+  `Noacredito` int(11) NOT NULL,
+  `Deserto` int(11) NOT NULL,
+  `AcreditadoSegui` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -181,19 +156,8 @@ CREATE TABLE `reporte` (
 INSERT INTO `reporte` (`IdReporte`, `IdTutorado`, `Semestres`, `Psicologia`, `Asesoria`, `Actividad`, `Conferencias`, `Talleres`, `Estatus`, `HoraSesionIndiv`, `HoraSesionGrup`, `EvaValor`, `EvalNivel`, `Acredito`, `Noacredito`, `Deserto`, `AcreditadoSegui`) VALUES
 (0, 0, 0, 0, 0, 0, 0, 0, 'Estatus', 0, 0, 0, '', 0, 0, 0, 0),
 (1, 16401026, 0, 1, 1, 0, 0, 0, 'Acreditó', 0, 0, 1, 'Suficiente', 1, 0, 0, 0),
-(3, 16401099, 0, 0, 0, 0, 0, 0, 'Acreditado en Seguimiento', 0, 0, 0, 'Insuficiente', 0, 0, 0, 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `seguro`
---
-
-CREATE TABLE `seguro` (
-  `IdSeguro` int(11) NOT NULL,
-  `IdTutorado` int(11) NOT NULL,
-  `Fecha` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(3, 16401099, 0, 0, 0, 0, 0, 0, 'Acreditado en Seguimiento', 0, 0, 0, 'Insuficiente', 0, 0, 0, 1),
+(4, 16401011, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -238,10 +202,6 @@ CREATE TABLE `tutorados` (
 --
 
 INSERT INTO `tutorados` (`IdTutorado`, `NombreTutorado`, `IdTutor`, `Semestres`, `Domicilio`, `Telefono`, `Preparatoria`, `Estatus`, `MotivoCarrera`) VALUES
-(100, '100', NULL, 2, '', '', '', '', 0),
-(101, '101', NULL, 6, '', '', '', '', 0),
-(102, '102', NULL, 11, '', '', '', '', 0),
-(103, '103', NULL, 13, '', '', '', '', 0),
 (16401026, 'Luis Miguel', 16401027, 9, '', '', '', '', 0),
 (16401029, 'Jose Luis Ramos Monreal', 16401028, 11, '', '', '', '', 0),
 (16401099, 'Jholaus Enrique Salazar Maldonado', 16401027, 2, '', '', '', '', 0);
@@ -264,17 +224,12 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`IdUser`, `Nombre`, `Password`, `TipoUser`) VALUES
-(100, '100', '', 'Alumno'),
-(101, '101', '', 'Alumno'),
-(102, '102', '', 'Alumno'),
-(103, '103', '', 'Alumno'),
-(7890, 'ddddddddddddddd', '123456', 'Tutor'),
 (16401020, 'blanca ramirez', 'br1234', 'Tutor'),
 (16401023, 'Jiacheng Zhou', 'z1234', 'Jefe de departamento'),
 (16401024, 'Juan Mario Gonzalez Borrayo', 'jm1234', 'Coordinador de Tutores'),
 (16401026, 'Luis Miguel', 'lm123', 'Alumno'),
-(16401027, 'Sergio Rivera Rios', 's1234', 'Tutor'),
-(16401028, 'edgar valderama', 'ev123456', 'Tutor'),
+(16401027, 'Sergio Rivera Rios', '123', 'Tutor'),
+(16401028, 'edgar valderama', 'e1234', 'Tutor'),
 (16401029, 'Jose Luis Ramos Monreal', 'jl1234', 'Alumno'),
 (16401099, 'Jholaus Enrique Salazar Maldonado', 'js1234', 'Alumno');
 
@@ -310,35 +265,16 @@ ALTER TABLE `canalizacion`
   ADD KEY `Tutorado-Canalizacion` (`IdTutorado`);
 
 --
--- Indices de la tabla `coordinador`
---
-ALTER TABLE `coordinador`
-  ADD PRIMARY KEY (`IdCoo`);
-
---
 -- Indices de la tabla `files`
 --
 ALTER TABLE `files`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `jefedpt`
---
-ALTER TABLE `jefedpt`
-  ADD PRIMARY KEY (`IdJefe`);
-
---
 -- Indices de la tabla `reporte`
 --
 ALTER TABLE `reporte`
   ADD PRIMARY KEY (`IdReporte`);
-
---
--- Indices de la tabla `seguro`
---
-ALTER TABLE `seguro`
-  ADD PRIMARY KEY (`IdSeguro`),
-  ADD KEY `Tutorado-Seguro` (`IdTutorado`);
 
 --
 -- Indices de la tabla `tutor`
@@ -364,22 +300,34 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `actividades`
+--
+ALTER TABLE `actividades`
+  MODIFY `IdAct` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT de la tabla `cambiartutor`
+--
+ALTER TABLE `cambiartutor`
+  MODIFY `IdMensaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
 -- AUTO_INCREMENT de la tabla `canalizacion`
 --
 ALTER TABLE `canalizacion`
-  MODIFY `IdCanal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `IdCanal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 
 --
 -- AUTO_INCREMENT de la tabla `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `IdReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `IdReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas

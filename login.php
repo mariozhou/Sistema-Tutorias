@@ -81,6 +81,7 @@ switch($btnlogin){
 }
 
 ?>
+<body>
     <div class="contenedor-imagen">
         <img src="img/login.jpg" alt="imglogin" >  
     </div>
@@ -106,4 +107,6 @@ switch($btnlogin){
     
         </form>
     </div>
+</body>
+
 <?php include("template/pie.php"); ?>

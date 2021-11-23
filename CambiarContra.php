@@ -12,7 +12,6 @@ $btnlogin=(isset($_POST['btnlogin']))?$_POST['btnlogin']:"";
 include("config/bd.php");//conexion
 switch($btnlogin){
     case "aceptar":
-  
         if($_POST){
             $sentenciaSQL = $conexion->prepare("SELECT `IdUser`, `Password`, `TipoUser` FROM `usuario` WHERE IdUser=:user");
             $sentenciaSQL->bindParam(':user',$txtUser);  
@@ -20,15 +19,20 @@ switch($btnlogin){
             $usuario = $sentenciaSQL->fetch(PDO::FETCH_ASSOC);
 
             if($usuario){ 
+          
                 if ($txtPass==$txtPass2) {
                     $sentenciaSQL1 = $conexion->prepare("UPDATE `usuario` SET `Password`=:contra  WHERE IdUser=:user");
                     $sentenciaSQL1->bindParam(':user',$txtUser);  
                     $sentenciaSQL1->bindParam(':contra',$txtPass);  
                     $sentenciaSQL1->execute();
                     $usuario = $sentenciaSQL->fetch(PDO::FETCH_ASSOC);
+                    echo "<script> alert('Contraseña cambiado');
+                    </script>";
+                    header("location:menuPrincipal.php");    
                     }else{
-                            echo "<script> alert('Contraseña no coincide');
+                           echo "<script> alert('Contraseña no coincide');
                             </script>";
+                     
                         }     
                     }else {
                              echo "<script> alert('Usuario no es validad');
@@ -58,7 +62,7 @@ switch($btnlogin){
                     <input class="caja-texto" type="password" name="txtPass" id="txtPass" placeholder="Ingrese contraseña" required>
                 </div>
                  
-                <div class="contraseña">
+                <div class="">
                     <img src="img/contraseña.jpg" alt="imgcontraseña" >
                     <input class="caja-texto" type="password" name="txtPass2" id="txtPass" placeholder="Ingrese contraseña" required>
                 </div>

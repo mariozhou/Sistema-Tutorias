@@ -3,7 +3,7 @@
 include('config/conexion.php');
 $tmp = array();
 $res = array();
-$sel = $con->query("SELECT * FROM `canalizacion` Join tutorados  WHERE canalizacion.IdTutorado = tutorados.IdTutorado AND canalizacion.IdTutor = '16401028' ");
+$sel = $con->query("SELECT * FROM `canalizacion` Join tutorados  WHERE canalizacion.IdTutorado = tutorados.IdTutorado AND tutorados.IdTutor = $idtutor ");
 while ($row = $sel->fetch_assoc()) {
     $tmp = $row;
     array_push($res, $tmp);
@@ -13,15 +13,15 @@ while ($row = $sel->fetch_assoc()) {
     <br><br>
     <h4>Canalizaciones</h4>
     <br><br>
-    <div class="table-wrapper-scroll-y my-custom-scrollbar">
-        <table class="table table-bordered table-striped mb-0">
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">      
+        <table class="table table-bordered table-striped mb-0">    
             <thead>
                 <tr>
                     <th>Alumno</th>
                     <th>Tipo</th>
                     <th>Motivos</th>
                     <th>Fecha</th>
-                    <th>Accion</th>
+                    <th>Accion</th>  
                 </tr>
             </thead>
             <tbody>

@@ -12,12 +12,20 @@
                 </div>
                 </a>
 
-                <a href="JD-AsignarTutor.php"> 
+                <a href="JD-AsignarTutor.php" style="text-decoration:none"> 
                 <div class="card">
                     <img src="img/aceptado.png" >
                         <h4>Asignar Tutores</h4>
                 </div>
                 </a>
+
+                <a href="JD-AgregarAlumno.php" style="text-decoration:none"> 
+                <div class="card">
+                    <img src="img/aceptado.png" >
+                        <h4>Agregar Alumno</h4>
+                </div>
+                </a>
+
                 <a href="JD-verExpediente.php" style="text-decoration:none"> 
                 <div class="card">
                     <img src="img/vision.png" >

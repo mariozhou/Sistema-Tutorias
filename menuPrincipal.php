@@ -35,4 +35,4 @@ switch($btntipo){
 <!--  <input class="botones" name="btnlogin" type="submit" value="Cambiar Contraseña">
       -->
 <?php include("template/pie.php"); 
-echo $btntipo."<br/>";?>
+
