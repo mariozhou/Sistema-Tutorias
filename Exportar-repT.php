@@ -118,9 +118,7 @@ $alumno = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
                 ?>
     
                 </tbody>
-                <tbody>
-
-                </tbody>
+    
             </table>
         </div>
         <br>
