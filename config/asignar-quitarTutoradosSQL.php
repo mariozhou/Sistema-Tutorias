@@ -1,7 +1,9 @@
 <?php
 include("bd.php");//conexion
 $asigtutor=(isset($_POST['tutor']))?$_POST['tutor']:"";
-
+ $date =(isset($_POST['demo']))?$_POST['demo']:"";
+ $latitud = isset($_POST['latitud'])?$_POST['latitud']:null;
+ $longitud = isset($_POST['longitud'])?$_POST['longitud']:null;
 if( !(isset($_POST["btnquitar"])) ){
 
     if( isset($_POST['check']) And !($asigtutor == "Tutores") ){
@@ -19,9 +21,10 @@ if( !(isset($_POST["btnquitar"])) ){
 
 
 }else{
-    echo "<script> alert('No eligio un Tutor o Alumno');
+    echo 'sdsd'.$date."<script> alert('No eligio un Tutor o Alumno');
     location.href = '../asignar-quitarTutorados.php';
    </script>";
+ 
 }
 }elseif( (isset($_POST["check"])) ){
     foreach( $_POST['check'] AS $value  ){
@@ -37,6 +40,7 @@ if( !(isset($_POST["btnquitar"])) ){
     echo "<script> alert('No eligio un Alumno');
     location.href = '../asignar-quitarTutorados.php';
    </script>";
+  
 }
 
 

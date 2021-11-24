@@ -23,8 +23,7 @@ if( (isset($_POST["Nombre"])) ){
 }else{
      $si="noo";
 }
-
-
+  
    
 ?>
         <script>
@@ -37,9 +36,8 @@ if( (isset($_POST["Nombre"])) ){
                 document.getElementById("demo").innerHTML= 'noviembre';
                     <?php  $date="Enero-Julio";?>
              }
-
-           
         </script>
+
     <form action="config\JD-AsigarTutorSQL.php" class="form-tutor" method="post">
         <h2 style="text-align:center;">Asignar Tutor</h2><br>
         <label for="">Nombre</label>
@@ -47,7 +45,7 @@ if( (isset($_POST["Nombre"])) ){
 
         <label for="" style="margin-left:10px;">Usuario</label>
         <input type="text" name="RFC" required> <br>
-
+      
         <div class="tableFixHead">
             <table style="width:100%"> 
                 <thead>

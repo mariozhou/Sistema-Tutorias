@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-11-2021 a las 07:25:35
+-- Tiempo de generación: 24-11-2021 a las 07:01:16
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.12
 
@@ -157,7 +157,8 @@ INSERT INTO `reporte` (`IdReporte`, `IdTutorado`, `Semestres`, `Psicologia`, `As
 (0, 0, 0, 0, 0, 0, 0, 0, 'Estatus', 0, 0, 0, '', 0, 0, 0, 0),
 (1, 16401026, 0, 1, 1, 0, 0, 0, 'Acreditó', 0, 0, 1, 'Suficiente', 1, 0, 0, 0),
 (3, 16401099, 0, 0, 0, 0, 0, 0, 'Acreditado en Seguimiento', 0, 0, 0, 'Insuficiente', 0, 0, 0, 1),
-(4, 16401011, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', 0, 0, 0, 0);
+(4, 16401011, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', 0, 0, 0, 0),
+(5, 16401033, 0, 0, 0, 0, 0, 0, 'Seleccionar estatus', 0, 0, 0, '', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -167,17 +168,19 @@ INSERT INTO `reporte` (`IdReporte`, `IdTutorado`, `Semestres`, `Psicologia`, `As
 
 CREATE TABLE `tutor` (
   `IdTutor` int(11) NOT NULL,
-  `NombreTutor` varchar(35) NOT NULL
+  `NombreTutor` varchar(35) NOT NULL,
+  `periodo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tutor`
 --
 
-INSERT INTO `tutor` (`IdTutor`, `NombreTutor`) VALUES
-(16401020, 'blanca ramirez'),
-(16401027, 'Sergio Rivera Rios'),
-(16401028, 'edgar valderama');
+INSERT INTO `tutor` (`IdTutor`, `NombreTutor`, `periodo`) VALUES
+(16401020, 'blanca ramirez', 0),
+(16401027, 'Sergio Rivera Rios', 0),
+(16401028, 'edgar valderama', 0),
+(20401020, 'luis', 0);
 
 -- --------------------------------------------------------
 
@@ -204,6 +207,7 @@ CREATE TABLE `tutorados` (
 INSERT INTO `tutorados` (`IdTutorado`, `NombreTutorado`, `IdTutor`, `Semestres`, `Domicilio`, `Telefono`, `Preparatoria`, `Estatus`, `MotivoCarrera`) VALUES
 (16401026, 'Luis Miguel', 16401027, 9, '', '', '', '', 0),
 (16401029, 'Jose Luis Ramos Monreal', 16401028, 11, '', '', '', '', 0),
+(16401033, 'Jesus', NULL, 12, '', '', '', '', 0),
 (16401099, 'Jholaus Enrique Salazar Maldonado', 16401027, 2, '', '', '', '', 0);
 
 -- --------------------------------------------------------
@@ -216,22 +220,25 @@ CREATE TABLE `usuario` (
   `IdUser` int(11) NOT NULL,
   `Nombre` varchar(35) NOT NULL,
   `Password` varchar(18) NOT NULL,
-  `TipoUser` varchar(35) NOT NULL
+  `TipoUser` varchar(35) NOT NULL,
+  `cambio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`IdUser`, `Nombre`, `Password`, `TipoUser`) VALUES
-(16401020, 'blanca ramirez', 'br1234', 'Tutor'),
-(16401023, 'Jiacheng Zhou', 'z1234', 'Jefe de departamento'),
-(16401024, 'Juan Mario Gonzalez Borrayo', 'jm1234', 'Coordinador de Tutores'),
-(16401026, 'Luis Miguel', 'lm123', 'Alumno'),
-(16401027, 'Sergio Rivera Rios', '123', 'Tutor'),
-(16401028, 'edgar valderama', 'e1234', 'Tutor'),
-(16401029, 'Jose Luis Ramos Monreal', 'jl1234', 'Alumno'),
-(16401099, 'Jholaus Enrique Salazar Maldonado', 'js1234', 'Alumno');
+INSERT INTO `usuario` (`IdUser`, `Nombre`, `Password`, `TipoUser`, `cambio`) VALUES
+(16401020, 'blanca ramirez', 'br1234', 'Tutor', 0),
+(16401023, 'Jiacheng Zhou', 'z1234', 'Jefe de departamento', 0),
+(16401024, 'Juan Mario Gonzalez Borrayo', 'jm1234', 'Coordinador de Tutores', 0),
+(16401026, 'Luis Miguel', 'lm123', 'Alumno', 0),
+(16401027, 'Sergio Rivera Rios', '123', 'Tutor', 0),
+(16401028, 'edgar valderama', 'e1234', 'Tutor', 0),
+(16401029, 'Jose Luis Ramos Monreal', 'jl1234', 'Alumno', 0),
+(16401033, 'Jesus', '123456', 'Alumno', 1),
+(16401099, 'Jholaus Enrique Salazar Maldonado', 'js1234', 'Alumno', 0),
+(20401020, 'luis', 'j1234', 'Tutor', 0);
 
 --
 -- Índices para tablas volcadas
@@ -327,7 +334,7 @@ ALTER TABLE `files`
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `IdReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `IdReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
@@ -357,6 +364,14 @@ ALTER TABLE `tutor`
 ALTER TABLE `tutorados`
   ADD CONSTRAINT `Tutor-Tutorado` FOREIGN KEY (`IdTutor`) REFERENCES `tutor` (`IdTutor`),
   ADD CONSTRAINT `Tutorada-usuario` FOREIGN KEY (`IdTutorado`) REFERENCES `usuario` (`IdUser`);
+
+DELIMITER $$
+--
+-- Eventos
+--
+CREATE DEFINER=`root`@`localhost` EVENT `TutorBaja` ON SCHEDULE EVERY 6 MONTH STARTS '2021-12-30 22:53:56' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE tutorados SET `IdTutor`= ""$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

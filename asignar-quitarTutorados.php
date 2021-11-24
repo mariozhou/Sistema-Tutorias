@@ -13,14 +13,12 @@
     <link rel="stylesheet"  type="text/css" href="datatable\DataTables-1.11.3\css\dataTables.bootstrap4.min.css">
      <!--font awesome con CDN-->  
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">  
-      
-    
+       
 <?php
 $rango=(isset($_POST['range-semestre']))?$_POST['range-semestre']:"";
 $asigtutor=(isset($_POST['tutor']))?$_POST['tutor']:"";
 $noct2=(isset($_POST['Ncontrol']))?$_POST['Ncontrol']:"";
-
-
+echo $date =(isset($_POST['demo']))?$_POST['demo']:"";
 
 //cosulta tutores 
 include("config/bd.php");//conexion
@@ -120,24 +118,6 @@ while ($row = $sel->fetch_assoc()) {
 
 <body>
     <form class="form-tutorado" method="post" >
-    <?php  $date="";?>
-    <script>
-            const d = new Date();
-            if(d.getMonth() ==  8 or 9 or 10 or 11 or  12){
-                     $date="Agosto-Diciembre";
-                   
-               
-                
-             }
-             
-             if(d.getMonth() == 10 ){
-                     $date="Enero-Julido";
-
-                    
-             }
-
-        </script>
-
         <label  style= "margin-top: 30px; margin-left: 50px; margin-bottom: 30px;"> Tutorados </label><br>
         <label> Rango de semestres</label>
         <select name="range-semestre" id="range-semestre" onchange="myFunction()">  
@@ -155,7 +135,7 @@ while ($row = $sel->fetch_assoc()) {
                 
             <form class="form-tutorado" method="post" action="config/asignar-quitarTutoradosSQL.php">
                 
-        <label>Tutor</label style= "margin-left: 50px;"> 
+        <label>Tutor</label style= "margin-left: 60px;"> 
         <select name="tutor" >
         <option >Tutores</option>
             <?php foreach($tutor as $row): //llenar combobox con Tutores 
@@ -165,11 +145,34 @@ while ($row = $sel->fetch_assoc()) {
                 </option>
             <?php endforeach ?> 
         </select> 
-        <label style= "margin-left: 50px;">Periodo:
-                <?php echo $date;
-                ?>
+        <label style= "margin-left: 50px;">Periodo: <a id="demo"></a>
         </label>        
+            <script type="text/javascript">
+                const d = new Date();
+                let day = d.getMonth() +1
+            
+                if(day == 8 || day == 9 || day == 10 || day == 11 || day == 12 ){
+                    document.getElementById("demo").innerHTML = "Agosto-Diciembre";
+                   // javascript_to_php(2)
+                }else {
+                    document.getElementById("demo").innerHTML = "Febrero-Julio";
+                   // javascript_to_php(1)
+                }
 
+                var variableLongitud = -34.6033415;
+                var variableLatitud = -58.3815275;
+                $.ajax({
+                    type: 'POST',
+                    url: 'asignar-quitarTutoradosSQL',
+                    dataType: 'html',
+                    data: {latitud:variableLatitud, longitud:variableLongitud},
+                    success: function(data) {
+                        alert('datos enviados a php correctamente!');
+                    }
+                });
+            </script>
+        
+   
         <div class="tableFixHead">
             <table style="width:100%" id="example" class="table table-bordered"> 
                 <thead>
@@ -182,16 +185,6 @@ while ($row = $sel->fetch_assoc()) {
                     </tr>
                 </thead>
                 <tbody>
-
-                 <?php /*foreach($alumno as $result) { 
-                     //$id = $result['IdTutorado'];
-            echo "<tr>
-                  <td>".$result -> IdTutorado."</td>
-                    <td>".$result -> Nombre."</td>
-                    <td>".$result -> IdUser."</td>
-                    <td>".$result -> Semestres."</td>
-                </tr>"; }   */   
-                ?>
 
                         <?php foreach ($res as $val) {
                             $id= $val['IdTutorado']; ?>

@@ -11,6 +11,7 @@
     $id1 = $sentenciaSQL->fetch(PDO::FETCH_ASSOC);
     $id=$_SESSION['id']= $id1["IdTutorado"];
     $idtutor=$_SESSION['idtutor']= $id1["IdTutor"];
+    
     ?>
 
 <head>
