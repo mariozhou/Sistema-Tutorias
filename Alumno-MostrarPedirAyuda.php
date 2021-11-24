@@ -7,7 +7,7 @@
  $sentenciaSQL1->execute();
  $id=($sentenciaSQL1->fetchColumn());
  $guardar=null;
-  echo'  Guardar:'.$guardar=(isset($_POST['opciones']))?$_POST['opciones']:"";
+  '  Guardar:'.$guardar=(isset($_POST['opciones']))?$_POST['opciones']:"";
   '  comentarios:'.$comentario=(isset($_POST['motivo']))?$_POST['motivo']:"";
   $tipo=(isset($_POST['opciones']))?$_POST['opciones']:"";
   $btn=(isset($_POST['accion']))?$_POST['accion']:"";

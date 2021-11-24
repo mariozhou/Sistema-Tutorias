@@ -16,8 +16,8 @@ while ($row = $sel->fetch_assoc()) {
 <div class="container">
     <h2>Entregables</h2>
   <!--  <a href="http://localhost/Sistema-Tutorias/act/Diasgnostico%20inicial.pdf">Diasgnostico Inicial</a><br>-->
-    <a href="http://localhost/Sistema-Tutorias/act/ficha%20de%20identificacion.pdf">Ficha</a><br>
-    <a href="http://localhost/Sistema-Tutorias/act/entrevista.pdf">Encuesta</a><br>
+    <a href="http://localhost/Sistema-Tutorias/files/ficha-de-identificacion.docx">Ficha</a><br>
+    <a href="http://localhost/Sistema-Tutorias/files/entrevista.docx">Encuesta</a><br>
 </div>
 <br>
 <div class="container">
@@ -55,7 +55,7 @@ while ($row = $sel->fetch_assoc()) {
                                     <td><?php echo $val['title'] ?></td>
                                     <td><?php echo $val['descripction'] ?></td>
                                     <td>
-                                        <button onclick="openModelPDF('<?php echo $val['url'] ?>')" class="btn btn-primary" type="button">Ver Archivo Modal</button>
+                                        <button onclick="openModelPDF('<?php echo $val['url'] ?>')" class="btn btn-primary" type="button">Ver Archivo Ventana Emergente</button>
                                         <a class="btn btn-primary" target="_black" href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/Sistema-Tutorias/' . $val['url']; ?>" >Ver Archivo pagina</a>
                                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteChildresn<?php echo $val['id']; ?>">
                                   Eliminar

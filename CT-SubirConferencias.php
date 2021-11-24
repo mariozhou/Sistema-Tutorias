@@ -50,7 +50,7 @@ while ($row = $sel->fetch_assoc()) {
                                     <td><?php echo $val['Actividad'] ?> </td>
                                     <td><?php echo $val['Des'] ?></td>
                                     <td><?php echo $val['Semestres'] ?></td>
-                                    <td><button onclick="openModelPDF('<?php echo $val['url'] ?>')" class="btn btn-primary" type="button">Ver Archivo Modal</button>
+                                    <td><button onclick="openModelPDF('<?php echo $val['url'] ?>')" class="btn btn-primary" type="button">Ver Archivo Ventana Emergente</button>
                                         <a class="btn btn-primary" target="_black" href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/Sistema-Tutorias/' . $val['url']; ?>" >Ver Archivo pagina</a>
                                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteChildresn<?php echo $val['IdAct']; ?>">
                                   Eliminar

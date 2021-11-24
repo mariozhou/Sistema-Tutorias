@@ -16,7 +16,8 @@ include("bd.php");//conexion
  $sentenciaSQL2->bindParam(':semestres',$semestres);
  $sentenciaSQL2->execute();
 
- $sentenciaSQL3 = $conexion->prepare("INSERT INTO `reporte`(`IdTutorado`,Estatus) VALUES (:rfc,'Seleccionar estatus')" );  
+ $sentenciaSQL3 = $conexion->prepare("INSERT INTO `reporte`(`IdTutorado`,NombreTutorado,Estatus) VALUES (:rfc,:nombre ,'Seleccionar estatus')" );  
+ $sentenciaSQL3->bindParam(':nombre',$nom);
  $sentenciaSQL3->bindParam(':rfc',$rfc);
  $sentenciaSQL3->execute();
  //INSERT INTO `reporte`(`IdTutorado`) VALUES ()

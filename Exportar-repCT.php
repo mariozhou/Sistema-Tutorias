@@ -68,7 +68,7 @@ $sentenciaSQL = $conexion->prepare("SELECT m.NombreTutor as Tutor,SUM(r.deserto)
 SUM(r.Acredito) as Acredito, SUM(r.Noacredito) as Noacredito,  
 r.deserto + r.Acredito + r.Noacredito as total,
 r.HoraSesionIndiv, r.HoraSesionGrup, SUM(r.Psicologia+r.Asesoria) as cana, 
-Count(r.Conferencias) as Conferencias, Count(r.Talleres) as Talleres FROM tutor as m 
+SUM(r.Conferencias) as Conferencias, SUM(r.Talleres) as Talleres FROM tutor as m 
 Join reporte as r ON m.IdTutor = r.Idtutor  Group BY m.NombreTutor ASC");  
 $sentenciaSQL->execute();
 $tutores = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
@@ -85,7 +85,8 @@ $tutores = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
 
     <div class="form-group">       
       <br>
-      <label for="No.Control"><h5>Seleccionar Tutor</h5></label> <br>
+      <label for="No.Control"><h5>Seleccionar Tutor</h5></label>
+       <br>
       <select class="form-select col-md-6" name="select" id="inputGroupSelect01" onChange="this.form.submit()">
       <option selected> <?php if(isset($_POST['select']) ){echo $id; }else{echo 'Tutor'; } ?> </option>
       <?php foreach($tutor as $row): //llenar combobox con Tutores?>  
