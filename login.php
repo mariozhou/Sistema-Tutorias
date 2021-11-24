@@ -29,35 +29,56 @@ switch($btnlogin){
                     $_SESSION['nombre']=$usuario["Nombre"];
                     $_SESSION['paterno']=$usuario["ApPaterno"];
                     $_SESSION['materno']=$usuario["ApMaterno"];
-
-                    header("location:menuTutor.php");
+                        if($usuario['cambio'] == 1){
+                            header("location:CambiarContra.php");    
+                        }else{
+                            header("location:menuTutor.php");
+                        }
+                    
                 }if((($usuario["TipoUser"])==='Alumno')AND ($menutipo === 'Alumno')  ){
                     $_SESSION['iduser']= $usuario["IdUser"];    
                     $_SESSION['tipo']= $usuario["TipoUser"];
                     $_SESSION['nombre']=$usuario["Nombre"];
                     $_SESSION['paterno']=$usuario["ApPaterno"];
                     $_SESSION['materno']=$usuario["ApMaterno"];
-                    header("location:menuAlumno.php");
+                    if($usuario['cambio'] == 1){
+                        header("location:CambiarContra.php");    
+                    }else{
+                        header("location:menuAlumno.php");
+                    }
+                    
+                    
                 }if((($usuario["TipoUser"])==='Coordinador de Tutores')AND ($menutipo === 'Coordinador de Tutores') ){
                     $_SESSION['iduser']= $usuario["IdUser"];
                     $_SESSION['tipo']= $usuario["TipoUser"];
                     $_SESSION['nombre']=$usuario["Nombre"];
                     $_SESSION['paterno']=$usuario["ApPaterno"];
                     $_SESSION['materno']=$usuario["ApMaterno"];
-                    header("location:menuCT.php");
+                    if($usuario['cambio'] == 1){
+                        header("location:CambiarContra.php");    
+                    }else{
+                        header("location:menuCT.php");
+                    }
+                    
                 }if((($usuario["TipoUser"])==='Jefe de departamento')AND ($menutipo === 'Jefe de departamento') ){
                     $_SESSION['iduser']= $usuario["IdUser"];
                     $_SESSION['tipo']= $usuario["TipoUser"];
                     $_SESSION['nombre']=$usuario["Nombre"];
                     $_SESSION['paterno']=$usuario["ApPaterno"];
                     $_SESSION['materno']=$usuario["ApMaterno"];
-                    header("location:menuJD.php");
+                    if($usuario['cambio'] == 1){
+                        header("location:CambiarContra.php");    
+                    }else{
+                        header("location:menuJD.php");
+                    }
+
                 }else{
-                    echo "Usuario o Contraseña no es validad";
+                    echo "<script> alert('Usuario o Contraseña no es validad');
+                            </script>";
                 }
             }else{
-                
-                echo "Usuario o Contraseña no es validad";
+                echo "<script> alert('Usuario o Contraseña no es validad');
+                            </script>";
             }
         }
   

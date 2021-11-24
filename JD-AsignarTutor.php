@@ -10,7 +10,7 @@ $tutor = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
 
 $nom=(isset($_POST['Nombre']))?$_POST['Nombre']:"";
 $rfc=(isset($_POST['RFC']))?$_POST['RFC']:"";
-
+$select=(isset($_POST['select']))?$_POST['select']:"";
 if( (isset($_POST["Nombre"])) ){
 
 /*
@@ -24,13 +24,28 @@ if( (isset($_POST["Nombre"])) ){
      $si="noo";
 }
 
+
+   
 ?>
+        <script>
+            const d = new Date();
+             //= d.getMonth() + 1;
+
+             if(d.getMonth() == 7 or 8 or 9 or 10 or 12)
+                    <?php  $date="Agosto-Diciembre";?>
+             }elseif(){
+                document.getElementById("demo").innerHTML= 'noviembre';
+                    <?php  $date="Enero-Julio";?>
+             }
+
+           
+        </script>
     <form action="config\JD-AsigarTutorSQL.php" class="form-tutor" method="post">
         <h2 style="text-align:center;">Asignar Tutor</h2><br>
         <label for="">Nombre</label>
         <input type="text" name="Nombre" required>
 
-        <label for="" style="margin-left:50px;">Usuario</label>
+        <label for="" style="margin-left:10px;">Usuario</label>
         <input type="text" name="RFC" required> <br>
 
         <div class="tableFixHead">

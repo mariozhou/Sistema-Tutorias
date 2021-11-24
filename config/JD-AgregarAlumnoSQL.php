@@ -5,7 +5,7 @@ include("bd.php");//conexion
  $rfc=$_POST['RFC'];
  $semestres=$_POST['semestres'];
 
- $sentenciaSQL1 = $conexion->prepare("INSERT INTO `usuario`(`IdUser`, `Nombre`, `Password`, `TipoUser`) VALUES (:rfc,:nombre,'123456','Alumno')" );  
+ $sentenciaSQL1 = $conexion->prepare("INSERT INTO `usuario`(`IdUser`, `Nombre`, `Password`, `TipoUser`,cambio) VALUES (:rfc,:nombre,'123456','Alumno','1')" );  
  $sentenciaSQL1->bindParam(':nombre',$nom);
  $sentenciaSQL1->bindParam(':rfc',$rfc);
  $sentenciaSQL1->execute();

@@ -116,9 +116,27 @@ while ($row = $sel->fetch_assoc()) {
 
 ?>  
 
+
+
 <body>
     <form class="form-tutorado" method="post" >
-      
+    <?php  $date="";?>
+    <script>
+            const d = new Date();
+            if(d.getMonth() ==  8 or 9 or 10 or 11 or  12){
+                     $date="Agosto-Diciembre";
+                   
+               
+                
+             }
+             
+             if(d.getMonth() == 10 ){
+                     $date="Enero-Julido";
+
+                    
+             }
+
+        </script>
 
         <label  style= "margin-top: 30px; margin-left: 50px; margin-bottom: 30px;"> Tutorados </label><br>
         <label> Rango de semestres</label>
@@ -137,8 +155,8 @@ while ($row = $sel->fetch_assoc()) {
                 
             <form class="form-tutorado" method="post" action="config/asignar-quitarTutoradosSQL.php">
                 
-            <label>Tutor</label>
-        <select name="tutor">
+        <label>Tutor</label style= "margin-left: 50px;"> 
+        <select name="tutor" >
         <option >Tutores</option>
             <?php foreach($tutor as $row): //llenar combobox con Tutores 
                  ?>  
@@ -146,8 +164,11 @@ while ($row = $sel->fetch_assoc()) {
                 <?php echo $row->Nombre.'  '.$row->IdUser; ?>
                 </option>
             <?php endforeach ?> 
-        </select> <br>
-
+        </select> 
+        <label style= "margin-left: 50px;">Periodo:
+                <?php echo $date;
+                ?>
+        </label>        
 
         <div class="tableFixHead">
             <table style="width:100%" id="example" class="table table-bordered"> 

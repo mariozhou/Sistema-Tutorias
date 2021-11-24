@@ -21,7 +21,7 @@ switch($btnlogin){
             if($usuario){ 
           
                 if ($txtPass==$txtPass2) {
-                    $sentenciaSQL1 = $conexion->prepare("UPDATE `usuario` SET `Password`=:contra  WHERE IdUser=:user");
+                    $sentenciaSQL1 = $conexion->prepare("UPDATE `usuario` SET `Password`=:contra, cambio='0'  WHERE IdUser=:user");
                     $sentenciaSQL1->bindParam(':user',$txtUser);  
                     $sentenciaSQL1->bindParam(':contra',$txtPass);  
                     $sentenciaSQL1->execute();
