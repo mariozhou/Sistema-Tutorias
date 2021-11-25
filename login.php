@@ -102,7 +102,8 @@ switch($btnlogin){
 }
 
 ?>
-<body>
+<!-- Form -original
+
     <div class="contenedor-imagen">
         <img src="img/login.jpg" alt="imglogin" >  
     </div>
@@ -128,6 +129,44 @@ switch($btnlogin){
     
         </form>
     </div>
-</body>
+-->
+
+
+<div class="container w-75 mt-5 mb-5 rounded shadow bg-info">
+    <div class="row align-items-stretch">
+        <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded">
+
+        </div>
+        <div class="col bg-white p-5 rounded-end">
+            <div class="text-end">
+                <img src="img/escudo_itt_grande.png" width="50" alt="imglogin">
+            </div> 
+            <h2 class="fw-bold text-center py-5">Bienvenido</h2>
+            <!--login-->
+            <form method="POST" class="form-group" enctype="multipart/form-data" required>
+                <div class="mb-4">
+                    <label for="txtUser" class="form-label">No. Control</label>
+                    <input type="text" class="form-control" name="txtUser" id="txtUser" placeholder="Ingrese su No.Control" required>
+                </div>
+                <div class="mb-4">
+                    <label for="Password" class="form-label">Contraseña</label>
+                    <input type="Password" class="form-control" name="txtPass" id="txtPass" placeholder="Ingrese contraseña">
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary" name="btnlogin" value="aceptar">Iniciar Sesión</button>
+                    <a href="menuPrincipal.php"><button type="button" class="btn btn-primary">Regresar</button></a>
+                </div>
+                <div class="my-3">
+                    <span><a href="CambiarContra.php">Cambiar contraseña</a></span>
+                </div>
+            </form>
+            <!---->
+        </div>
+    </div>
+</div>
+
+
+
+
 
 <?php include("template/pie.php"); ?>

@@ -5,12 +5,11 @@
     $tipo=$_SESSION['tipo'];
     $nombre=$_SESSION['nombre'];
     $iduser=$_SESSION['iduser'];
-   
-    if( !isset($_SESSION['nombre']) and !isset($_SESSION['iduser'])  ){
+
+    
+    if( !(isset($_SESSION['iduser']))  ){
         header("location:menuPrincipal.php");
     }
-  
-    
     ?>
 <head>
     <meta charset="UTF-8">
@@ -23,7 +22,7 @@
     <link rel="stylesheet" href="./css/diseñoasignar-quitarTutorados.css" type="text/css">
     <link rel="stylesheet" href="./css/Menu.css" type="text/css">
     <link rel="stylesheet" href="./css/mostrarCambioTutor.css" type="text/css">
-   
+    
 </head>
 <body>
     <header>
@@ -40,7 +39,14 @@
     </header>
 
     <div class="menu">
-            <img src="img/menu.jpg" alt="imgmenu">
+            <div class="cerrar_sesion">
+                <a class="btn btn-primary btn-lg" href="CerrarSesion.php" role="button">Cerrar Sesión</a>
+            </div>
+            
+            <div class="cambiar_contra">
+                <a class="btn btn-primary btn-lg" role="button" href="CambiarContra.php">Cambiar Contraseña</a> 
+            </div>
+            
             <div>            
                 <h4> <?php
                 echo  htmlspecialchars($nombre);

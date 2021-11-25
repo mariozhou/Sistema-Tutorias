@@ -18,7 +18,7 @@
 $rango=(isset($_POST['range-semestre']))?$_POST['range-semestre']:"";
 $asigtutor=(isset($_POST['tutor']))?$_POST['tutor']:"";
 $noct2=(isset($_POST['Ncontrol']))?$_POST['Ncontrol']:"";
-echo $date =(isset($_POST['demo']))?$_POST['demo']:"";
+ $date =(isset($_POST['demo']))?$_POST['demo']:"";
 
 //cosulta tutores 
 include("config/bd.php");//conexion

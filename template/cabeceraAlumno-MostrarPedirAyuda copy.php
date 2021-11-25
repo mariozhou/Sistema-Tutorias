@@ -1,25 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php 
-    session_start();
-    $tipo=$_SESSION['tipo'];
-    $nombre=$_SESSION['nombre'];
-    $iduser=$_SESSION['iduser'];
+   session_start();
+   $tipo=$_SESSION['tipo'];
+   $nombre=$_SESSION['nombre'];
+   $iduser=$_SESSION['iduser'];
 
-    
-    if( !(isset($_SESSION['iduser']))  ){
-        header("location:menuPrincipal.php");
-    }
-
-    include("config/bd.php");//conexion
-    $sentenciaSQL = $conexion->prepare("SELECT * FROM `usuario` Where Nombre=:nombre ");  
-    $sentenciaSQL->bindParam(':nombre',$nombre);    
-    $sentenciaSQL->execute();
-    $id1 = $sentenciaSQL->fetch(PDO::FETCH_ASSOC);
-    $id=$_SESSION['id']= $id1["IdUser"];
-    $idtutor=$_SESSION['idtutor']= $id1["IdUser"];
+   
+   if( !(isset($_SESSION['iduser']))  ){
+       header("location:menuPrincipal.php");
+   }
     ?>
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,9 +19,6 @@
 
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/cabecera.css" type="text/css">
-    <link rel="stylesheet" href="./css/tablas.css" type="text/css">
-    <link rel="stylesheet" href="./css/Alumno-SubirExpediente.css" type="text/css">
-    
 </head>
 <body>
     

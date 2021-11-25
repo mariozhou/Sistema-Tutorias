@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/cabecera.css" type="text/css">
     <link rel="stylesheet" href="./css/login.css" type="text/css">
+
 </head>
 <body>
-    
+    <script src="bootstrap.bundle.min.js"></script>
     <header>
         <div class="logo">
             <img src="img/logo-TecNM.png" alt="logo" >    
