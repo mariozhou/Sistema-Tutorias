@@ -39,7 +39,7 @@ if( !(isset($_SESSION['iduser']))  ){
     </header>
     <div class="menu">
             <div class="cerrar_sesion">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Cerrar Sesión</a>
+                <a class="btn btn-primary btn-lg" href="CerrarSesion.php" role="button">Cerrar Sesión</a>
             </div>
             
             <div class="cambiar_contra">

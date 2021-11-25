@@ -7,7 +7,7 @@ $comentario=(isset($_POST['motivo']))?$_POST['motivo']:"";
 $nombre=$_SESSION['nombre'];
 $idtutor=$_SESSION['idtutor'];
 
- $sentenciaSQL2 = $conexion->prepare("INSERT INTO `canalizacion`( `IdTutorado`,Tipo, `Comentarios`,IdTutor) VALUES (:id,:tipo,:comentario,:idtutor)");  
+ $sentenciaSQL2 = $conexion->prepare("INSERT INTO `canalizacion`( `IdTutorado`,Tipo, `Comentarios`,IdTutor,Respuesta) VALUES (:id,:tipo,:comentario,:idtutor,'pendientes de respuesta')");  
  $sentenciaSQL2->bindParam(':id',$id);
  $sentenciaSQL2->bindParam(':tipo',$tipo);
  $sentenciaSQL2->bindParam(':comentario',$comentario);

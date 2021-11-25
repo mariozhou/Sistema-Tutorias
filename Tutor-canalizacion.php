@@ -9,7 +9,10 @@ while ($row = $sel->fetch_assoc()) {
     array_push($res, $tmp);
 }
 ?>
+
+
 <div class="container">
+<form action="config/Tutor-canalizacionSQL.php"  method="post"  required>
     <br><br>
     <h4>Canalizaciones</h4>
     <br><br>
@@ -17,6 +20,7 @@ while ($row = $sel->fetch_assoc()) {
         <table class="table table-bordered table-striped mb-0">    
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Alumno</th>
                     <th>Tipo</th>
                     <th>Motivos</th>
@@ -28,14 +32,16 @@ while ($row = $sel->fetch_assoc()) {
             <tbody>
             <?php foreach ($res as $val) { ?>
                                 <tr>
+                                    <td><input type='radio' name='check' value='<?php echo $val['IdCanal'] ?>' required></td> 
                                     <td><?php echo $val['IdTutorado'].' - '.$val['NombreTutorado'] ?> </td>
                                     <td><?php echo $val['Tipo'] ?> </td>
                                     <td><?php echo $val['Comentarios'] ?></td>
+                                    <td><?php echo $val['Respuesta'] ?></td>
                                     <td><?php echo $val['Fecha'] ?></td>  
                                     <td>
-                                    <button  type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                  <!--  <button  type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                         Atender
-                                    </button>    
+                                    </button>    -->
                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteChildresn<?php echo $val['IdCanal']; ?>">
                                         Eliminar
                                     </button> 
@@ -48,7 +54,24 @@ while ($row = $sel->fetch_assoc()) {
              
             </tbody>
         </table>
+        
     </div>
+    <br>
+    <div class="">     
+                <label >Respuesta</label><br>
+                <textarea required type="text" name="respuesta" id="respuesta" cols="40" rows="4"></textarea>
+                <div class="container">
+                    <br>
+        
+            <div class="row align-items-start" >
+                <div class="col" >
+                    <button type="submit" class="btn btn-primary btn-lg" id="botones">Enviar</button>
+                </div>
+            </div>
+        
+    </div>
+    </div>            
+    </form>
       <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -65,6 +88,11 @@ while ($row = $sel->fetch_assoc()) {
 
                             <div class="form-group">
                                 <label for="title">Mensaje</label>
+                               
+                                <?php echo $_SESSION['Tipo1']=$val['Tipo'] ?>
+                                <?php echo $_SESSION['IdTutorado1']=$val['IdTutorado'] ?>
+                                <?php echo $_SESSION['idtutor1']=$idtutor ?>
+
                                 <textarea  class="form-control" id="mensaje" name="mensaje"> </textarea>
                             </div>      
                         </form>
@@ -114,7 +142,7 @@ while ($row = $sel->fetch_assoc()) {
 
                                     }
                                 };
-                                xhttp.open("POST", "ConfeUpload.php", true);
+                                xhttp.open("POST", "respuestaUpload.php", true);
                                 xhttp.send(data);
                                 $('#form1').trigger('reset');
                             }

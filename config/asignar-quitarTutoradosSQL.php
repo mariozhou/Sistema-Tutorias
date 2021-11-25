@@ -2,6 +2,7 @@
 include("bd.php");//conexion
 $asigtutor=(isset($_POST['tutor']))?$_POST['tutor']:"";
  $date =(isset($_POST['demo']))?$_POST['demo']:"";
+ 
  $latitud = isset($_POST['latitud'])?$_POST['latitud']:null;
  $longitud = isset($_POST['longitud'])?$_POST['longitud']:null;
 if( !(isset($_POST["btnquitar"])) ){
