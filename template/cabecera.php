@@ -5,6 +5,12 @@
     $tipo=$_SESSION['tipo'];
     $nombre=$_SESSION['nombre'];
     $iduser=$_SESSION['iduser'];
+   
+    if( !isset($_SESSION['nombre']) and !isset($_SESSION['iduser'])  ){
+        header("location:menuPrincipal.php");
+    }
+  
+    
     ?>
 <head>
     <meta charset="UTF-8">

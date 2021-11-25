@@ -16,8 +16,8 @@ while ($row = $sel->fetch_assoc()) {
 <div class="container">
     <h2>Entregables</h2>
   <!--  <a href="http://localhost/Sistema-Tutorias/act/Diasgnostico%20inicial.pdf">Diasgnostico Inicial</a><br>-->
-    <a href="http://localhost/Sistema-Tutorias/files/ficha-de-identificacion.docx">Ficha</a><br>
-    <a href="http://localhost/Sistema-Tutorias/files/entrevista.docx">Encuesta</a><br>
+    <a href="./files/ficha-de-identificacion.docx">Ficha</a><br>
+    <a href="./files/entrevista.docx">Encuesta</a><br>
 </div>
 <br>
 <div class="container">
