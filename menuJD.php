@@ -21,15 +21,22 @@
 
                 <a href="JD-AgregarAlumno.php" style="text-decoration:none"> 
                 <div class="card">
-                    <img src="img/aceptado.png" >
+                    <img src="img/alumno.png" >
                         <h4>Agregar Alumno</h4>
                 </div>
                 </a>
 
                 <a href="JD-verExpediente.php" style="text-decoration:none"> 
                 <div class="card">
-                    <img src="img/vision.png" >
+                    <img src="img/libro.png" >
                     <h4>Expedientes</h4>
+                </div>
+                </a>
+
+                <a href="JD-ReporAnte.php" style="text-decoration:none"> 
+                <div class="card">
+                    <img src="img/reportes.png" >
+                    <h4>Reportes Anteriores</h4>
                 </div>
                 </a>
         

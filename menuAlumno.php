@@ -31,6 +31,14 @@
             <h4>Expediente</h4>
         </div>
         </a>
+
+        <a href="AlumnoMsj.php" style="text-decoration:none">
+        <div class="card">
+            <img src="img/mensaje.png" >
+            <h4>Mensajes</h4>
+        </div>
+        </a>
+
     </div>
 </body>
 <?php include("template/pie.php"); ?>

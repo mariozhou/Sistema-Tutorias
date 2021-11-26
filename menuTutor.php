@@ -37,7 +37,13 @@
                 <div class="card">
                     <img src="img/exportar.png" >
                     <h4>Visualizar / Exportar Reporte</h4>
-                    
+                </div>
+                </a>
+
+                <a href="Tutor-tutorado.php" style="text-decoration:none">
+                <div class="card">
+                    <img src="img/alumno.png" >
+                    <h4>Tutorados</h4>
                 </div>
                 </a>
         
