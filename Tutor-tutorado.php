@@ -16,7 +16,7 @@ while ($row = $sel->fetch_assoc()) {
 <div class="container">
 <form action="config/Tutor-canalizacionSQL.php"  method="post"  required>
     <br><br>
-    <h4>Canalizaciones</h4>
+    <h4>Tutorados</h4>
     <br><br>
     <div class="table-wrapper-scroll-y my-custom-scrollbar">      
         <table class="table table-bordered table-striped mb-0">    
@@ -64,7 +64,7 @@ while ($row = $sel->fetch_assoc()) {
        
     <br>
     <div class="container">
-        <a href="menuCT.php">
+        <a href="menuTutor.php">
             <div class="row align-items-start" >
                 <div class="col" >
                     <button type="button" class="btn btn-primary btn-lg" id="botones">Regresar</button>

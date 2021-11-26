@@ -14,7 +14,6 @@ if( !(isset($_POST["btnquitar"])) ){
         $sentenciaSQL2->bindParam(':noctl',$value);
         $sentenciaSQL2->bindParam(':tutor',$asigtutor);
         $sentenciaSQL2->execute();
-  
     }
     echo $value.$asigtutor."<script> alert('Se asigno correcto');
     location.href = '../asignar-quitarTutorados.php';

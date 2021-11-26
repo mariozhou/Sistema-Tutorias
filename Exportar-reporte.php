@@ -194,7 +194,7 @@ $alumno = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
                     <button type="" class="btn btn-primary btn-lg" id="botones">Regresar</button>
                     </a>
                 </div>
-                <a id="boton" href="menuJD.php" >       
+                <a id="boton" href="periodo.php" >       
                 <button type="submit" class="btn btn-primary btn-lg" id="botones"><?php if($idact=='1'){echo "Cerrar Periodo"; }else{echo "Abrir Periodo";}  ?> </button>
                 </a>
             </div>

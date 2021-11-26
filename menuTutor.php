@@ -1,10 +1,17 @@
 
 <?php include("./template/cabecera.php"); ?>
+<?php
 
+include("config/bd.php");//conexion
+$sentenciaSQL3= $conexion->prepare("SELECT `activo`, `Idperiodo` FROM `periodo` WHERE 1");
+$sentenciaSQL3->execute();
+$idact=($sentenciaSQL3->fetchColumn());
+
+?>
 <body>
 
     <div class="container">   
-                <a href="Tutor-MostrarReporteTutor.php" style="text-decoration:none"> 
+                <a  <?php if($idact=='1'){echo 'href="Tutor-MostrarReporteTutor.php"'; }else{}  ?>  style="text-decoration:none"> 
                 <div class="card">
                     <img src="./img/reporte-de-negocios.png" >
                     <h4></br>Realizar Reporte</h4>
