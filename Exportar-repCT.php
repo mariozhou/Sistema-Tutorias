@@ -47,7 +47,7 @@ if(isset($_POST['opcion'])){
 include("config/bd.php");//conexion
 $sentenciaSQL2 = $conexion->prepare("SELECT tutorados.NombreTutorado,
 tutorados.IdTutorado, reporte.Psicologia,
-reporte.Asesoria, reporte.Actividad, reporte.Conferencias,
+reporte.Asesoria,SUM(reporte.Actividad, reporte.conferencias, reporte.Talleres) as total, reporte.Actividad, reporte.Conferencias,
 reporte.Talleres, reporte.HoraSesionIndiv,  
 reporte.HoraSesionGrup, reporte.EvaValor, reporte.EvalNivel, 
 reporte.Acredito,reporte.Noacredito,reporte.Deserto,
@@ -198,7 +198,6 @@ $Impacto = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
                         <th>Acredito</th>
                         <th>No Acredito</th>
                         <th>Deserto</th>
-                        <th>Acredito</th>
                         <th>Ac. En Seguimiento</th>
                         <th>Nivel Numerico</th>
                         <th>Nivel De Desempeño</th>
@@ -262,11 +261,10 @@ $Impacto = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
                     <td>".$result -> Talleres."</td>
                     <td>".$result -> Psicologia."</td>
                     <td>".$result -> Asesoria."</td>
-                    <td>".$result -> Asesoria."</td>
+                    <td>".$result -> total."</td>
                     <td>".$result -> Acredito."</td>
                     <td>".$result -> Noacredito."</td>
                     <td>".$result -> Deserto."</td>
-                    <td>".$result -> Asesoria."</td>
                     <td>".$result -> AcreditadoSegui."</td>
                     <td>".$result -> EvaValor."</td>
                     <td>".$result -> EvalNivel."</td>

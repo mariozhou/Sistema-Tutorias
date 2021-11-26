@@ -1,15 +1,15 @@
-$.fn.dataTable.Api.register( 'column().data().sum()', function () {
-    return this.reduce( function (a, b) {
-        var x = parseFloat( a ) || 0;
-        var y = parseFloat( b ) || 0;
-        return x + y;
-    } );
-} );
-$(document).ready(function() {    
-    var table = $('#example').DataTable({        
+
+$(document).ready(function() {   
+    
+     var table = $('#example').DataTable({   
+        
+            scrollY: 300,
+            scrollX: 300,
+            paging: true ,
         deferRender: true,
         scrollX:     300,
         scroller:    true,
+
         "buttons":[ 
 			{
 				extend:    'excelHtml5',
@@ -33,6 +33,7 @@ $(document).ready(function() {
 			     },
 			     "sProcessing":"Procesando...",
             },
+
         //para usar los botones   
         responsive: "true",
         dom: 'Bfrtilp'

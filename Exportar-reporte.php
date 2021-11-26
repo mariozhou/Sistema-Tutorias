@@ -48,7 +48,7 @@ $tutor = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
 
 $sentenciaSQL1 = $conexion->prepare("SELECT tutorados.NombreTutorado,
 tutorados.IdTutorado, reporte.Psicologia,
-reporte.Asesoria, reporte.Actividad, reporte.Conferencias,
+reporte.Asesoria, reporte.Actividad,(reporte.Actividad + reporte.conferencias + reporte.Talleres) as total, reporte.Conferencias,
 reporte.Talleres, reporte.HoraSesionIndiv,  
 reporte.HoraSesionGrup, reporte.EvaValor, reporte.EvalNivel, 
 reporte.Acredito,reporte.Noacredito,reporte.Deserto,
@@ -107,8 +107,9 @@ $Impacto = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
     </form>
     <form class="form-tutorado" method="post" >
 
-        <div  max-width="1400px" id="demo">
-            <table id="example" class="table table-bordered" max-width="1400px"> 
+        <div  div class="table-responsive">
+            <table id = "example" class="table table-bordered table-striped table-hover"  width="100%">
+           
             
                 <thead>
                 <?php if($opcion == 'tutores') {
@@ -139,7 +140,6 @@ $Impacto = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
                         <th>Acredito</th>
                         <th>No Acredito</th>
                         <th>Deserto</th>
-                        <th>Acredito</th>
                         <th>Ac. En Seguimiento</th>
                         <th>Nivel Numerico</th>
                         <th>Nivel De Desempeño</th>
@@ -210,8 +210,6 @@ $Impacto = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
                     <td>".$result -> Acredito."</td>
                     <td>".$result -> Noacredito."</td>
                     <td>".$result -> Deserto."</td>
-                    <td>".$result -> Asesoria."</td>
-                 
                     <td>".$result -> AcreditadoSegui."</td>
                     <td>".$result -> EvaValor."</td>
                     <td>".$result -> EvalNivel."</td>

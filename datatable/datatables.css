@@ -96,7 +96,7 @@ table.dataTable {
   clear: both;
   margin-top: 6px !important;
   margin-bottom: 6px !important;
-  max-width: none !important;
+  max-width: 1400px !important;
   border-collapse: separate !important;
   border-spacing: 0;
 }
@@ -139,6 +139,10 @@ div.dataTables_wrapper div.dataTables_filter input {
 div.dataTables_wrapper div.dataTables_info {
   padding-top: 0.85em;
 }
+div.dataTables_wrapper {
+  margin: 0 auto;
+  width: 70%;
+}
 div.dataTables_wrapper div.dataTables_paginate {
   margin: 0;
   white-space: nowrap;
@@ -148,6 +152,15 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
   margin: 2px 0;
   white-space: nowrap;
   justify-content: flex-end;
+}
+.dataTables_wrapper {
+  margin: 0 auto;
+  width: 50%;
+}
+table.dataTable {
+  margin: 0 auto !important;
+  max-width: 1400px !important;
+  min-width: 700px !important;
 }
 div.dataTables_wrapper div.dataTables_processing {
   position: absolute;
@@ -245,7 +258,7 @@ div.dataTables_scrollFoot > .dataTables_scrollFootInner > table {
   border-top: none;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1400px) {
   div.dataTables_wrapper div.dataTables_length,
 div.dataTables_wrapper div.dataTables_filter,
 div.dataTables_wrapper div.dataTables_info,
