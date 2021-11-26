@@ -60,6 +60,9 @@ switch ($estatus2 ) {
         $acrese=1;
         break;  
 }
+if ( $estatus2=="Acreditó" ) {
+   $estatus2="Tutoría de seguimiento";
+}
 
  $sentenciaSQL1 = $conexion->prepare("UPDATE `reporte` SET IdTutor=:idtutor, `Psicologia`=:psi2,Acredito = :acre, Noacredito=:noacre, Deserto=:deser, AcreditadoSegui=:acrese,`Asesoria`=:ase2,`Actividad`=:act2,`Conferencias`=:conf2,`Talleres`=:taller2,`Estatus`=:estatus2,`HoraSesionIndiv`=:ssinv2,`HoraSesionGrup`=:ssgru2,`EvaValor`=:vnum2,`EvalNivel`=:vdes2 WHERE IdTutorado=:idsql ");  
  $sentenciaSQL1->bindParam(':idsql',$idsql);

@@ -35,16 +35,24 @@
                     <input type="radio" id="opciones" name="opciones" value="Asesorias de Ciencias Basicas" required>    
                     <label for="problema">Ocupo Asesorias de Ciencias Basicas</label>
                 </div>
+
                 <div>
                     <input type="radio" id="opciones" name="opciones" value="Inconveniente con maestro" required>    
                     <label for="problema">Tengo un inconveniente con maestro</label>
-
+                </div>
+    
+                <div>
+                    <input type="radio" id="opciones" name="opciones" value="Dudas" required>    
+                    <label for="problema">Solicitar información/Dudas</label>
                 </div>
             </div>       
 
-            <div class="colum-der">     
-                <label >Motivo del asunto</label><br>
-                <textarea required type="text" name="motivo" id="asunto" cols="10" rows="10"></textarea>
+            <div class="colum-der">   
+            <br>
+                <label  >Ingresar Materia si es necesario</label>
+                <input class="materia" type="text" id="materia" name="materia" placeholder="Materia">  
+            <br>
+                <textarea required type="text" placeholder="Motivo del asunto" name="motivo" id="asunto" cols="5" rows="10"></textarea>
             </div>
            
             <div class="ren-abajo">

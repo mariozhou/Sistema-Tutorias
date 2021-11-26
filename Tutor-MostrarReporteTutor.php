@@ -77,6 +77,10 @@ $_SESSION['id']=$id;
              echo "Acredito";
              // $dis= "false";
                 break;
+            case "Tutoría de seguimiento":
+              echo  'dis:'.$dis = "false";
+              echo "Tutoría de seguimiento";
+                break;
             case "NoAcredito":
               echo "NoAcredito";
                 break;
@@ -191,7 +195,7 @@ if(  (isset($_POST['botones'])) ){
       
     <div class="form-group form-horizontal">
       <br><br><p>ESTATUS EN EL PROGRAMA: <?php echo $estatus; ?></p>
-      <select class="form-select col-md-6"  name="estatus" id="estatus" <?php if($estatus=="Acreditó" ){echo 'disabled="»disabled»"'; } ?>  >
+      <select class="form-select col-md-6"  name="estatus" id="estatus" <?php if($estatus=="Acreditó" or $estatus== "Tutoría de seguimiento" ){echo 'disabled="»disabled»"'; } ?>  >
                 <option hidden selected>Selecciona un estatus</option>
                 <option > Acreditó </option>  
                 <option > No Acreditó </option> 
@@ -216,9 +220,17 @@ if(  (isset($_POST['botones'])) ){
         <label class="">0. Insuficiente/No Acreditado</label>
         </div>
       </div>
+<div>
+      <label for="DESEMPEÑO" class="control-label col-md-3">VALOR DE DESEMPEÑO</label>
+        <input type="text" disabled="»disabled»" name="vdes" class="form-control col-md-1" value="<?php echo $vdes; ?>">
+</div>
+ 
     </div>
     
     <div class="container" id="partebaja">
+
+  
+
       <div class="row align-items-start">
         <div class="col">
         <a id="boton" href="menuTutor.php">
@@ -229,8 +241,11 @@ if(  (isset($_POST['botones'])) ){
         <div class="col">
           <button type="submit" class="btn btn-primary btn-lg" name="botones" id="botones">Aceptar</button>
         </div>
+
       </div>
     </div>
+
+
   </form>
 </div>
 <?php include("template/pie.php"); ?>
