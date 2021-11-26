@@ -56,14 +56,23 @@ JOIN reporte ON tutorados.IdTutorado = reporte.IdTutorado
 ORDER BY NombreTutorado ASC");  
 $sentenciaSQL1->execute();
 $alumno = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
+$sentenciaSQL1 = $conexion->prepare("SELECT tutorados.NombreTutorado,
+tutorados.IdTutorado, canalizacion.Tipo,
+Canalizacion.HoraAtend FROM tutorados 
+JOIN canalizacion ON tutorados.IdTutorado = canalizacion.IdTutorado 
+ORDER BY tutorados.NombreTutorado ASC");  
+$sentenciaSQL1->execute();
+$atendidas = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
 
 $sentenciaSQL1 = $conexion->prepare("SELECT tutorados.NombreTutorado,
 tutorados.IdTutorado, canalizacion.Tipo,
-Canalizacion.Materia, FROM tutorados 
+impact.AssDep FROM tutorados 
 JOIN canalizacion ON tutorados.IdTutorado = canalizacion.IdTutorado 
-ORDER BY NombreTutorado ASC");  
+JOIN impact ON canalizacion.idTutorado = impact.idTutorado
+ORDER BY tutorados.NombreTutorado ASC");  
 $sentenciaSQL1->execute();
-$asesoria = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
+$Impacto = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
+
 
 
 //actualizar tabla alumnos
@@ -134,14 +143,23 @@ $asesoria = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
                         <th>Nivel De Desempeño</th>
 
                     </tr>";
-                    }else if($opcion == 'Canalizacion'){
+                    }else if($opcion == 'Atendidas'){
                         echo"<tr>
                         <th >Nombre Del Alumno</th>
                         <th>No. Control</th>
                         <th>Tipo de Canalizacion</th>
-                        <th>Materia</th>
+                        <th>Horas Atendidas</th>
                         </tr>";
-                    }else{
+                    }else if($opcion == 'Impacto'){
+                        echo"
+                        <th >Nombre Del Tutorado</th>
+                        <th>No. Control</th>
+                        <th>Tipo de Canalizacion</th>
+                        <th>Impacto</th>
+    
+                    </tr>";
+    
+                  }else{
                         echo"<tr>
                         <th >Nombre Del Tutor</th>
                         <th>Desertaron</th>
@@ -196,16 +214,25 @@ $asesoria = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
                     <td>".$result -> EvalNivel."</td>
                     </tr>"; 
 
-                    }else if($opcion == 'Canalizacion'){
-                        foreach($asesoria as $result)  
+                    }else if($opcion == 'Impacto'){
+                        foreach($Impacto as $result)  
                     echo "<tr>
                     <td>".$result -> NombreTutorado."</td>
                     <td>".$result -> IdTutorado."</td>
                     <td>".$result -> Tipo."</td>
-                    <td>".$result -> Materia."</td>
-
+                    <td>".$result -> Psi."</td>
+    
                     </tr>"; 
-                   }else{
+                     }else if($opcion == 'Atendidas'){
+                        foreach($atendidas as $result)  
+                    echo "<tr>
+                    <td>".$result -> NombreTutorado."</td>
+                    <td>".$result -> IdTutorado."</td>
+                    <td>".$result -> Tipo."</td>
+                    <td>".$result -> HoraAtend."</td>
+    
+                    </tr>"; 
+                     }else{
                         foreach($tutor as $result)  
                         echo "<tr>
                             <td>".$result -> NombreTutorado."</td>

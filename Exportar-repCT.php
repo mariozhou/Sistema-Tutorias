@@ -33,36 +33,70 @@
 
 
 
- 
-//cosulta tutores 
-include("config/bd.php");//conexion
-if(isset($_POST['select'])){
-$sentenciaSQL = $conexion->prepare("SELECT m.NombreTutor, r.IdTutorado, Count(r.deserto), 
-Count(r.Acredito), Count(r.Noacredito), r.deserto + r.Acredito + r.Noacredito,
-r.HoraSesionIndiv, r.HoraSesionGrup, Count(r.Psicologia+r.Asesoria), 
-Count(r.Conferencias), Count(r.Talleres) FROM tutor as m 
-Join reporte as r ON m.IdTutor = r.Idtutor  Group BY m.NombreTutor ASC");  
-$sentenciaSQL->execute();
-$tutor = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
-}
-//actualizar tabla alumnos
-$sentenciaSQL = $conexion->prepare("SELECT * FROM `tutor`  ORDER BY  NombreTutor ASC");  
-$sentenciaSQL->execute();
-$alumno = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
-
-$sentenciaSQL1 = $conexion->prepare("SELECT tutorados.NombreTutorado,
-tutorados.IdTutorado, canalizacion.Tipo,
-Canalizacion.Materia, FROM tutorados 
-JOIN canalizacion ON tutorados.IdTutorado = canalizacion.IdTutorado 
-ORDER BY NombreTutorado ASC");  
-$sentenciaSQL1->execute();
-$asesoria = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
-
-
 $id=(isset($_POST['select']))?$_POST['select']:"";
 $_POST['idsql']=$id;
 
 
+if(isset($_POST['opcion'])){
+    $opcion = $_POST['opcion'];
+ }else{
+     $opcion = '';
+ } 
+
+
+include("config/bd.php");//conexion
+$sentenciaSQL2 = $conexion->prepare("SELECT tutorados.NombreTutorado,
+tutorados.IdTutorado, reporte.Psicologia,
+reporte.Asesoria, reporte.Actividad, reporte.Conferencias,
+reporte.Talleres, reporte.HoraSesionIndiv,  
+reporte.HoraSesionGrup, reporte.EvaValor, reporte.EvalNivel, 
+reporte.Acredito,reporte.Noacredito,reporte.Deserto,
+reporte.AcreditadoSegui FROM tutorados 
+JOIN reporte ON tutorados.IdTutorado = reporte.IdTutorado where reporte.IdTutor=:idtutor
+ORDER BY NombreTutorado ASC");  
+$sentenciaSQL2->bindParam(':idtutor',$id);
+$sentenciaSQL2->execute();
+$alumno = $sentenciaSQL2->fetchAll(PDO::FETCH_OBJ);
+
+$sentenciaSQL = $conexion->prepare("SELECT m.NombreTutor as Tutor,SUM(r.deserto) as Deserto, 
+SUM(r.Acredito) as Acredito, SUM(r.Noacredito) as Noacredito,  
+r.deserto + r.Acredito + r.Noacredito as total,
+r.HoraSesionIndiv, r.HoraSesionGrup, SUM(r.Psicologia+r.Asesoria) as cana, 
+SUM(r.Conferencias) as Conferencias, SUM(r.Talleres) as Talleres FROM tutor as m 
+Join reporte as r ON m.IdTutor = r.Idtutor  Group BY m.NombreTutor ASC");  
+$sentenciaSQL->execute();
+$tutor = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
+
+//actualizar tabla alumnos
+$sentenciaSQL = $conexion->prepare("SELECT * FROM `tutor`  ORDER BY  NombreTutor ASC");  
+$sentenciaSQL->execute();
+$tutores2 = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
+
+$sentenciaSQL1 = $conexion->prepare("SELECT tutorados.NombreTutorado,
+tutorados.IdTutorado, canalizacion.Tipo,
+Canalizacion.Materia FROM tutorados 
+JOIN canalizacion ON tutorados.IdTutorado = canalizacion.IdTutorado 
+ORDER BY tutorados.NombreTutorado ASC");  
+$sentenciaSQL1->execute();
+$asesoria = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
+
+
+$sentenciaSQL1 = $conexion->prepare("SELECT tutorados.NombreTutorado,
+tutorados.IdTutorado, canalizacion.Tipo,
+Canalizacion.HoraAtend FROM tutorados 
+JOIN canalizacion ON tutorados.IdTutorado = canalizacion.IdTutorado 
+ORDER BY tutorados.NombreTutorado ASC");  
+$sentenciaSQL1->execute();
+$atendidas = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
+
+$sentenciaSQL1 = $conexion->prepare("SELECT tutorados.NombreTutorado,
+tutorados.IdTutorado, canalizacion.Tipo,
+impact.Psi FROM tutorados 
+JOIN canalizacion ON tutorados.IdTutorado = canalizacion.IdTutorado 
+JOIN impact ON canalizacion.idTutorado = impact.idTutorado
+ORDER BY tutorados.NombreTutorado ASC");  
+$sentenciaSQL1->execute();
+$Impacto = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
 
 
 //tutor con nombre retrun id 
@@ -78,9 +112,14 @@ $_POST['idsql']=$id;
     <form class="form-radio" method="post" >
         <p>
             Elige una opcion<br>
-            
-                 <input type="submit" name="opcion" value="Canalizacion" class="btn btn-primary" <?php if($opcion == "Canalizacion") echo "checked"; ?>> 
-        </p>
+            <button type="submit" name="opcion" value="tutores" class="btn btn-primary" <?php if($opcion == "tutores") echo "checked"; ?>> 
+            Todos los tutores
+        </button>
+                 <input type="submit" name="opcion" value="Solicitadas" class="btn btn-primary" <?php if($opcion == "Solicitadas") echo "checked"; ?>> 
+                 <input type="submit" name="opcion" value="Atendidas" class="btn btn-primary" <?php if($opcion == "Atendidas") echo "checked"; ?>> 
+                 <input type="submit" name="opcion" value="Impacto" class="btn btn-primary" <?php if($opcion == "Impacto") echo "checked"; ?>> 
+
+                </p>
     </form>
     <form action="" method="post" class="form-group">
      <div class="form-group">       
@@ -89,7 +128,7 @@ $_POST['idsql']=$id;
       <label for="No.Control"><h5>Seleccionar Tutor</h5></label> <br>
       <select class="form-select col-md-6" name="select" id="inputGroupSelect01" onChange="this.form.submit()">
       <option selected> <?php if(isset($_POST['select']) ){echo $id; }else{echo 'Tutor'; } ?> </option>
-      <?php foreach($alumno as $row): //llenar combobox con Tutores 
+      <?php foreach($tutores2 as $row): //llenar combobox con Tutores 
                  ?>  
                 <option value="<?php echo$idsq= $row->IdTutor;?>"> 
                 <?php echo $select =$row->NombreTutor.' '.$row->IdTutor; $_POST['idsql']=$select;?>
@@ -103,18 +142,24 @@ $_POST['idsql']=$id;
 
         <div  max-width="1400px">
             <table id="example" class="table table-bordered" max-width="1400px"> 
-            <?php if($opcion == 'Canalizacion'){
+           <thead>
+           <?php if($opcion == 'Solicitadas'){
                         echo"<tr>
-                        <th >Nombre Del Alumno</th>
+                        <th >Nombre Del tutorado</th>
                         <th>No. Control</th>
                         <th>Tipo de Canalizacion</th>
                         <th>Materia</th>
                         </tr>";
-                    }else{
-                <thead>
-                    echo"<tr>
-                    <th >Nombre Del Tutor</th>
-                    <th >Nombre Del Tutorado</th>
+                    }else if($opcion == 'Atendidas'){
+                        echo"<tr>
+                        <th >Nombre Del Tutorado</th>
+                        <th>No. Control</th>
+                        <th>Tipo de Canalizacion</th>
+                        <th>Horas Atendidas</th>
+                        </tr>";
+                    }else if($opcion == 'tutores'){
+                        echo"
+                        <tr><th >Nombre Del Tutor</th>
                         <th>Desertaron</th>
                         <th>Acreditaron</th>
                         <th>No Acreditaron</th>
@@ -123,15 +168,48 @@ $_POST['idsql']=$id;
                         <th>Tutoria Grupal</th>
                         <th>Numero de estudiantes Canalizados</th>
                         <th>Conferencias</th>
-                        <th>Talleres</th>
- 
+                        <th>Talleres</th></tr>
+                       
+
                     </tr>";
+
+                  }else if($opcion == 'Impacto'){
+                    echo"
+                    <th >Nombre Del Tutorado</th>
+                    <th>No. Control</th>
+                    <th>Tipo de Canalizacion</th>
+                    <th>Impacto</th>
+
+                </tr>";
+
+              }else{
+                        echo "
+                        <tr>
+                        <th >Nombre Del Tutorado</th>
+                        <th>No. Control</th>
+                        <th>Sesiones Individuales</th>
+                        <th>Sesiones  Grupales</th>
+                        <th>Actividad  Integradora  (Max. 4 hrs)</th>
+                        <th>Conferencias</th>
+                        <th>Talleres</th>
+                        <th>Psicologia</th>
+                        <th>Asesoria</th>
+                        <th>Total de horas  Cumplidas</th>
+                        <th>Acredito</th>
+                        <th>No Acredito</th>
+                        <th>Deserto</th>
+                        <th>Acredito</th>
+                        <th>Ac. En Seguimiento</th>
+                        <th>Nivel Numerico</th>
+                        <th>Nivel De Desempeño</th>
+                        </tr>";
+
                   } ?>
                 </thead>
                 <tbody>
                 
                  <?php
-                 if($opcion == 'Canalizacion'){
+                 if($opcion == 'Solicitadas'){
                     foreach($asesoria as $result)  
                 echo "<tr>
                 <td>".$result -> NombreTutorado."</td>
@@ -140,34 +218,63 @@ $_POST['idsql']=$id;
                 <td>".$result -> Materia."</td>
 
                 </tr>"; 
-                 }else 
-                 if(isset($_POST['select'])){
-                     foreach($tutor as $result) { 
+                 }else if($opcion == 'Atendidas'){
+                    foreach($atendidas as $result)  
                 echo "<tr>
-                <td>".$result -> NombreTutor."</td>
                 <td>".$result -> NombreTutorado."</td>
-                <td>".$result -> Deserto."</td>
-                <td>".$result -> Acredito."</td>
-                <td>".$result -> Noacredito."</td>
-                <td>".$result -> Noacredito."</td>
-                <td>".$result -> HoraSesionIndiv."</td>
-                <td>".$result -> HoraSesionGrup."</td>
-                <td>".$result -> Conferencias."</td>
-                <td>".$result -> Talleres."</td>
-                <td>".$result -> Psicologia."</td>
+                <td>".$result -> IdTutorado."</td>
+                <td>".$result -> Tipo."</td>
+                <td>".$result -> HoraAtend."</td>
 
-                  
-                    </tr>"; }
+                </tr>"; 
+                 }else if($opcion == 'Impacto'){
+                    foreach($Impacto as $result)  
+                echo "<tr>
+                <td>".$result -> NombreTutorado."</td>
+                <td>".$result -> IdTutorado."</td>
+                <td>".$result -> Tipo."</td>
+                <td>".$result -> Psi."</td>
+
+                </tr>"; 
+                 }else if($opcion=='tutores'){
+                    foreach($tutor as $result) { 
+                        echo "<tr>
+                        <td>".$result -> Tutor."</td>
+                        <td>".$result -> Deserto."</td>
+                        <td>".$result -> Acredito."</td>
+                        <td>".$result -> Noacredito."</td>
+                        <td>".$result -> total."</td>
+                        <td>".$result -> HoraSesionIndiv."</td>
+                        <td>".$result -> HoraSesionGrup."</td>
+                        <td>".$result -> cana."</td>
+                        <td>".$result -> Conferencias."</td>
+                        <td>".$result -> Talleres."</td>
+                            </tr>"; }  
+                 }else if(isset($_POST['select'])){
+                    foreach($alumno as $result)  
+                    echo "<tr>
+                    <td>".$result -> NombreTutorado."</td>
+                    <td>".$result -> IdTutorado."</td>
+                    <td>".$result -> HoraSesionIndiv."</td>
+                    <td>".$result -> HoraSesionGrup."</td>
+                    <td>".$result -> Actividad."</td>
+                    <td>".$result -> Conferencias."</td>
+                    <td>".$result -> Talleres."</td>
+                    <td>".$result -> Psicologia."</td>
+                    <td>".$result -> Asesoria."</td>
+                    <td>".$result -> Asesoria."</td>
+                    <td>".$result -> Acredito."</td>
+                    <td>".$result -> Noacredito."</td>
+                    <td>".$result -> Deserto."</td>
+                    <td>".$result -> Asesoria."</td>
+                    <td>".$result -> AcreditadoSegui."</td>
+                    <td>".$result -> EvaValor."</td>
+                    <td>".$result -> EvalNivel."</td>
+                    </tr>"; 
                 }      
                 ?>
 
                 
-                </tbody>
-                <tbody>
-
-
-
-
                 </tbody>
             </table>
         </div>
