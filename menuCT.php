@@ -39,6 +39,13 @@
         </div>
         </a>
 
+        <a href="CT-Canalizacion.php" style="text-decoration:none">
+        <div class="card">
+            <img src="img/aceptado.png" >
+            <h4> Canalizaciones</h4>
+        </div>
+        </a>
+
     </div>
 </body>
 <?php include("template/pie.php"); ?>

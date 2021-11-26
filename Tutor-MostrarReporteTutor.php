@@ -10,6 +10,7 @@ $sentenciaSQL->bindParam(':idtutor',$idtutor);
 $sentenciaSQL->execute();
 $alumno = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
 
+
    $id=(isset($_POST['select']))?$_POST['select']:"";
    $_POST['idsql']=$id;
 
@@ -65,6 +66,16 @@ $_SESSION['id']=$id;
           $noacre1=$datos->Noacredito;
           $deser1=$datos->Deserto;
           $acrese1=$datos->AcreditadoSegui;
+
+          $sentenciaSQL2 = $conexion->prepare("SELECT * FROM `impact` WHERE IdTutorado = :id ");  
+          $sentenciaSQL2->bindParam(':id',$id);
+          $sentenciaSQL2->execute();
+          $tutorado = $sentenciaSQL2->fetchAll(PDO::FETCH_OBJ);   
+          foreach($tutorado as $impact);
+          $psix= $impact->Psi;
+          $assdep= $impact->AssDep;
+          $assbc= $impact->AssDep;
+
          // echo '<script type="text/javascript">', 'desahbilitar();', '</script>';
           switch ($estatus ) {
             case "Acredito":
@@ -76,6 +87,10 @@ $_SESSION['id']=$id;
 
              echo "Acredito";
              // $dis= "false";
+                break;
+            case "Tutoría de seguimiento":
+              echo  'dis:'.$dis = "false";
+              echo "Tutoría de seguimiento";
                 break;
             case "NoAcredito":
               echo "NoAcredito";
@@ -191,7 +206,7 @@ if(  (isset($_POST['botones'])) ){
       
     <div class="form-group form-horizontal">
       <br><br><p>ESTATUS EN EL PROGRAMA: <?php echo $estatus; ?></p>
-      <select class="form-select col-md-6"  name="estatus" id="estatus" <?php if($estatus=="Acreditó" ){echo 'disabled="»disabled»"'; } ?>  >
+      <select class="form-select col-md-6"  name="estatus" id="estatus" <?php if($estatus=="Acreditó" or $estatus== "Tutoría de seguimiento" ){echo 'disabled="»disabled»"'; } ?>  >
                 <option hidden selected>Selecciona un estatus</option>
                 <option > Acreditó </option>  
                 <option > No Acreditó </option> 
@@ -215,10 +230,30 @@ if(  (isset($_POST['botones'])) ){
         <label class="">1. Suficiente</label>
         <label class="">0. Insuficiente/No Acreditado</label>
         </div>
-      </div>
+        
+                <div>
+                  <br>
+                <label for="DESEMPEÑO" class="control-label col-md-3">Psicologica</label>
+                <textarea  type="text" placeholder="" name="psi" id="psi" cols="40" rows="5"><?php echo $psix; ?></textarea>
+                </div>
+                <div>
+                <label for="DESEMPEÑO" class="control-label col-md-5">Asesoria Departamental</label>
+                <textarea  type="text" placeholder="" name="assdep" id="assdep" cols="40" rows="5"><?php echo $assdep; ?></textarea>
+                </div>
+                <div>
+                <label for="DESEMPEÑO" class="control-label col-md-6">Asesoria de Ciencia Basicas</label>
+                <textarea  type="text" placeholder="" name="assbc" id="assbc" cols="40" rows="5" > <?php echo $assbc; ?></textarea>
+                </div>
+
+        </div>
+
+
     </div>
     
     <div class="container" id="partebaja">
+
+  
+
       <div class="row align-items-start">
         <div class="col">
         <a id="boton" href="menuTutor.php">
@@ -229,8 +264,11 @@ if(  (isset($_POST['botones'])) ){
         <div class="col">
           <button type="submit" class="btn btn-primary btn-lg" name="botones" id="botones">Aceptar</button>
         </div>
+
       </div>
     </div>
+
+
   </form>
 </div>
 <?php include("template/pie.php"); ?>

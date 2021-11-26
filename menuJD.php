@@ -32,6 +32,13 @@
                     <h4>Expedientes</h4>
                 </div>
                 </a>
+
+                <a href="JD-ReporAnte.php" style="text-decoration:none"> 
+                <div class="card">
+                    <img src="img/vision.png" >
+                    <h4>Reportes Anteriores</h4>
+                </div>
+                </a>
         
     </div>
 

@@ -79,6 +79,7 @@ $tutor = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
 $sentenciaSQL = $conexion->prepare("SELECT m.NombreTutor as Tutor,Count(r.deserto) as Deserto, 
 Count(r.Acredito) as Acredito, Count(r.Noacredito) as Noacredito,  
 r.deserto + r.Acredito + r.Noacredito as total,
+
 r.HoraSesionIndiv, r.HoraSesionGrup, Count(r.Psicologia+r.Asesoria) as cana, 
 Count(r.Conferencias) as Conferencias, Count(r.Talleres) as Talleres FROM tutor as m 
 Join reporte as r ON m.IdTutor = r.Idtutor
@@ -96,6 +97,8 @@ $asesoria = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
 
 
 $sentenciaSQL = $conexion->prepare("SELECT * FROM `tutor`  ORDER BY  NombreTutor ASC");  
+
+
 $sentenciaSQL->execute();
 $tutor2 = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
 
@@ -113,11 +116,13 @@ $tutor2 = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
 
     <div class="form-group">       
       <br>
+
       <label for="No.Control"><h5>Seleccionar Tutor</h5></label> <br>
 
       <select type='submit' class="form-select col-md-6" name="select" id="inputGroupSelect01" onChange="this.form.submit()">
       <option selected> <?php if(isset($_POST['select']) ){echo $id; }else{echo 'Tutores'; } ?> </option>
       <?php foreach($tutor2 as $row): //llenar combobox con Tutores?>  
+
                 <option value="<?php echo$idsq= $row->IdTutor;?>"> 
                                 <?php echo $select =$row->NombreTutor.' '.$row->IdTutor; $_POST['idsql']=$select; ?>
 

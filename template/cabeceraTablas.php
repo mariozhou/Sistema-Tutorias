@@ -4,6 +4,12 @@
     session_start();
     $tipo=$_SESSION['tipo'];
     $nombre=$_SESSION['nombre'];
+    $iduser=$_SESSION['iduser'];
+
+    
+    if( !(isset($_SESSION['iduser']))  ){
+        header("location:menuPrincipal.php");
+    }
 
     include("config/bd.php");//conexion
     $sentenciaSQL = $conexion->prepare("SELECT * FROM `usuario` Where Nombre=:nombre ");  
@@ -41,10 +47,22 @@
         </div>
     </header>
 
-    <div class="container-fluid" style="background-color: #2140AE;">
-        <div class="row">
-            <div class="col-2 mt-3">
-                <a class="btn btn-primary" href="CerrarSesion.php" role="button">Cerrar Sesión</a>
+
+    <div class="menu">
+            <div class="cerrar_sesion">
+                <a class="btn btn-primary btn-lg" href="CerrarSesion.php" role="button">Cerrar Sesión</a>
+            </div>
+            
+            <div class="cambiar_contra">
+                <a class="btn btn-primary btn-lg" role="button" href="CambiarContra.php">Cambiar Contraseña</a> 
+            </div>
+            <div>            
+                <h4> <?php
+                echo  htmlspecialchars($nombre);
+                ?> </h4>
+                <p>  <?php echo htmlspecialchars($tipo) ?> </p>
+                <img src="img/foto-perfil.jpg" alt="foto-perfil">
+
             </div>
             <div class="col-3 mt-3">
                 <a class="btn btn-primary " role="button" href="CambiarContra.php">Cambiar Contraseña</a> 

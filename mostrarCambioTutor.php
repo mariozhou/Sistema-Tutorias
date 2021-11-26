@@ -23,7 +23,7 @@ $nombre;
             <br><br>
             <div class="form-inline" >
                 <label for="invidual" class="control-label col-md-3" id="tutor" >Tutor</label>
-                <input type="text" class="form-control col-md-6" placeholder="Nombre" value="<?php echo $tutor['IdTutor'].'  '.$tutor['NombreTutor']; ?> ">
+                <input type="text" disabled="»disabled»" class="form-control col-md-6" placeholder="Nombre" value="<?php echo $tutor['IdTutor'].'  '.$tutor['NombreTutor']; ?> ">
             </div>
         </div>
 

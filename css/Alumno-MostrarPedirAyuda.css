@@ -35,9 +35,17 @@ label{
 }
 
 
+.colum-der .materia{
+
+    width: 250px;
+    
+}
+
 .colum-der{
     display: grid;
     grid-area: d;
+    padding-right: 25%;
+    padding-top: 3%;
 }
 
 .ren-abajo button{

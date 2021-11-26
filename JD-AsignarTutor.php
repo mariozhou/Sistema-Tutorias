@@ -3,10 +3,16 @@
 <?php
 
 //cosulta tutores 
-include("config/bd.php");//conexion
-$sentenciaSQL = $conexion->prepare("SELECT * FROM `usuario` Where TipoUser='Tutor' ORDER BY Nombre ASC");  
-$sentenciaSQL->execute();
-$tutor = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
+
+$tmp = array();
+$res = array();
+include('config/conexion.php');
+$sel = $con->query("SELECT * FROM `usuario` Where TipoUser='Tutor' Or TipoUser='' ORDER BY Nombre ASC");
+while ($row = $sel->fetch_assoc()) {
+    $tmp = $row;
+    array_push($res, $tmp);
+    
+}
 
 $nom=(isset($_POST['Nombre']))?$_POST['Nombre']:"";
 $rfc=(isset($_POST['RFC']))?$_POST['RFC']:"";
@@ -26,42 +32,35 @@ if( (isset($_POST["Nombre"])) ){
   
    
 ?>
-        <script>
-            const d = new Date();
-             //= d.getMonth() + 1;
-
-             if(d.getMonth() == 7 or 8 or 9 or 10 or 12)
-                    <?php  $date="Agosto-Diciembre";?>
-             }elseif(){
-                document.getElementById("demo").innerHTML= 'noviembre';
-                    <?php  $date="Enero-Julio";?>
-             }
-        </script>
+        
 
     <form action="config\JD-AsigarTutorSQL.php" class="form-tutor" method="post">
-        <h2 style="text-align:center;">Asignar Tutor</h2><br>
-        <label for="">Nombre</label>
+       <h2 style="text-align:center;">Asignar Tutor</h2><br>
+     <!--    <label for="">Nombre</label>
         <input type="text" name="Nombre" required>
 
         <label for="" style="margin-left:10px;">Usuario</label>
         <input type="text" name="RFC" required> <br>
-      
+-->
         <div class="tableFixHead">
             <table style="width:100%"> 
                 <thead>
-                    <tr>
+                    <tr><th>#</th>
                         <th style="width:70%">Nombre</th>
                         <th>Usuario</th>
+                        <th>Estatus</th>
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($tutor as $val) { 
-                    ?>
+                <?php foreach ($res as $val) { 
+                     $id= $val['IdUser']; ?>
+                    
                                 <tr>
-                           <!--     <td><input type='checkbox' name='check[]' value='<?//php $val -> IdUser ?>'></></td>  -->
-                                    <td><?php echo $val -> Nombre ?></td>
-                                    <td><?php echo $val -> IdUser ?></td>
-                             
+                                <td><input type='checkbox' name='check[]' value='<?php echo $id ?>'></></td> 
+                                    <td><?php echo $val['Nombre']  ?></td>
+                                    <td><?php echo $val['IdUser']  ?></td>
+                                    <td><?php echo $val['TipoUser'] ?></td>
+                                    
                                 </tr>
                             <?php } ?>
                 </tbody>

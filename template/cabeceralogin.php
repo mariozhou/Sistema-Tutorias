@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/cabecera.css" type="text/css">
     <link rel="stylesheet" href="./css/login.css" type="text/css">
+
 </head>
 <body>
+
     <header class="header">
         <div class="containercab">
             <div class="logo">
@@ -24,6 +26,7 @@
             <div class="logo2"> 
                 <img src="img/escudo_itt_grande.png" alt="logo2" >
             </div>
+
         </div>
     </header>
 

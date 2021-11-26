@@ -16,11 +16,17 @@ include("bd.php");//conexion
  $sentenciaSQL2->bindParam(':semestres',$semestres);
  $sentenciaSQL2->execute();
 
- $sentenciaSQL3 = $conexion->prepare("INSERT INTO `reporte`(`IdTutorado`,Estatus) VALUES (:rfc,'Seleccionar estatus')" );  
+ $sentenciaSQL3 = $conexion->prepare("INSERT INTO `reporte`(`IdTutorado`,NombreTutorado,Estatus) VALUES (:rfc,:nombre ,'')" );  
+ $sentenciaSQL3->bindParam(':nombre',$nom);
  $sentenciaSQL3->bindParam(':rfc',$rfc);
  $sentenciaSQL3->execute();
  //INSERT INTO `reporte`(`IdTutorado`) VALUES ()
 
+ $sentenciaSQL4 = $conexion->prepare("INSERT INTO `impact`(`IdTutorado`) VALUES (:rfc)" );  
+ $sentenciaSQL4->bindParam(':nombre',$nom);
+ $sentenciaSQL4->bindParam(':rfc',$rfc);
+ $sentenciaSQL4->execute();
+ //INSERT INTO `impact`(`IdImp`, `IdTutorado`, `Psi`, `AssDep`, `AssBC`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]')
 if( $sentenciaSQL1 And $sentenciaSQL2){   
 
    echo "<script> alert('Agregado');

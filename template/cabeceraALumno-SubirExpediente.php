@@ -4,6 +4,12 @@
     session_start();
     $tipo=$_SESSION['tipo'];
     $nombre=$_SESSION['nombre'];
+    $iduser=$_SESSION['iduser'];
+
+    
+    if( !(isset($_SESSION['iduser']))  ){
+        header("location:menuPrincipal.php");
+    }
 
     include("config/bd.php");//conexion
     $sentenciaSQL = $conexion->prepare("SELECT * FROM `usuario` Where Nombre=:nombre ");  
@@ -24,6 +30,7 @@
     <link rel="stylesheet" href="./css/cabecera.css" type="text/css">
     <link rel="stylesheet" href="./css/tablas.css" type="text/css">
     <link rel="stylesheet" href="./css/Alumno-SubirExpediente.css" type="text/css">
+    
 </head>
 <body>
     
@@ -44,8 +51,13 @@
     </header>
 
     <div class="menu">
-            <img src="img/menu.jpg" alt="imgmenu">
+            <div class="cerrar_sesion">
+                <a class="btn btn-primary btn-lg" href="CerrarSesion.php" role="button">Cerrar Sesión</a>
+            </div>
             
+            <div class="cambiar_contra">
+                <a class="btn btn-primary btn-lg" role="button" href="CambiarContra.php">Cambiar Contraseña</a> 
+            </div>
             <div>
             <h4> <?php
                 echo  htmlspecialchars($nombre);
