@@ -25,19 +25,22 @@
     <link rel="stylesheet" href="./css/Tutor-MostrarReporteTutor.css" type="text/css">
 </head>
 <body>
-    
-    <header>
-        <div class="logo">
-            <img src="img/logo-TecNM.png" alt="logo" >    
-        </div>  
-        <h2 class="titulo">Tecnologico Nacional de Mexico</h2>
-        <h2 class="titulo2">Instituto Tecnologico de Tepic</h2> 
-        <h3 class="titulo3">Plataforma de tutorias</h3>
-
-        <div class="logo2"> 
-            <img src="img/escudo_itt_grande.png" alt="logo2" >
+    <header class="header">
+        <div class="containercab">
+            <div class="logo">
+                <img src="img/logo-TecNM.png" alt="logo" >    
+            </div>  
+            <div class="titulos">
+                <h2 class="titulo">Tecnológico Nacional de México</h2>
+                <h2 class="titulo2">Instituto Tecnologico de Tepic</h2> 
+             <h3 class="titulo3">Plataforma de tutorias</h3>
+            </div>
+            <div class="logo2"> 
+                <img src="img/escudo_itt_grande.png" alt="logo2" >
+            </div>
         </div>
     </header>
+
     <div class="menu">
             <img src="img/menu.jpg" alt="imgmenu">
             
@@ -50,4 +53,4 @@
                 <img src="img/foto-perfil.jpg" alt="foto-perfil">
             </div>
     </div>
-<main>
+</body>
