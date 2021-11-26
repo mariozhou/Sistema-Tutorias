@@ -65,26 +65,9 @@
 
             </div>
             <div class="col-3 mt-3">
-                <a class="btn btn-primary " role="button" href="CambiarContra.php">Cambiar Contraseña</a> 
+                
             </div>
-            <div class="col-7">
-                <div class="row">
-                    <div class="col">
-                        <div class="col">
-                            <h4 class="text-right" style="color:white;"> <?php
-                            echo  htmlspecialchars($nombre);
-                            ?> </h4>
-                        </div>
-                        <div class="col">
-                            <p class="text-right" style="color:white;">  <?php echo htmlspecialchars($tipo) ?> </p>
-                        </div>
-
-                    </div>
-                    <div class="float-right">
-                        <img src="img/foto-perfil.jpg" class="img-fluid mt-1 mr-1" alt="foto-perfil">
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 </body>
