@@ -20,7 +20,7 @@
     $idtutor=$_SESSION['idtutor']= $id1["IdUser"];
     ?>
    
-<head>
+   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,6 +47,7 @@
         </div>
     </header>
 
+
     <div class="menu">
             <div class="cerrar_sesion">
                 <a class="btn btn-primary btn-lg" href="CerrarSesion.php" role="button">Cerrar Sesión</a>
@@ -61,7 +62,31 @@
                 ?> </h4>
                 <p>  <?php echo htmlspecialchars($tipo) ?> </p>
                 <img src="img/foto-perfil.jpg" alt="foto-perfil">
+
             </div>
+            <div class="col-3 mt-3">
+                <a class="btn btn-primary " role="button" href="CambiarContra.php">Cambiar Contraseña</a> 
+            </div>
+            <div class="col-7">
+                <div class="row">
+                    <div class="col">
+                        <div class="col">
+                            <h4 class="text-right" style="color:white;"> <?php
+                            echo  htmlspecialchars($nombre);
+                            ?> </h4>
+                        </div>
+                        <div class="col">
+                            <p class="text-right" style="color:white;">  <?php echo htmlspecialchars($tipo) ?> </p>
+                        </div>
+
+                    </div>
+                    <div class="float-right">
+                        <img src="img/foto-perfil.jpg" class="img-fluid mt-1 mr-1" alt="foto-perfil">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
+    
     
