@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-11-2021 a las 06:33:50
+-- Tiempo de generación: 25-11-2021 a las 09:25:45
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.12
 
@@ -40,7 +40,7 @@ CREATE TABLE `actividades` (
 --
 
 INSERT INTO `actividades` (`IdAct`, `Actividad`, `Des`, `Semestres`, `url`) VALUES
-(30, 'futbol', 'partido', '8', 'act/entrevistapdf.pdf');
+(32, 'taller', '', '', 'act/entrevistapdfpdf.pdf');
 
 -- --------------------------------------------------------
 
@@ -77,7 +77,7 @@ CREATE TABLE `cambiartutor` (
 --
 
 INSERT INTO `cambiartutor` (`IdMensaje`, `IdTutorado`, `NombreTutorado`, `Mensaje`, `NombreTutor`, `Fecha`) VALUES
-(20, 16401029, 'Jose Luis Ramos Monreal', 'halo', 'edgar valderama', '2021-11-17 18:13:28');
+(23, 16401029, 'Jose Luis Ramos Monreal', 'no me cae bien este wey', 'edgar valderama', '2021-11-24 19:20:10');
 
 -- --------------------------------------------------------
 
@@ -90,15 +90,20 @@ CREATE TABLE `canalizacion` (
   `IdTutorado` int(11) NOT NULL,
   `Tipo` varchar(25) NOT NULL,
   `Comentarios` varchar(500) NOT NULL,
-  `Fecha` datetime NOT NULL DEFAULT current_timestamp()
+  `Fecha` datetime NOT NULL DEFAULT current_timestamp(),
+  `IdTutor` int(11) NOT NULL,
+  `Respuesta` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `canalizacion`
 --
 
-INSERT INTO `canalizacion` (`IdCanal`, `IdTutorado`, `Tipo`, `Comentarios`, `Fecha`) VALUES
-(121, 16401029, 'Asesorias Departamental', 'hola amigos', '2021-11-16 23:07:53');
+INSERT INTO `canalizacion` (`IdCanal`, `IdTutorado`, `Tipo`, `Comentarios`, `Fecha`, `IdTutor`, `Respuesta`) VALUES
+(122, 16401029, 'Psicologico', 'no me siento bien', '2021-11-24 10:04:48', 16401028, 'pendientes de respuesta'),
+(124, 16401029, 'Asesorias Departamental', 'reprobe jauregui ', '2021-11-24 19:19:41', 16401028, 'pendientes de respuesta'),
+(126, 16401099, 'Inconveniente con maestro', 'sadasd', '2021-11-24 23:55:32', 16401027, 'respondida'),
+(127, 16401099, 'Psicologico', 'asdasdasdas', '2021-11-25 00:43:06', 16401027, 'pendientes de respuesta');
 
 -- --------------------------------------------------------
 
@@ -121,7 +126,32 @@ CREATE TABLE `files` (
 
 INSERT INTO `files` (`id`, `title`, `descripction`, `url`, `type`, `IdTutorado`) VALUES
 (5, 'gh', 'gfh', 'files/eje-proyecto-invespdf.pdf', NULL, 0),
-(33, 'asd', 'asd', 'files/16401029ficha-de-identificacionpdf.pdf', NULL, 16401029);
+(34, 'entrevista1', '', 'files/16401029entrevista1.pdf', NULL, 16401029),
+(35, 'ficha', '', 'files/16401026ficha.pdf', NULL, 16401026),
+(37, 'entrevista 1', '', 'files/16401034entrevista-1.pdf', NULL, 16401034),
+(39, 'asdas', '', 'files/16401029asdas.pdf', NULL, 16401029);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mensaje`
+--
+
+CREATE TABLE `mensaje` (
+  `IdMsj` int(11) NOT NULL,
+  `Remitente` varchar(11) NOT NULL,
+  `IdDestino` int(11) NOT NULL,
+  `Mensaje` varchar(500) NOT NULL,
+  `Asunto` varchar(250) NOT NULL,
+  `Fecha` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `mensaje`
+--
+
+INSERT INTO `mensaje` (`IdMsj`, `Remitente`, `IdDestino`, `Mensaje`, `Asunto`, `Fecha`) VALUES
+(3, 'Tutor', 16401026, 'asd', '', '2021-11-25 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -132,6 +162,8 @@ INSERT INTO `files` (`id`, `title`, `descripction`, `url`, `type`, `IdTutorado`)
 CREATE TABLE `reporte` (
   `IdReporte` int(11) NOT NULL,
   `IdTutorado` int(11) NOT NULL,
+  `NombreTutorado` varchar(50) NOT NULL,
+  `IdTutor` int(11) DEFAULT NULL,
   `Semestres` tinyint(4) NOT NULL,
   `Psicologia` int(11) NOT NULL,
   `Asesoria` int(11) NOT NULL,
@@ -143,32 +175,25 @@ CREATE TABLE `reporte` (
   `HoraSesionGrup` int(11) NOT NULL,
   `EvaValor` int(11) NOT NULL,
   `EvalNivel` varchar(20) NOT NULL,
-  `Acredito` int(11) DEFAULT NULL,
-  `Noacredito` int(11) DEFAULT NULL,
-  `Deserto` int(11) DEFAULT NULL,
-  `AcreditadoSegui` int(11) DEFAULT NULL
+  `Acredito` int(11) NOT NULL,
+  `Noacredito` int(11) NOT NULL,
+  `Deserto` int(11) NOT NULL,
+  `AcreditadoSegui` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `reporte`
 --
 
-INSERT INTO `reporte` (`IdReporte`, `IdTutorado`, `Semestres`, `Psicologia`, `Asesoria`, `Actividad`, `Conferencias`, `Talleres`, `Estatus`, `HoraSesionIndiv`, `HoraSesionGrup`, `EvaValor`, `EvalNivel`, `Acredito`, `Noacredito`, `Deserto`, `AcreditadoSegui`) VALUES
-(0, 0, 0, 0, 0, 0, 0, 0, 'Estatus', 0, 0, 0, '', 0, 0, 0, 0),
-(1, 16401026, 0, 1, 1, 0, 0, 0, 'Acreditó', 0, 0, 1, 'Suficiente', 1, 0, 0, 0),
-(3, 16401099, 0, 0, 0, 0, 0, 0, 'Acreditado en Seguimiento', 0, 0, 0, 'Insuficiente', 0, 0, 0, 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `seguro`
---
-
-CREATE TABLE `seguro` (
-  `IdSeguro` int(11) NOT NULL,
-  `IdTutorado` int(11) NOT NULL,
-  `Fecha` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `reporte` (`IdReporte`, `IdTutorado`, `NombreTutorado`, `IdTutor`, `Semestres`, `Psicologia`, `Asesoria`, `Actividad`, `Conferencias`, `Talleres`, `Estatus`, `HoraSesionIndiv`, `HoraSesionGrup`, `EvaValor`, `EvalNivel`, `Acredito`, `Noacredito`, `Deserto`, `AcreditadoSegui`) VALUES
+(0, 0, '', NULL, 0, 0, 0, 0, 0, 0, 'Selecciona un estatus', 0, 0, 0, '', 0, 0, 0, 0),
+(1, 16401026, 'Luis Miguel', 16401027, 0, 1, 1, 0, 0, 0, 'Acreditó', 0, 0, 1, 'Suficiente', 1, 0, 0, 0),
+(3, 16401099, 'Jholaus Enrique Salazar Maldonado', 16401027, 0, 1, 1, 0, 0, 0, 'Acreditó', 1, 2, 3, 'Notable', 1, 0, 0, 0),
+(5, 16401033, 'Jesus', 16401028, 0, 0, 0, 0, 0, 0, 'Seleccionar estatus', 0, 0, 0, '', 0, 0, 0, 0),
+(6, 16401029, 'Jose Luis Ramos Monreal', 16401027, 0, 0, 0, 0, 0, 0, 'Seleccionar estatus', 0, 0, 0, '', 0, 0, 0, 0),
+(7, 16401034, 'manuel', NULL, 0, 0, 0, 0, 0, 0, 'Seleccionar estatus', 0, 0, 0, '', 0, 0, 0, 0),
+(8, 16401035, 'jose', NULL, 0, 0, 0, 0, 0, 0, 'Seleccionar estatus', 0, 0, 0, '', 0, 0, 0, 0),
+(9, 20401011, 'chuy', NULL, 0, 0, 0, 0, 0, 0, 'Seleccionar estatus', 0, 0, 0, '', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -178,17 +203,21 @@ CREATE TABLE `seguro` (
 
 CREATE TABLE `tutor` (
   `IdTutor` int(11) NOT NULL,
-  `NombreTutor` varchar(35) NOT NULL
+  `NombreTutor` varchar(35) NOT NULL,
+  `periodo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tutor`
 --
 
-INSERT INTO `tutor` (`IdTutor`, `NombreTutor`) VALUES
-(16401020, 'blanca ramirez'),
-(16401027, 'Sergio Rivera Rios'),
-(16401028, 'edgar valderama');
+INSERT INTO `tutor` (`IdTutor`, `NombreTutor`, `periodo`) VALUES
+(16401020, 'blanca ramirez', 0),
+(16401027, 'Sergio Rivera Rios', 0),
+(16401028, 'edgar valderama', 0),
+(16402011, 'francisco', 0),
+(20401020, 'luis', 0),
+(20401021, 'manel', 0);
 
 -- --------------------------------------------------------
 
@@ -213,13 +242,13 @@ CREATE TABLE `tutorados` (
 --
 
 INSERT INTO `tutorados` (`IdTutorado`, `NombreTutorado`, `IdTutor`, `Semestres`, `Domicilio`, `Telefono`, `Preparatoria`, `Estatus`, `MotivoCarrera`) VALUES
-(100, '100', NULL, 2, '', '', '', '', 0),
-(101, '101', NULL, 6, '', '', '', '', 0),
-(102, '102', NULL, 11, '', '', '', '', 0),
-(103, '103', NULL, 13, '', '', '', '', 0),
 (16401026, 'Luis Miguel', 16401027, 9, '', '', '', '', 0),
 (16401029, 'Jose Luis Ramos Monreal', 16401028, 11, '', '', '', '', 0),
-(16401099, 'Jholaus Enrique Salazar Maldonado', 16401027, 2, '', '', '', '', 0);
+(16401033, 'Jesus', 16401020, 12, '', '', '', '', 0),
+(16401034, 'manuel', NULL, 1, '', '', '', '', 0),
+(16401035, 'jose', 16401020, 6, '', '', '', '', 0),
+(16401099, 'Jholaus Enrique Salazar Maldonado', 16401027, 2, '', '', '', '', 0),
+(20401011, 'chuy', NULL, 10, '', '', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -231,27 +260,30 @@ CREATE TABLE `usuario` (
   `IdUser` int(11) NOT NULL,
   `Nombre` varchar(35) NOT NULL,
   `Password` varchar(18) NOT NULL,
-  `TipoUser` varchar(35) NOT NULL
+  `TipoUser` varchar(35) NOT NULL,
+  `cambio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`IdUser`, `Nombre`, `Password`, `TipoUser`) VALUES
-(100, '100', '', 'Alumno'),
-(101, '101', '', 'Alumno'),
-(102, '102', '', 'Alumno'),
-(103, '103', '', 'Alumno'),
-(7890, 'ddddddddddddddd', '123456', 'Tutor'),
-(16401020, 'blanca ramirez', 'br1234', 'Tutor'),
-(16401023, 'Jiacheng Zhou', 'z1234', 'Jefe de departamento'),
-(16401024, 'Juan Mario Gonzalez Borrayo', 'jm1234', 'Coordinador de Tutores'),
-(16401026, 'Luis Miguel', 'lm123', 'Alumno'),
-(16401027, 'Sergio Rivera Rios', 's1234', 'Tutor'),
-(16401028, 'edgar valderama', 'ev123456', 'Tutor'),
-(16401029, 'Jose Luis Ramos Monreal', 'jl1234', 'Alumno'),
-(16401099, 'Jholaus Enrique Salazar Maldonado', 'js1234', 'Alumno');
+INSERT INTO `usuario` (`IdUser`, `Nombre`, `Password`, `TipoUser`, `cambio`) VALUES
+(16401020, 'blanca ramirez', 'br1234', 'Tutor', 0),
+(16401023, 'Jiacheng Zhou', 'z1234', 'Jefe de departamento', 0),
+(16401024, 'Juan Mario Gonzalez Borrayo', 'jm1234', 'Coordinador de Tutores', 0),
+(16401026, 'Luis Miguel', 'lm1234', 'Alumno', 0),
+(16401027, 'Sergio Rivera Rios', '123', 'Tutor', 0),
+(16401028, 'edgar valderama', 'e1234', 'Tutor', 0),
+(16401029, 'Jose Luis Ramos Monreal', 'jl1234', 'Alumno', 0),
+(16401033, 'Jesus', '123456', 'Alumno', 1),
+(16401034, 'manuel', 'm1234', 'Alumno', 0),
+(16401035, 'jose', '123456', 'Alumno', 1),
+(16401099, 'Jholaus Enrique Salazar Maldonado', 'js1234', 'Alumno', 0),
+(16402011, 'francisco', '123456', 'Tutor', 1),
+(20401011, 'chuy', '123456', 'Alumno', 1),
+(20401020, 'luis', 'j1234', 'Tutor', 0),
+(20401021, 'manel', '123456', 'Tutor', 1);
 
 --
 -- Índices para tablas volcadas
@@ -291,17 +323,16 @@ ALTER TABLE `files`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `mensaje`
+--
+ALTER TABLE `mensaje`
+  ADD PRIMARY KEY (`IdMsj`);
+
+--
 -- Indices de la tabla `reporte`
 --
 ALTER TABLE `reporte`
   ADD PRIMARY KEY (`IdReporte`);
-
---
--- Indices de la tabla `seguro`
---
-ALTER TABLE `seguro`
-  ADD PRIMARY KEY (`IdSeguro`),
-  ADD KEY `Tutorado-Seguro` (`IdTutorado`);
 
 --
 -- Indices de la tabla `tutor`
@@ -330,31 +361,37 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `actividades`
 --
 ALTER TABLE `actividades`
-  MODIFY `IdAct` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `IdAct` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `cambiartutor`
 --
 ALTER TABLE `cambiartutor`
-  MODIFY `IdMensaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `IdMensaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `canalizacion`
 --
 ALTER TABLE `canalizacion`
-  MODIFY `IdCanal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `IdCanal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT de la tabla `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT de la tabla `mensaje`
+--
+ALTER TABLE `mensaje`
+  MODIFY `IdMsj` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `IdReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `IdReporte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas
@@ -384,6 +421,14 @@ ALTER TABLE `tutor`
 ALTER TABLE `tutorados`
   ADD CONSTRAINT `Tutor-Tutorado` FOREIGN KEY (`IdTutor`) REFERENCES `tutor` (`IdTutor`),
   ADD CONSTRAINT `Tutorada-usuario` FOREIGN KEY (`IdTutorado`) REFERENCES `usuario` (`IdUser`);
+
+DELIMITER $$
+--
+-- Eventos
+--
+CREATE DEFINER=`root`@`localhost` EVENT `TutorBaja` ON SCHEDULE EVERY 6 MONTH STARTS '2021-12-30 22:53:56' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE tutorados SET `IdTutor`= ""$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

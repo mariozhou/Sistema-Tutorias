@@ -50,6 +50,15 @@ $sentenciaSQL = $conexion->prepare("SELECT * FROM `tutor`  ORDER BY  NombreTutor
 $sentenciaSQL->execute();
 $alumno = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
 
+$sentenciaSQL1 = $conexion->prepare("SELECT tutorados.NombreTutorado,
+tutorados.IdTutorado, canalizacion.Tipo,
+Canalizacion.Materia, FROM tutorados 
+JOIN canalizacion ON tutorados.IdTutorado = canalizacion.IdTutorado 
+ORDER BY NombreTutorado ASC");  
+$sentenciaSQL1->execute();
+$asesoria = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
+
+
 $id=(isset($_POST['select']))?$_POST['select']:"";
 $_POST['idsql']=$id;
 
@@ -66,6 +75,13 @@ $_POST['idsql']=$id;
 
 <body>
 
+    <form class="form-radio" method="post" >
+        <p>
+            Elige una opcion<br>
+            
+                 <input type="submit" name="opcion" value="Canalizacion" class="btn btn-primary" <?php if($opcion == "Canalizacion") echo "checked"; ?>> 
+        </p>
+    </form>
     <form action="" method="post" class="form-group">
      <div class="form-group">       
 
@@ -87,9 +103,16 @@ $_POST['idsql']=$id;
 
         <div  max-width="1400px">
             <table id="example" class="table table-bordered" max-width="1400px"> 
-
+            <?php if($opcion == 'Canalizacion'){
+                        echo"<tr>
+                        <th >Nombre Del Alumno</th>
+                        <th>No. Control</th>
+                        <th>Tipo de Canalizacion</th>
+                        <th>Materia</th>
+                        </tr>";
+                    }else{
                 <thead>
-                    <tr>
+                    echo"<tr>
                     <th >Nombre Del Tutor</th>
                     <th >Nombre Del Tutorado</th>
                         <th>Desertaron</th>
@@ -102,11 +125,23 @@ $_POST['idsql']=$id;
                         <th>Conferencias</th>
                         <th>Talleres</th>
  
-                    </tr>
+                    </tr>";
+                  } ?>
                 </thead>
                 <tbody>
+                
+                 <?php
+                 if($opcion == 'Canalizacion'){
+                    foreach($asesoria as $result)  
+                echo "<tr>
+                <td>".$result -> NombreTutorado."</td>
+                <td>".$result -> IdTutorado."</td>
+                <td>".$result -> Tipo."</td>
+                <td>".$result -> Materia."</td>
 
-                 <?php if(isset($_POST['select'])){
+                </tr>"; 
+                 }else 
+                 if(isset($_POST['select'])){
                      foreach($tutor as $result) { 
                 echo "<tr>
                 <td>".$result -> NombreTutor."</td>
