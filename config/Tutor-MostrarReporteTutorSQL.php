@@ -15,6 +15,12 @@ $idtutor=$_SESSION['idtutor'];
  $vnum2=(isset($_POST['vnum']))?$_POST['vnum']:"";
  $vdes2=(isset($_POST['vdes']))?$_POST['vdes']:"";
 
+
+ $psi=(isset($_POST['psi']))?$_POST['psi']:"";
+ $assdep=(isset($_POST['assdep']))?$_POST['assdep']:"";
+ $assbc=(isset($_POST['assbc']))?$_POST['assbc']:"";
+
+
 //nivel de desempeno
  switch ($vnum2 ) {
     case 0:
@@ -83,9 +89,15 @@ if ( $estatus2=="Acreditó" ) {
  $sentenciaSQL1->bindParam(':acrese',$acrese);
 
  $sentenciaSQL1->bindParam(':idtutor',$idtutor);
-
  //Acredito = :acre, Noacredito=:noacre, Deserto=:deser, AcreditadoSegui=:acrese
  $sentenciaSQL1->execute();
+
+ $sentenciaSQL2 = $conexion->prepare("UPDATE `impact` SET `Psi`=:psi,`AssDep`=:assdep,`AssBC`=:assbc WHERE IdTutorado=:idsql");  
+ $sentenciaSQL2->bindParam(':psi',$psi);
+ $sentenciaSQL2->bindParam(':assdep',$assdep);
+ $sentenciaSQL2->bindParam(':assbc',$assbc);
+ $sentenciaSQL2->bindParam(':idsql',$idsql);
+ $sentenciaSQL2->execute();
 
 if( $sentenciaSQL1){   
      'sd'.$idsql;
