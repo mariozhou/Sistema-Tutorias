@@ -4,7 +4,7 @@
 include('config/conexion.php');
 $tmp = array();
 $res = array();
-$sel = $con->query("SELECT * FROM `actividades` WHERE 1 ");
+$sel = $con->query("SELECT * FROM `reportefile` WHERE 1 ");
 while ($row = $sel->fetch_assoc()) {
     $tmp = $row;
     array_push($res, $tmp);
@@ -35,10 +35,10 @@ while ($row = $sel->fetch_assoc()) {
         <table class="table mt-2"> 
             <thead>
                 <tr>
-                <th scope="col">#</th>
-                <th scope="col">Titulo</th>
-                 <th scope="col">Descripcion</th>
-                <th scope="col">Semestres</th>
+          
+           
+                 <th scope="col">Periodo</th>
+                <th scope="col">Fecha</th>
                 <th scope="col">Acciones</th>
                 </tr>
             </thead>
@@ -46,19 +46,18 @@ while ($row = $sel->fetch_assoc()) {
             <tbody>
                             <?php foreach ($res as $val) { ?>
                                 <tr>
-                                    <td><?php echo $val['IdAct'] ?> </td>
-                                    <td><?php echo $val['Actividad'] ?> </td>
-                                    <td><?php echo $val['Des'] ?></td>
-                                    <td><?php echo $val['Semestres'] ?></td>
-                                    <td><button onclick="openModelPDF('<?php echo $val['url'] ?>')" class="btn btn-primary" type="button">Ver Archivo Ventana Emergente</button>
-                                        <a class="btn btn-primary" target="_black" href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/Sistema-Tutorias/' . $val['url']; ?>" >Ver Archivo pagina</a>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteChildresn<?php echo $val['IdAct']; ?>">
+                                    <td><?php echo $val['title'] ?> </td>
+                                
+                                    <td><?php echo $val['Fecha'] ?></td>
+                                  
+                                    <td><a class="btn btn-primary" target="_black" href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/Sistema-Tutorias/' . $val['url']; ?>" >Descargar Reporte</a>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteChildresn<?php echo $val['Idreport']; ?>">
                                   Eliminar
                               </button>
                                     </td>
                                 </tr>
                                     <!--Ventana Modal para la Alerta de Eliminar--->
-                            <?php include('config/ModalEliConf.php'); ?>
+                            <?php include('config/ModalElimRepor.php'); ?>
                             <?php } ?>
                         </tbody>
         </table>
@@ -69,7 +68,7 @@ while ($row = $sel->fetch_assoc()) {
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Nuevo archivo</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Nuevo Reporte</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -77,20 +76,13 @@ while ($row = $sel->fetch_assoc()) {
                     <div class="modal-body">
                         <form enctype="multipart/form-data" id="form1">
                             <div class="form-group">
-                                <label for="title">Titulo</label>
-                                <input type="text" class="form-control" id="title" name="title">
+                                <label for="title">Periodo</label>
+                                <input type="text" class="form-control" id="title" name="title" required>
                             </div>
-                            <div class="form-group">
-                                <label for="description">Descripcion</label>
-                                <input type="text" class="form-control" id="description" name="description">
-                            </div>
-                            <div class="form-group">
-                                <label for="semestres">Semestres</label>
-                                <input type="text" class="form-control" id="semestres" name="semestres">
-                            </div>       
+                            
                             <div class="form-group">
                                 <label for="description">archivo</label>
-                                <input type="file" class="form-control" id="file" name="file">
+                                <input type="file" class="form-control" id="file" name="file" required>
                             </div>
                         </form>
                     </div>
@@ -140,7 +132,7 @@ while ($row = $sel->fetch_assoc()) {
 
                                     }
                                 };
-                                xhttp.open("POST", "ConfeUpload.php", true);
+                                xhttp.open("POST", "ReporUpload.php", true);
                                 xhttp.send(data);
                                 $('#form1').trigger('reset');
                             }
@@ -150,7 +142,7 @@ while ($row = $sel->fetch_assoc()) {
                                 $('#iframePDF').attr('src','<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/Sistema-Tutorias/'; ?>'+url);
                             }
         </script>
-     <a id="boton" href="menuCT.php" >
+     <a id="boton" href="menuJD.php" >
     <div class="container">
         <div class="row align-items-start">
             <div class="col">
@@ -183,17 +175,17 @@ while ($row = $sel->fetch_assoc()) {
 
     $('.btnBorrar').click(function(e){
         e.preventDefault();
-        var IdAct = $(this).attr("id");
+        var Idreport = $(this).attr("id");
 
-        var dataString = 'IdAct='+ IdAct;
-        url = "config/ConfeRecib_delete.php";
+        var dataString = 'Idreport='+ Idreport;
+        url = "config/recib_DeleteRepot.php";
             $.ajax({
                 type: "POST",
                 url: url,
                 data: dataString,
                 success: function(data)
                 {
-                  window.location.href="CT-SubirConferencias.php";
+                  window.location.href="JD-ReporAnte.php";
                   $('#respuesta').html(data);
                 }
             });

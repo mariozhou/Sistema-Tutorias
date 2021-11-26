@@ -179,15 +179,27 @@ $alumno = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
 
     </form>
 
-        <a id="boton" href="menuJD.php" >
+        <?php
+            include("config/bd.php");//conexion
+            $sentenciaSQL3= $conexion->prepare("SELECT `activo`, `Idperiodo` FROM `periodo` WHERE 1");
+            $sentenciaSQL3->execute();
+            $idact=($sentenciaSQL3->fetchColumn());
+                    
+        ?>
+
         <div class="container">
             <div class="row align-items-start">
                 <div class="col">
-                    <button type="submit" class="btn btn-primary btn-lg" id="botones">Regresar</button>
+                <a id="boton" href="menuJD.php" >
+                    <button type="" class="btn btn-primary btn-lg" id="botones">Regresar</button>
+                    </a>
                 </div>
+                <a id="boton" href="menuJD.php" >       
+                <button type="submit" class="btn btn-primary btn-lg" id="botones"><?php if($idact=='1'){echo "Cerrar Periodo"; }else{echo "Abrir Periodo";}  ?> </button>
+                </a>
             </div>
     </div>
-        </a>
+       
       
      <!-- jQuery, Popper.js, Bootstrap JS -->
  
