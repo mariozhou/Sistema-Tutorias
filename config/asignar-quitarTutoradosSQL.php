@@ -10,6 +10,7 @@ if( !(isset($_POST["btnquitar"])) ){
     if( isset($_POST['check']) And !($asigtutor == "Tutores") ){
 
     foreach( $_POST['check'] AS $value  ){
+        echo '123'.$value;
         $sentenciaSQL2 = $conexion->prepare("UPDATE tutorados SET `IdTutor`=(SELECT IdTutor FROM `tutor` WHERE NombreTutor =:tutor ) WHERE IdTutorado= :noctl ");  
         $sentenciaSQL2->bindParam(':noctl',$value);
         $sentenciaSQL2->bindParam(':tutor',$asigtutor);
