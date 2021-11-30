@@ -30,14 +30,11 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">  
       
 <?php
- $rango=(isset($_POST['range-semestre']))?$_POST['range-semestre']:"";
-  $asigtutor=(isset($_POST['tutor']))?$_POST['tutor']:"";
-  $noct2=(isset($_POST['Ncontrol']))?$_POST['Ncontrol']:"";
-//actualizar tabla 
+
+
+
 $id=(isset($_POST['select']))?$_POST['select']:"";
 $_POST['idsql']=$id;
-
-
 
 
 if(isset($_POST['opcion'])){
@@ -45,13 +42,11 @@ if(isset($_POST['opcion'])){
  }else{
      $opcion = '';
  } 
- 
- //para el combobox de tutor
 
 
-//datos de los tutorados de un tutor
+include("config/bd.php");//conexion
 $sentenciaSQL2 = $conexion->prepare("SELECT tutorados.NombreTutorado,
-tutorados.IdTutorado, reporte.Psicologia, reporte.Psicologia + reporte.Conferencias + reporte.Talleres as total,
+tutorados.IdTutorado, reporte.Psicologia,
 reporte.Asesoria, reporte.Actividad, reporte.Conferencias,
 reporte.Talleres, reporte.HoraSesionIndiv,  
 reporte.HoraSesionGrup, reporte.EvaValor, reporte.EvalNivel, 
@@ -63,86 +58,105 @@ $sentenciaSQL2->bindParam(':idtutor',$id);
 $sentenciaSQL2->execute();
 $alumno = $sentenciaSQL2->fetchAll(PDO::FETCH_OBJ);
 
-//cosulta tutores 
-include("config/bd.php");//conexion
-$sentenciaSQL = $conexion->prepare("SELECT m.NombreTutor as Tutor,Count(r.deserto) as Deserto, 
-Count(r.Acredito) as Acredito, Count(r.Noacredito) as Noacredito,  
-r.deserto + r.Acredito + r.Noacredito as total,
-r.HoraSesionIndiv, r.HoraSesionGrup, Count(r.Psicologia+r.Asesoria) as cana, 
-Count(r.Conferencias) as Conferencias, Count(r.Talleres) as Talleres FROM tutor as m 
-Join reporte as r ON m.IdTutor = r.Idtutor  where r.IdTutor=:idtutor
- Group BY m.NombreTutor ASC");  
-$sentenciaSQL->bindParam(':idtutor',$id);
+$sentenciaSQL = $conexion->prepare("SELECT m.NombreTutor as Tutor,SUM(r.deserto) as Deserto, 
+SUM(r.Acredito) as Acredito, SUM(r.Noacredito) as Noacredito,  
+count(r.deserto + r.Acredito + r.Noacredito) as total,
+r.HoraSesionIndiv, r.HoraSesionGrup, count(r.Psicologia+r.Asesoria) as cana, 
+SUM(r.Conferencias) as Conferencias, SUM(r.Talleres) as Talleres FROM tutor as m 
+Join reporte as r ON m.IdTutor = r.Idtutor  Group BY m.NombreTutor ASC");  
 $sentenciaSQL->execute();
 $tutor = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
 
-$sentenciaSQL = $conexion->prepare("SELECT m.NombreTutor as Tutor,Count(r.deserto) as Deserto, 
-Count(r.Acredito) as Acredito, Count(r.Noacredito) as Noacredito,  
-r.deserto + r.Acredito + r.Noacredito as total,
-
-r.HoraSesionIndiv, r.HoraSesionGrup, Count(r.Psicologia+r.Asesoria) as cana, 
-Count(r.Conferencias) as Conferencias, Count(r.Talleres) as Talleres FROM tutor as m 
-Join reporte as r ON m.IdTutor = r.Idtutor
- Group BY m.NombreTutor ASC");  
+//actualizar tabla alumnos
+$sentenciaSQL = $conexion->prepare("SELECT * FROM `tutor`  ORDER BY  NombreTutor ASC");  
 $sentenciaSQL->execute();
-$tutor1 = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
+$tutores2 = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
 
 $sentenciaSQL1 = $conexion->prepare("SELECT tutorados.NombreTutorado,
 tutorados.IdTutorado, canalizacion.Tipo,
 Canalizacion.Materia FROM tutorados 
 JOIN canalizacion ON tutorados.IdTutorado = canalizacion.IdTutorado 
-ORDER BY IdTutorado ASC");  
+ORDER BY tutorados.NombreTutorado ASC");  
 $sentenciaSQL1->execute();
 $asesoria = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
 
 
-$sentenciaSQL = $conexion->prepare("SELECT * FROM `tutor`  ORDER BY  NombreTutor ASC");  
+$sentenciaSQL1 = $conexion->prepare("SELECT tutorados.NombreTutorado,
+tutorados.IdTutorado, canalizacion.Tipo,
+Canalizacion.HoraAtend FROM tutorados 
+JOIN canalizacion ON tutorados.IdTutorado = canalizacion.IdTutorado 
+ORDER BY tutorados.NombreTutorado ASC");  
+$sentenciaSQL1->execute();
+$atendidas = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
+
+$sentenciaSQL1 = $conexion->prepare("SELECT* FROM tutorados 
+JOIN impact WHERE tutorados.IdTutorado = impact.IdTutorado
+ORDER BY tutorados.NombreTutorado ASC");  
+$sentenciaSQL1->execute();
+$Impacto = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
 
 
-$sentenciaSQL->execute();
-$tutor2 = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
-
+//tutor con nombre retrun id 
+//SELECT IdTutor FROM `tutor` WHERE NombreTutor = 'blanca ramirez' 
+// agregar tutor
+//UPDATE `tutorados` SET `IdTutor`=(SELECT IdTutor FROM `tutor` WHERE NombreTutor =:tutor ) WHERE IdTutorado = :noctl
+//UPDATE `tutorados` SET `IdTutor`=(SELECT IdTutor FROM `tutor` WHERE NombreTutor =:tutor ) WHERE IdTutorado = :noctl
+//
 ?>  
 
 <body>
-<form class="form-radio" method="post" >
+
+    <form class="form-radio" method="post" >
         <p>
-         <button type="submit" name="opcion" value="tutores" class="btn btn-primary" <?php if($opcion == "tutores") echo "checked"; ?>> 
+            Elige una opcion<br>
+            <button type="submit" name="opcion" value="tutores" class="btn btn-primary" <?php if($opcion == "tutores") echo "checked"; ?>> 
             Todos los tutores
         </button>
-        </p>
-        <input type="submit" name="opcion" value="Canalizacion" class="btn btn-primary" <?php if($opcion == "Canalizacion") echo "checked"; ?>> 
+                 <input type="submit" name="opcion" value="Solicitadas" class="btn btn-primary" <?php if($opcion == "Solicitadas") echo "checked"; ?>> 
+                 <input type="submit" name="opcion" value="Atendidas" class="btn btn-primary" <?php if($opcion == "Atendidas") echo "checked"; ?>> 
+                 <input type="submit" name="opcion" value="Impacto" class="btn btn-primary" <?php if($opcion == "Impacto") echo "checked"; ?>> 
 
+                </p>
+    </form>
+    <form action="" method="post" class="form-group">
+     <div class="form-group">       
 
-    <div class="form-group">       
       <br>
-
       <label for="No.Control"><h5>Seleccionar Tutor</h5></label> <br>
-
-      <select type='submit' class="form-select col-md-6" name="select" id="inputGroupSelect01" onChange="this.form.submit()">
-      <option selected> <?php if(isset($_POST['select']) ){echo $id; }else{echo 'Tutores'; } ?> </option>
-      <?php foreach($tutor2 as $row): //llenar combobox con Tutores?>  
-
+      <select class="form-select col-md-6" name="select" id="inputGroupSelect01" onChange="this.form.submit()">
+      <option selected> <?php if(isset($_POST['select']) ){echo $id; }else{echo 'Tutor'; } ?> </option>
+      <?php foreach($tutores2 as $row): //llenar combobox con Tutores 
+                 ?>  
                 <option value="<?php echo$idsq= $row->IdTutor;?>"> 
-                                <?php echo $select =$row->NombreTutor.' '.$row->IdTutor; $_POST['idsql']=$select; ?>
-
-
+                <?php echo $select =$row->NombreTutor.' '.$row->IdTutor; $_POST['idsql']=$select;?>
+                
                 </option>
             <?php endforeach ?>  
             <?php   ?>
       </select>
     </div>
-    </form>
+    </form>     
 
-    <form class="form-tutorado" method="post" >
-        <div  max-width="1400px">
-            <table id="example" class="table table-bordered" max-width="1400px"> 
-
-                <thead>
-                    <?php if($opcion == 'tutores'){
-                    echo"<tr>
-                    <th >Nombre Del Tutor</th>
-                 
+    <div  div class="table-responsive">
+            <table id = "example" class="table table-bordered table-striped table-hover"  width="100%">
+           <thead>
+           <?php if($opcion == 'Solicitadas'){
+                        echo"<tr>
+                        <th >Nombre Del tutorado</th>
+                        <th>No. Control</th>
+                        <th>Tipo de Canalizacion</th>
+                        <th>Materia</th>
+                        </tr>";
+                    }else if($opcion == 'Atendidas'){
+                        echo"<tr>
+                        <th >Nombre Del Tutorado</th>
+                        <th>No. Control</th>
+                        <th>Tipo de Canalizacion</th>
+                      
+                        </tr>";
+                    }else if($opcion == 'tutores'){
+                        echo"
+                        <tr><th >Nombre Del Tutor</th>
                         <th>Desertaron</th>
                         <th>Acreditaron</th>
                         <th>No Acreditaron</th>
@@ -151,19 +165,24 @@ $tutor2 = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
                         <th>Tutoria Grupal</th>
                         <th>Numero de estudiantes Canalizados</th>
                         <th>Conferencias</th>
-                        <th>Talleres</th>
- 
+                        <th>Talleres</th></tr>
+                       
+
                     </tr>";
-                
-                    }else  if($opcion == 'Canalizacion'){
-                    echo"<tr>
-                    <th >Nombre Del Alumno</th>
+
+                  }else if($opcion == 'Impacto'){
+                    echo"
+                    <th >Nombre Del Tutorado</th>
                     <th>No. Control</th>
-                    <th>Tipo de Canalizacion</th>
-                    <th>Materia</th>
-                    </tr>";
-                     }else {
-                        echo"<tr>
+                    <th>Psicologico</th>
+                    <th>Asesoria Departemental</th>
+                    <th>Asesoria Ciencias Basicas</th>
+
+                </tr>";
+
+              }else{
+                        echo "
+                        <tr>
                         <th >Nombre Del Tutorado</th>
                         <th>No. Control</th>
                         <th>Sesiones Individuales</th>
@@ -177,17 +196,18 @@ $tutor2 = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
                         <th>Acredito</th>
                         <th>No Acredito</th>
                         <th>Deserto</th>
+                        <th>Acredito</th>
                         <th>Ac. En Seguimiento</th>
                         <th>Nivel Numerico</th>
                         <th>Nivel De Desempeño</th>
+                        </tr>";
 
-                    </tr>";}           
-                ?>
+                  } ?>
                 </thead>
                 <tbody>
-                    <?php
-
-                if($opcion == 'Canalizacion'){
+                
+                 <?php
+                 if($opcion == 'Solicitadas'){
                     foreach($asesoria as $result)  
                 echo "<tr>
                 <td>".$result -> NombreTutorado."</td>
@@ -196,24 +216,41 @@ $tutor2 = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
                 <td>".$result -> Materia."</td>
 
                 </tr>"; 
-                 }else if($opcion == "tutores") {
-                    foreach($tutor1 as $result)  
-                    echo "<tr>
-                    <td>".$result -> Tutor."</td>
-                    
-                    <td>".$result -> Deserto."</td>
-                    <td>".$result -> Acredito."</td>
-                    <td>".$result -> Noacredito."</td>
-                    <td>".$result -> total."</td>
-                    <td>".$result -> HoraSesionIndiv."</td>
-                    <td>".$result -> HoraSesionGrup."</td>
-                    <td>".$result -> cana."</td>
-                    <td>".$result -> Conferencias."</td>
-                    <td>".$result -> Talleres."</td>
-                       </tr>"; 
-                    }else 
+                 }else if($opcion == 'Atendidas'){
+                    foreach($atendidas as $result)  
+                echo "<tr>
+                <td>".$result -> NombreTutorado."</td>
+                <td>".$result -> IdTutorado."</td>
+                <td>".$result -> Tipo."</td>
                 
-                    foreach($alumno as $result)  {
+
+                </tr>"; 
+                 }else if($opcion == 'Impacto'){
+                    foreach($Impacto as $result)  
+                echo "<tr>
+                <td>".$result -> NombreTutorado."</td>
+                <td>".$result -> IdTutorado."</td>
+                <td>".$result -> Psi."</td>
+                <td>".$result -> AssDep."</td>
+                <td>".$result -> AssBC."</td>
+   
+                </tr>"; 
+                 }else if($opcion=='tutores'){
+                    foreach($tutor as $result) { 
+                        echo "<tr>
+                        <td>".$result -> Tutor."</td>
+                        <td>".$result -> Deserto."</td>
+                        <td>".$result -> Acredito."</td>
+                        <td>".$result -> Noacredito."</td>
+                        <td>".$result -> total."</td>
+                        <td>".$result -> HoraSesionIndiv."</td>
+                        <td>".$result -> HoraSesionGrup."</td>
+                        <td>".$result -> cana."</td>
+                        <td>".$result -> Conferencias."</td>
+                        <td>".$result -> Talleres."</td>
+                            </tr>"; }  
+                 }else if(isset($_POST['select'])){
+                    foreach($alumno as $result)  
                     echo "<tr>
                     <td>".$result -> NombreTutorado."</td>
                     <td>".$result -> IdTutorado."</td>
@@ -224,21 +261,20 @@ $tutor2 = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
                     <td>".$result -> Talleres."</td>
                     <td>".$result -> Psicologia."</td>
                     <td>".$result -> Asesoria."</td>
-                    <td>".$result -> total."</td>
+                    <td>".$result -> Asesoria."</td>
                     <td>".$result -> Acredito."</td>
                     <td>".$result -> Noacredito."</td>
                     <td>".$result -> Deserto."</td>
+                    <td>".$result -> Asesoria."</td>
                     <td>".$result -> AcreditadoSegui."</td>
                     <td>".$result -> EvaValor."</td>
                     <td>".$result -> EvalNivel."</td>
-                    </tr>"; }
-                  
+                    </tr>"; 
+                }      
                 ?>
-                    
-                </tbody>
-                  
-           
 
+                
+                </tbody>
             </table>
         </div>
         <br>
@@ -252,6 +288,10 @@ $tutor2 = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
      <!-- jQuery, Popper.js, Bootstrap JS -->
  
 
+
 </body>
+
+
+
 
 <?php include("template/pie.php"); ?>

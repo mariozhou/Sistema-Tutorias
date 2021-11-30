@@ -51,7 +51,9 @@ while ($row = $sel->fetch_assoc()) {
                                     <td><?php echo $val['Fecha'] ?></td>
                                   
                                     <td><a class="btn btn-primary" target="_black" href="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . '/Sistema-Tutorias/' . $val['url']; ?>" >Descargar Reporte</a>
-                                        
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteChildresn<?php echo $val['Idreport']; ?>">
+                                  Eliminar
+                              </button>
                                     </td>
                                 </tr>
                                     <!--Ventana Modal para la Alerta de Eliminar--->

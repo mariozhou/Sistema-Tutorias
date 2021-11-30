@@ -12,7 +12,7 @@
   $tipo=(isset($_POST['opciones']))?$_POST['opciones']:"";
   $btn=(isset($_POST['accion']))?$_POST['accion']:"";
 ?>
-
+<body background=#D4E4F2 >
 <div class="ren-arriba">
         <h3>Por favor seleccione una opcion. Pronto se atenderá su solicitud</h3>
     </div>
@@ -74,6 +74,6 @@
             </div>  
         </form> 
     </div>  
-
+</body>
 <?php include("template/pie.php");
 ?>

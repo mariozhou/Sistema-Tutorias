@@ -10,18 +10,25 @@ if( !(isset($_POST["btnquitar"])) ){
     if( isset($_POST['check']) And !($asigtutor == "Tutores") ){
 
     foreach( $_POST['check'] AS $value  ){
+
         $sentenciaSQL2 = $conexion->prepare("UPDATE tutorados SET `IdTutor`=(SELECT IdTutor FROM `tutor` WHERE NombreTutor =:tutor ) WHERE IdTutorado= :noctl ");  
         $sentenciaSQL2->bindParam(':noctl',$value);
         $sentenciaSQL2->bindParam(':tutor',$asigtutor);
         $sentenciaSQL2->execute();
+
+
+        $sentenciaSQL3 = $conexion->prepare("UPDATE reporte SET `IdTutor`=(SELECT IdTutor FROM `tutor` WHERE NombreTutor =:tutor ) WHERE IdTutorado= :noctl ");  
+        $sentenciaSQL3->bindParam(':noctl',$value);
+        $sentenciaSQL3->bindParam(':tutor',$asigtutor);
+        $sentenciaSQL3->execute();
     }
-    echo $value.$asigtutor."<script> alert('Se asigno correcto');
+    echo "<script> alert('Se asigno correcto');
     location.href = '../asignar-quitarTutorados.php';
    </script>";
 
 
 }else{
-    echo 'sdsd'.$date."<script> alert('No eligio un Tutor o Alumno');
+    echo "<script> alert('No eligio un Tutor o Alumno');
     location.href = '../asignar-quitarTutorados.php';
    </script>";
  

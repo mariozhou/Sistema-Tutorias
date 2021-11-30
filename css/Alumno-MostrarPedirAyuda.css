@@ -11,6 +11,10 @@ label{
     text-align: center;
 
 }
+body{
+    background-color: #D4E4F2;
+
+}
 .ren-arriba{
     display: grid;
     grid-area: a;

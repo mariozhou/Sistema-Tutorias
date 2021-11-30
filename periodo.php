@@ -14,12 +14,17 @@ if($idact=='1' ){
     $sentenciaSQL4= $conexion->prepare("UPDATE tutorados SET IdTutor = null");
     $sentenciaSQL4->execute();
 
-    $sentenciaSQL4= $conexion->prepare("UPDATE reporte SET IdTutor = null");
+    $sentenciaSQL4= $conexion->prepare("UPDATE reporte SET IdTutor = null,
+    Psicologia=0,Asesoria=0,Actividad=0,Conferencias=0,Talleres=0,HoraSesionIndiv=0,
+    HoraSesionGrup=0,EvaValor=0,EvalNivel=0");
     $sentenciaSQL4->execute();    
 
     $sentenciaSQL4= $conexion->prepare("UPDATE usuario SET TipoUser = null where TipoUser='Tutor' ");
     $sentenciaSQL4->execute(); 
 
+    $sentenciaSQL4= $conexion->prepare("UPDATE impact SET Psi = null,AssDep= null,AssBC=null ");
+    $sentenciaSQL4->execute(); 
+    
     echo "<script> alert('Cerrando periodo');
     location.href = 'Exportar-reporte.php';
     </script>";

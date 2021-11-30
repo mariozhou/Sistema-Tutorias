@@ -35,19 +35,6 @@ switch($btnlogin){
                             header("location:menuTutor.php");
                         }
                     
-                }if((($usuario["TipoUser"])==='Alumno')AND ($menutipo === 'Alumno')  ){
-                    $_SESSION['iduser']= $usuario["IdUser"];    
-                    $_SESSION['tipo']= $usuario["TipoUser"];
-                    $_SESSION['nombre']=$usuario["Nombre"];
-                    $_SESSION['paterno']=$usuario["ApPaterno"];
-                    $_SESSION['materno']=$usuario["ApMaterno"];
-                    if($usuario['cambio'] == 1){
-                        header("location:CambiarContra.php");    
-                    }else{
-                        header("location:menuAlumno.php");
-                    }
-                    
-                    
                 }if((($usuario["TipoUser"])==='Coordinador de Tutores')AND ($menutipo === 'Coordinador de Tutores') ){
                     $_SESSION['iduser']= $usuario["IdUser"];
                     $_SESSION['tipo']= $usuario["TipoUser"];
@@ -72,6 +59,28 @@ switch($btnlogin){
                         header("location:menuJD.php");
                     }
 
+                }if((($usuario["TipoUser"])==='Alumno')AND ($menutipo === 'Alumno')  ){
+                    $conexion-> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+                    $sentenciaSQL2 = $conexion->prepare("SELECT * FROM `tutorados` WHERE IdTutorado=:user ");
+                    //AND TipoUser=:tipo
+                    $sentenciaSQL2->bindParam(':user',$txtUser);
+                    $sentenciaSQL2->execute();
+                    $acceso = $sentenciaSQL2->fetch(PDO::FETCH_ASSOC);
+                    if( ($acceso['IdTutor'] == null) ){
+                        echo "<script> alert('En espera de que le asigne un tutor');
+                        </script>";
+                           
+                    }else{ $_SESSION['iduser']= $usuario["IdUser"];    
+                        $_SESSION['tipo']= $usuario["TipoUser"];
+                        $_SESSION['nombre']=$usuario["Nombre"];
+                        $_SESSION['paterno']=$usuario["ApPaterno"];
+                        $_SESSION['materno']=$usuario["ApMaterno"];
+                        if($usuario['cambio'] == 1){
+                            header("location:CambiarContra.php");    
+                        }else{
+                            header("location:menuAlumno.php");
+                        }
+                    }      
                 }else{
                     echo "<script> alert('Usuario o Contraseña no es validad');
                             </script>";
@@ -145,7 +154,7 @@ switch($btnlogin){
             <!--login-->
             <form method="POST" class="form-group" enctype="multipart/form-data" required>
                 <div class="mb-4">
-                    <label for="txtUser" class="form-label">No. Control</label>
+                    <label for="txtUser" class="form-label">Usuario</label>
                     <input type="text" class="form-control" name="txtUser" id="txtUser" placeholder="Ingrese su No.Control" required>
                 </div>
                 <div class="mb-4">

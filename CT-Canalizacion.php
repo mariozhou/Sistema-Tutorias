@@ -3,7 +3,9 @@
 include('config/conexion.php');
 $tmp = array();
 $res = array();
-$sel = $con->query("SELECT * FROM `reporte` JOIN tutorados where reporte.IdTutorado=tutorados.IdTutorado and tutorados.IdTutor=$iduser ");
+//$sel = $con->query("SELECT * FROM `reporte` JOIN tutorados where reporte.IdTutorado=tutorados.IdTutorado and tutorados.IdTutor=$iduser ");
+$sel = $con->query("SELECT * FROM `canalizacion` join usuario WHERE canalizacion.IdTutorado = usuario.IdUser ");
+
 while ($row = $sel->fetch_assoc()) {
     $tmp = $row;
     array_push($res, $tmp);
@@ -34,7 +36,7 @@ while ($row = $sel->fetch_assoc()) {
             <?php foreach ($res as $val) { ?>
                                 <tr>
                                     
-                                    <td><?php echo $val['IdTutorado'].' - '.$val['NombreTutorado'] ?> </td>
+                                    <td><?php echo $val['IdTutorado'].' - '.$val['Nombre'] ?> </td>
                                     <td><?php echo $val['Tipo'] ?> </td>
                                     <td><?php echo $val['Materia'] ?> </td>
                                     <td><?php echo $val['Comentarios'] ?></td>

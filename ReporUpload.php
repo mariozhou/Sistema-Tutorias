@@ -35,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    //$ins = $con->query("INSERT INTO `actividades`( `Actividad`, `Des`, `Semestres`, `url`, `type`) VALUES (,'[value-2]','[value-3]','[value-4]','[value-5]','[value-6]')");
    if ($ins) {
         echo 'Subido';
+        
     } else {
         echo 'Errorasd';
     }

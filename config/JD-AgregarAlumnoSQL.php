@@ -23,7 +23,6 @@ include("bd.php");//conexion
  //INSERT INTO `reporte`(`IdTutorado`) VALUES ()
 
  $sentenciaSQL4 = $conexion->prepare("INSERT INTO `impact`(`IdTutorado`) VALUES (:rfc)" );  
- $sentenciaSQL4->bindParam(':nombre',$nom);
  $sentenciaSQL4->bindParam(':rfc',$rfc);
  $sentenciaSQL4->execute();
  //INSERT INTO `impact`(`IdImp`, `IdTutorado`, `Psi`, `AssDep`, `AssBC`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]')

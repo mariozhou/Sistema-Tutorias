@@ -16,7 +16,7 @@ $idtutor=$_SESSION['idtutor'];
  $vdes2=(isset($_POST['vdes']))?$_POST['vdes']:"";
 
 
- $psi=(isset($_POST['psi']))?$_POST['psi']:"";
+ $psi=(isset($_POST['psix']))?$_POST['psix']:"";
  $assdep=(isset($_POST['assdep']))?$_POST['assdep']:"";
  $assbc=(isset($_POST['assbc']))?$_POST['assbc']:"";
 

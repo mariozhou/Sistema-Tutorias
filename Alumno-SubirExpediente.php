@@ -21,9 +21,10 @@ while ($row = $sel->fetch_assoc()) {
 </div>
 <br>
 <div class="container">
+  
     <div class="row align-items-start ">   
         <div class="col">
-            <h4 style="text-align: right;">Subir Archivos</h4>   
+            <h4 style="text-align: center;">Subir Archivos "solo en PDF"</h4>   
         </div>
         <div class="col">
             <button  type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">

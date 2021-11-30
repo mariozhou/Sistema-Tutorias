@@ -34,15 +34,22 @@
 
         <a href="Coordinador-MostrarCambioTutor.php" style="text-decoration:none">
         <div class="card">
-            <img src="img/aceptado.png" >
+            <img src="img/mensaje.png" >
             <h4> Mostrar Mensajes</h4>
         </div>
         </a>
 
         <a href="CT-Canalizacion.php" style="text-decoration:none">
         <div class="card">
-            <img src="img/aceptado.png" >
+            <img src="img/resumen.png" >
             <h4> Canalizaciones</h4>
+        </div>
+        </a>
+
+        <a href="CT-subirReport.php" style="text-decoration:none">
+        <div class="card">
+            <img src="img/reportes.png" >
+            <h4> Subir Reportes</h4>
         </div>
         </a>
 

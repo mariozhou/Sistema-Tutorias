@@ -18,13 +18,15 @@
                         <h4>Asignar Tutores</h4>
                 </div>
                 </a>
-
+   
                 <a href="JD-AgregarAlumno.php" style="text-decoration:none"> 
                 <div class="card">
-                    <img src="img/aceptado.png" >
+                    <img src="img/alumno2.png" >
                         <h4>Agregar Alumno</h4>
                 </div>
                 </a>
+                
+
 
                 <a href="JD-verExpediente.php" style="text-decoration:none"> 
                 <div class="card">
@@ -35,10 +37,12 @@
 
                 <a href="JD-ReporAnte.php" style="text-decoration:none"> 
                 <div class="card">
-                    <img src="img/vision.png" >
+                    <img src="img/reportes.png" >
                     <h4>Reportes Anteriores</h4>
                 </div>
                 </a>
+
+                
         
     </div>
 

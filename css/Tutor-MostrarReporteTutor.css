@@ -3,7 +3,11 @@ main{
     padding-bottom: 2%;
 
 }
+body{
 
+    background-color: #D4E4F2;
+
+}
 #marco{
     border-style: dotted solid;
     border-color: lightslategray;

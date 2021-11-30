@@ -88,7 +88,7 @@ switch($btnlogin){
             <!--login-->
             <form method="POST" class="form-group" enctype="multipart/form-data" required>
                 <div class="mb-4">
-                    <label for="txtUser" class="form-label">No. Control</label>
+                    <label for="txtUser" class="form-label">Usuario</label>
                     <input type="text" class="form-control" name="txtUser" id="txtUser" placeholder="Ingrese su No.Control" required>
                 </div>
                 <div class="mb-4">

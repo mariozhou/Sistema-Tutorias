@@ -74,13 +74,13 @@ $_SESSION['id']=$id;
           foreach($tutorado as $impact);
           $psix= $impact->Psi;
           $assdep= $impact->AssDep;
-          $assbc= $impact->AssDep;
+          $assbc= $impact->AssBC;
 
          // echo '<script type="text/javascript">', 'desahbilitar();', '</script>';
           switch ($estatus ) {
             case "Acredito":
               
-            echo  'dis:'.$dis = "false";
+            
            //   echo '<script type="text/javascript"> document.getElementById("estatus").disabled=true; </script>';
            //  echo '<script type="text/javascript"> document.getElementById("estatus1").disabled=true; </script>';
            //  echo '<script type="text/javascript"> var funcion ="si"; </script>';
@@ -89,7 +89,7 @@ $_SESSION['id']=$id;
              // $dis= "false";
                 break;
             case "Tutoría de seguimiento":
-              echo  'dis:'.$dis = "false";
+            
               echo "Tutoría de seguimiento";
                 break;
             case "NoAcredito":
@@ -200,7 +200,7 @@ if(  (isset($_POST['botones'])) ){
         <input type="text" name="ase" class="form-control col-md-1" value="<?php echo $ase; ?>">
 
         <label for="grupal" class="control-label col-md-3" id="letra">Horas sumados</label>
-        <input disabled="»disabled»" type="text" name="" class="form-control col-md-1" value="<?php echo $ase+$psi; ?>">
+        <input disabled="»disabled»" type="text" name="" class="form-control col-md-1" value="<?php echo $ssInv+$ssGru+$ase+$psi+$act+$conf+$taller; ?>">
        </div>
     </div>  
       
@@ -234,7 +234,7 @@ if(  (isset($_POST['botones'])) ){
                 <div>
                   <br>
                 <label for="DESEMPEÑO" class="control-label col-md-3">Psicologica</label>
-                <textarea  type="text" placeholder="" name="psi" id="psi" cols="40" rows="5"><?php echo $psix; ?></textarea>
+                <textarea  type="text" placeholder="" name="psix" id="psix" cols="40" rows="5"><?php echo $psix; ?></textarea>
                 </div>
                 <div>
                 <label for="DESEMPEÑO" class="control-label col-md-5">Asesoria Departamental</label>

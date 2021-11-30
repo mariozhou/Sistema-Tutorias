@@ -3,10 +3,16 @@
 <?php
 
 //cosulta tutores 
-include("config/bd.php");//conexion
-$sentenciaSQL = $conexion->prepare("SELECT * FROM `usuario` Where TipoUser='Tutor' ORDER BY Nombre ASC");  
-$sentenciaSQL->execute();
-$tutor = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
+
+$tmp = array();
+$res = array();
+include('config/conexion.php');
+$sel = $con->query("SELECT * FROM `usuario` Where TipoUser='Tutor' Or TipoUser='' ORDER BY Nombre ASC");
+while ($row = $sel->fetch_assoc()) {
+    $tmp = $row;
+    array_push($res, $tmp);
+    
+}
 
 $nom=(isset($_POST['Nombre']))?$_POST['Nombre']:"";
 $rfc=(isset($_POST['RFC']))?$_POST['RFC']:"";
@@ -46,13 +52,14 @@ if( (isset($_POST["Nombre"])) ){
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($tutor as $val) { 
-                    ?>
+                <?php foreach ($res as $val) { 
+                     $id= $val['IdUser']; ?>
+                    
                                 <tr>
-                                <td><input type='checkbox' name='check[]' value='<?php $val -> IdUser ?>'></></td>  
-                                    <td><?php echo $val -> Nombre ?></td>
-                                    <td><?php echo $val -> IdUser ?></td>
-                                    <td><?php echo $val -> TipoUser ?></td>
+                                <td><input type='checkbox' name='check[]' value='<?php echo $id ?>'></></td> 
+                                    <td><?php echo $val['Nombre']  ?></td>
+                                    <td><?php echo $val['IdUser']  ?></td>
+                                    <td><?php echo $val['TipoUser'] ?></td>
                                     
                                 </tr>
                             <?php } ?>
