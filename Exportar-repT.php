@@ -41,17 +41,18 @@ $sentenciaSQL = $conexion->prepare("SELECT * FROM `usuario` Where TipoUser='Tuto
 $sentenciaSQL->execute();
 $tutor = $sentenciaSQL->fetchAll(PDO::FETCH_OBJ);
 
-$sentenciaSQL1 = $conexion->prepare("SELECT tutorados.NombreTutorado,
+$sentenciaSQL2 = $conexion->prepare("SELECT tutorados.NombreTutorado,
 tutorados.IdTutorado, reporte.Psicologia,
-reporte.Asesoria, reporte.Actividad, SUM(reporte.Actividad, reporte.conferencias, reporte.Talleres) as total,reporte.Conferencias,
+reporte.Asesoria, reporte.Actividad, reporte.Conferencias,
 reporte.Talleres, reporte.HoraSesionIndiv,  
+(reporte.HoraSesionGrup + reporte.HoraSesionIndiv +  reporte.Psicologia +  reporte.Asesoria + reporte.Actividad +  reporte.Conferencias + reporte.Talleres) as Total,
 reporte.HoraSesionGrup, reporte.EvaValor, reporte.EvalNivel, 
-reporte.Acredito,reporte.Noacredito,reporte.Deserto,
-reporte.AcreditadoSegui FROM tutorados 
-JOIN reporte ON tutorados.IdTutorado = reporte.IdTutorado 
+tutorados.Estatus FROM tutorados 
+JOIN reporte ON tutorados.IdTutorado = reporte.IdTutorado where reporte.IdTutor=:idtutor
 ORDER BY NombreTutorado ASC");  
-$sentenciaSQL1->execute();
-$alumno = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
+$sentenciaSQL2->bindParam(':idtutor',$id);
+$sentenciaSQL2->execute();
+$alumno = $sentenciaSQL2->fetchAll(PDO::FETCH_OBJ);
 //actualizar tabla alumnos
 
 
@@ -84,10 +85,7 @@ $alumno = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
                         <th>Psicologia</th>
                         <th>Asesoria</th>
                         <th>Total de horas  Cumplidas</th>
-                        <th>Acredito</th>
-                        <th>No Acredito</th>
-                        <th>Deserto</th>
-                        <th>Ac. En Seguimiento</th>
+                        <th>Estatus</th>
                         <th>Nivel Numerico</th>
                         <th>Nivel De Desempeño</th>
                     </tr>
@@ -106,10 +104,7 @@ $alumno = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
                 <td>".$result -> Psicologia."</td>
                 <td>".$result -> Asesoria."</td>
                 <td>".$result -> total."</td>
-                <td>".$result -> Acredito."</td>
-                <td>".$result -> Noacredito."</td>
-                <td>".$result -> Deserto."</td>
-                <td>".$result -> AcreditadoSegui."</td>
+                <td>".$result -> Estatus."</td>
                 <td>".$result -> EvaValor."</td>
                 <td>".$result -> EvalNivel."</td>
                   
