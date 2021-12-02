@@ -49,9 +49,9 @@ $sentenciaSQL2 = $conexion->prepare("SELECT tutorados.NombreTutorado,
 tutorados.IdTutorado, reporte.Psicologia,
 reporte.Asesoria, reporte.Actividad, reporte.Conferencias,
 reporte.Talleres, reporte.HoraSesionIndiv,  
+(reporte.HoraSesionGrup + reporte.HoraSesionIndiv +  reporte.Psicologia +  reporte.Asesoria + reporte.Actividad +  reporte.Conferencias + reporte.Talleres) as Total,
 reporte.HoraSesionGrup, reporte.EvaValor, reporte.EvalNivel, 
-reporte.Acredito,reporte.Noacredito,reporte.Deserto,
-reporte.AcreditadoSegui FROM tutorados 
+reporte.Estatus as Estatus FROM tutorados 
 JOIN reporte ON tutorados.IdTutorado = reporte.IdTutorado where reporte.IdTutor=:idtutor
 ORDER BY NombreTutorado ASC");  
 $sentenciaSQL2->bindParam(':idtutor',$id);
@@ -106,18 +106,26 @@ $Impacto = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
 
 <body>
 
-    <form class="form-radio" method="post" >
+<form class="form-radio" method="post" >
         <p>
-            Elige una opcion<br>
-            <button type="submit" name="opcion" value="tutores" class="btn btn-primary" <?php if($opcion == "tutores") echo "checked"; ?>> 
+            
+            <h4 class="titulo-boton">
+            Reporte de Tutores</h4>
+            <h4 class="titulo-boton2">
+            Reportes de Canalizacion</h4>
+    </form>
+            <form class="reportes" method="post">
+            <button type="submit" id="opcion" name="opcion" value="tutores" class="btn btn-primary" <?php if($opcion == "tutores") echo "checked"; ?>> 
             Todos los tutores
         </button>
+ 
+        
                  <input type="submit" name="opcion" value="Solicitadas" class="btn btn-primary" <?php if($opcion == "Solicitadas") echo "checked"; ?>> 
                  <input type="submit" name="opcion" value="Atendidas" class="btn btn-primary" <?php if($opcion == "Atendidas") echo "checked"; ?>> 
                  <input type="submit" name="opcion" value="Impacto" class="btn btn-primary" <?php if($opcion == "Impacto") echo "checked"; ?>> 
-
+                 </form>
                 </p>
-    </form>
+  
     <form action="" method="post" class="form-group">
      <div class="form-group">       
 
@@ -193,11 +201,8 @@ $Impacto = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
                         <th>Psicologia</th>
                         <th>Asesoria</th>
                         <th>Total de horas  Cumplidas</th>
-                        <th>Acredito</th>
-                        <th>No Acredito</th>
-                        <th>Deserto</th>
-                        <th>Acredito</th>
-                        <th>Ac. En Seguimiento</th>
+                        <th>Estatus</th>
+              
                         <th>Nivel Numerico</th>
                         <th>Nivel De Desempeño</th>
                         </tr>";
@@ -260,13 +265,10 @@ $Impacto = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
                     <td>".$result -> Conferencias."</td>
                     <td>".$result -> Talleres."</td>
                     <td>".$result -> Psicologia."</td>
+                    <td>".$result -> Total."</td>    
                     <td>".$result -> Asesoria."</td>
-                    <td>".$result -> Asesoria."</td>
-                    <td>".$result -> Acredito."</td>
-                    <td>".$result -> Noacredito."</td>
-                    <td>".$result -> Deserto."</td>
-                    <td>".$result -> Asesoria."</td>
-                    <td>".$result -> AcreditadoSegui."</td>
+                    <td>".$result -> Estatus."</td>
+
                     <td>".$result -> EvaValor."</td>
                     <td>".$result -> EvalNivel."</td>
                     </tr>"; 

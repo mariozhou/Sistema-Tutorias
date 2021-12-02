@@ -34,3 +34,17 @@ table>tbody>tr>td {
     align-items: center;
   
 }
+
+#opcion{
+
+    margin-right: 18%;
+}
+.reportes{
+  display: flex;
+  flex-wrap: nowrap;
+justify-content: center;
+align-items: center;
+}
+.titulo-boton{
+  padding-right: 15%;
+}
