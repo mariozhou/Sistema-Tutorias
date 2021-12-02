@@ -51,7 +51,7 @@ reporte.Asesoria, reporte.Actividad, reporte.Conferencias,
 reporte.Talleres, reporte.HoraSesionIndiv,  
 (reporte.HoraSesionGrup + reporte.HoraSesionIndiv +  reporte.Psicologia +  reporte.Asesoria + reporte.Actividad +  reporte.Conferencias + reporte.Talleres) as Total,
 reporte.HoraSesionGrup, reporte.EvaValor, reporte.EvalNivel, 
-reporte.Estatus as Estatus FROM tutorados 
+reporte.Estatus FROM tutorados 
 JOIN reporte ON tutorados.IdTutorado = reporte.IdTutorado where reporte.IdTutor=:idtutor
 ORDER BY NombreTutorado ASC");  
 $sentenciaSQL2->bindParam(':idtutor',$id);
@@ -265,10 +265,9 @@ $Impacto = $sentenciaSQL1->fetchAll(PDO::FETCH_OBJ);
                     <td>".$result -> Conferencias."</td>
                     <td>".$result -> Talleres."</td>
                     <td>".$result -> Psicologia."</td>
-                    <td>".$result -> Total."</td>    
                     <td>".$result -> Asesoria."</td>
+                    <td>".$result -> Total."</td>      
                     <td>".$result -> Estatus."</td>
-
                     <td>".$result -> EvaValor."</td>
                     <td>".$result -> EvalNivel."</td>
                     </tr>"; 
